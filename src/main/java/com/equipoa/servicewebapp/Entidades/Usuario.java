@@ -22,6 +22,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Provincias provincia;
 
+<<<<<<< HEAD
     //atributos para cliente
     private String direccion;
 
@@ -38,6 +39,17 @@ public class Usuario {
     private List<Calificacion> calificacionesRecibidas;
 
     public Usuario() {
+=======
+    @ManyToOne
+    private Ocupaciones ocupacion;
+
+    public Ocupaciones getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(Ocupaciones ocupacion) {
+        this.ocupacion = ocupacion;
+>>>>>>> main
     }
 
     public Usuario(String email, String name, String password, int phone, Date fecharegistro, Rol rol, Provincias provincia) {
