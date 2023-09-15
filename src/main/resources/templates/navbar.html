@@ -1,0 +1,19 @@
+<nav th:fragment="nav_bar" class="nav">
+
+    <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+
+    <div class="navbar">
+
+        <img class="logo" src="Img/logoReparoYa.png" alt="logoReparoYa">   
+
+    </div>
+
+    <ul class="nav_ul">
+        <li class="nav_ul_li"> <a class="nav_ul_li_a" href="">Servicios</a></li>
+        <li class="nav_ul_li"> <a class="nav_ul_li_a" href="">Contacto</a></li>
+        <li class="nav_ul_li"> <a class="nav_ul_li_a" href="">Preguntas Frecuentes</a></li>
+        <li class="nav_ul_li"> <a th:href="@{/RegistroUser/}" class="nav_ul_li_a_sesion" href="inicio de sesion">Iniciar Sesión</a></li>
+    </ul>
+
+
+</nav>

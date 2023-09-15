@@ -1,0 +1,14 @@
+.body {
+    margin: 0;
+    padding: 0;
+    background-image: url(/Img/img_pintor.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.header {
+    height: 80px;
+    width: 100%;
+
+}
+
