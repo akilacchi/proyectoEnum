@@ -20,6 +20,17 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Provincias provincia;
 
+    @ManyToOne
+    private Ocupaciones ocupacion;
+
+    public Ocupaciones getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(Ocupaciones ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+
     public Usuario(String email, String name, String password, int phone, Date fecharegistro, Rol rol, Provincias provincia) {
         this.email = email;
         this.name = name;
