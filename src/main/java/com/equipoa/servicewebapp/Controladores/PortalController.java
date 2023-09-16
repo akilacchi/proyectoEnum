@@ -55,6 +55,12 @@ public class PortalController {
         modelo.addAttribute("provincia", getProvincias());
         return "registro.html";
     }
+    @GetMapping("/registrarProveedor")
+    public String registrarProveedor(Model modelo){
+        modelo.addAttribute("rol",getRol());
+        modelo.addAttribute("provincia", getProvincias());
+        return "registroProveedor.html";
+    }
 
     @PostMapping("/registro")
     public String registro(@RequestParam String email, @RequestParam String name, @RequestParam String password, @RequestParam String password2, @RequestParam int phone, @RequestParam Rol rol, @RequestParam Provincias provincia){
@@ -67,6 +73,12 @@ public class PortalController {
         }
 
         return "redirect:/";
+    }
+     @GetMapping("/select")
+    public String selectRol(Model modelo){
+        modelo.addAttribute("rol",getRol());
+        modelo.addAttribute("provincia", getProvincias());
+        return "selectClienteProveedor.html";
     }
 
 }

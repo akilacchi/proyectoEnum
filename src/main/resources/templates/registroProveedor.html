@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar</title>
+  <link rel="stylesheet" type="text/css" href="/Css/Registro.css">
+</head>
+<body>
+  <div class="contenedor">
+    <div class="contenedor-formulario">
+      <div class="imagen-formulario">
+        <div class="texto">
+          <h2>¡Bienvenido!<br></h2>
+        </div>
+      </div>
+      <div class="cuerpo-formulario">
+        <div class="encabezado">
+          <h2>Registro</h2>
+          <p>¿Ya tienes una cuenta? <a href="inicio de sesion.html">Inicia sesión</a></p>
+        </div>
+        <div class="grupo-formulario">
+          <div class="grupo-input">
+            <label>Nombre completo</label>
+            <input type="text" name="fullName" placeholder="Nombre completo">
+          </div>
+          <div class="grupo-input">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Correo electrónico">
+          </div>
+          <div class="grupo-input">
+            <label>Numero de telefono</label>
+            <input type="number" name="phone" placeholder="Número de teléfono">
+          </div>
+          <div class="grupo-input">
+            <label>Contraseña</label>
+            <input type="password" name="password" placeholder="Contraseña">
+          </div>
+          <div class="grupo-input">
+            <label>Repetir contraseña</label>
+            <input type="password" name="pass2" placeholder="Repetir contraseña">
+          </div>
+          <div class="grupo-input">
+            <label for="localidad">Localidad:</label>
+            <select id="localidad" name="ubicacion">
+              <option th:each="l: ${localidad}" th:value="${l}" th:text="${#strings.capitalize(l.toString().toLowerCase())}"> </option>
+            </select>
+          </div>
+          <div class="grupo-input">
+            <label for="servicio">Servicio que provee</label>
+           <select name="servicio" id="servicio"></select>
+          </div>
+          <div class="grupo-input">
+            <label for="certificacion">¿Tiene certificacion?</label>
+           <select name="certificacion" id="certificacion">
+           <option value="1">si</option>
+           <option value="2">no</option>
+          </select>
+          </div>
+          <div class="grupo-input">
+            <button type="submit"> Registrarse </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

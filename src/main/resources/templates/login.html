@@ -1,25 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar sesión</title>
-</head>
-<body>
-<div>
-    <h1>Iniciar sesion</h1>
-    <br>
-    <form action="/logincheck" method="post">
-        <label>Ingrese su Email</label>
-    <br>
-        <input type="email" name="email" placeholder="fernando@chiquito.com">
-    <br>
-        <label>Ingrese su contraseña</label>
-    <br>
-        <input type="password" name="password" placeholder="********">
-    <br>
-        <button type="submit">Iniciar Sesion</button>
-    </form>
-</div>
-
-</body>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/Css/Login.css">
+        <title>Inicio de Sesión</title>
+    </head>
+    <body>
+        <div class="contenedor">
+            <div class="contenedor-formulario">
+                <div class="cuerpo-formulario">
+                    <div class="encabezado">
+                        <h2>Iniciar Sesión</h2>
+                        <p>¿No tienes una cuenta? <a th:href="@{/select}">Crea tu cuenta</a></p>
+                    </div>
+                    <div class="grupo-formulario">
+                        <div class="grupo-input">
+                            <input type="text" placeholder="Nombre de usuario">
+                        </div>
+                        <div class="grupo-input">
+                            <input type="password" placeholder="Contraseña">
+                        </div>
+                        <div class="grupo-input flex">
+                            <div class="recordar"><input type="checkbox" id="checkbox"> <label for="checkbox">Recordarme</label></div>
+                            <div class="olvidar"><a href="#">¿Olvidaste tu contraseña?</a></div>
+                        </div>
+                        <div class="grupo-input centro">
+                            <button type="submit">Iniciar sesión</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="imagen-formulario">
+                    <div class="texto">
+                        <h2 class="bienvenido">¡Bienvenido!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
