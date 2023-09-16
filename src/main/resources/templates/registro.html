@@ -11,21 +11,26 @@
 <div>
     <h1> Registro de usuario </h1>
         <br>
-    <form action="/registro" method="post">
+    <form action="/registro" method="post" enctype="multipart/form-data">
         <label>Ingrese su nombre</label>
-        <input name="name" type="text">
+        <input name="name" type="text" placeholder="Nombre">
         <br>
         <label>Ingrese su Email</label>
-        <input name="email" type="email">
+        <input name="email" type="email" placeholder="fernando@chiquito.com">
+        <br>
+
+        <label>Suba una foto de perfil</label>
+        <input name="archivo" type="file">
+
         <br>
         <label>Ingrese su contraseña</label>
-        <input name="password" type="password">
+        <input name="password" type="password" placeholder="********">
         <br>
         <label>Repita su contraseña</label>
-        <input name="password2" type="password">
+        <input name="password2" type="password" placeholder="********">
         <br>
         <label>Ingrese su número de teléfono</label>
-        <input name="phone">
+        <input name="phone" type="text" placeholder="56 9 1234 5678">
         <br>
         <label>Seleccione su rol</label>
         <select id="rol" name="rol">

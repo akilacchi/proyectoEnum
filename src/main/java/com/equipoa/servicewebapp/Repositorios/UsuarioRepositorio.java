@@ -1,10 +1,13 @@
 package com.equipoa.servicewebapp.Repositorios;
 
 import com.equipoa.servicewebapp.Entidades.Usuario;
+import com.equipoa.servicewebapp.Enum.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
@@ -12,5 +15,8 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
     public Usuario buscarPorEmail(@Param("email") String email);
 
     @Query("SELECT u FROM Usuario u WHERE u.phone = :phone")
-    public Usuario buscarPorTelefono(@Param("phone") int phone );
+    public Usuario buscarPorTelefono(@Param("phone") String phone );
+
+    @Query("SELECT u FROM Usuario u WHERE u.rol = :rol")
+    public List<Usuario> findAllByRol(@Param("rol") Rol rol);
 }

@@ -1,9 +1,11 @@
 package com.equipoa.servicewebapp.Servicios;
 
+import com.equipoa.servicewebapp.Entidades.Imagen;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
+import com.equipoa.servicewebapp.Repositorios.ImagenRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,10 +27,13 @@ import java.util.List;
 public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
-    UsuarioRepositorio usuarioRepositorio;
+    private UsuarioRepositorio usuarioRepositorio;
+
+    @Autowired
+    private ImagenServicio imagenServicio;
 
     @Transactional
-    public void crearUsuario(String email, String name, String password, String password2, int phone, Rol rol, Provincias provincia) throws MiException {
+    public void crearUsuario(MultipartFile archivo, String email, String name, String password, String password2, String phone, Rol rol, Provincias provincia) throws MiException {
     validar(email,name,password,password2,phone,rol);
         if (usuarioRepositorio.buscarPorEmail(email) == null && usuarioRepositorio.buscarPorTelefono(phone) == null) {
             Usuario usr = new Usuario();
@@ -38,13 +44,92 @@ public class UsuarioServicio implements UserDetailsService {
             usr.setRol(rol);
             usr.setProvincia(provincia);
             usr.setFecharegistro(new Date());
+
+            Imagen imagen = imagenServicio.guarddar(archivo);
+            usr.setProfilePicture(imagen);
+
             usuarioRepositorio.save(usr);
         }else{
             throw new MiException("Usuario ya registrado");
         }
     }
 
-    private void validar(String email, String name, String password, String password2, int phone, Rol rol) throws MiException {
+
+    //Crud Cliente
+    @Transactional
+    public void crearCliente(MultipartFile archivo,String email, String name, String password, String password2, String phone, Rol rol, Provincias provincia, String direccion) throws MiException {
+        //validarCliente(email, name, password, password2, phone);
+        if (usuarioRepositorio.buscarPorEmail(email) == null && usuarioRepositorio.buscarPorTelefono(phone) == null) {
+            Usuario cliente = new Usuario();
+            cliente.setEmail(email);
+            cliente.setName(name);
+            cliente.setPassword(new BCryptPasswordEncoder().encode(password));
+            cliente.setPhone(phone);
+            cliente.setProvincia(provincia);
+            cliente.setFecharegistro(new Date());;
+            cliente.setRol(Rol.CLIENTE); // Establecer el rol como "cliente"
+            cliente.setDireccion(direccion);
+            cliente.setCalificacionesEmitidas(new ArrayList<>());
+            cliente.setTrabajosCliente(new ArrayList<>());
+
+            Imagen imagen = imagenServicio.guarddar(archivo);
+            cliente.setProfilePicture(imagen);
+
+            usuarioRepositorio.save(cliente);
+        } else {
+            throw new MiException("Usuario ya registrado");
+        }
+
+    }
+
+    public void actualizarCliente(MultipartFile archivo,String email, String nuevoNombre, String nuevaDireccion, String nuevoPhone) throws MiException {
+        // Buscamos al cliente por su dirección de correo electrónico
+        Usuario cliente = usuarioRepositorio.buscarPorEmail(email);
+
+        if (cliente == null || !cliente.getRol().equals(Rol.CLIENTE)) {
+            throw new MiException("Cliente no encontrado");
+        }
+
+        // Actualizamos los datos del cliente
+        cliente.setName(nuevoNombre);
+        cliente.setDireccion(nuevaDireccion);
+        cliente.setPhone(nuevoPhone);
+
+        Long idImagen = null;
+        if (cliente.getProfilePicture() != null){
+            idImagen = cliente.getProfilePicture().getId();
+        }
+        Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+
+        cliente.setProfilePicture(imagen);
+
+        // Guardamos los cambios en la base de datos
+        usuarioRepositorio.save(cliente);
+    }
+
+    @Transactional
+    public void eliminarClientePorEmail(String email) throws MiException {
+        // Verificamos si el cliente existe
+        Usuario clienteExistente = usuarioRepositorio.buscarPorEmail(email);
+
+        if (clienteExistente == null || !clienteExistente.getRol().equals(Rol.CLIENTE)) {
+            throw new MiException("Cliente no encontrado");
+        }
+
+        // Eliminamos al cliente de la base de datos
+        usuarioRepositorio.delete(clienteExistente);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Usuario> obtenerTodosLosClientes() {
+        List<Usuario> clientes = usuarioRepositorio.findAllByRol(Rol.CLIENTE);
+        return clientes;
+    }
+
+
+
+
+    private void validar(String email, String name, String password, String password2, String phone, Rol rol) throws MiException {
         if (email.trim().isEmpty() || email == null) {
             throw new MiException("Email no puede estar vacío");
         }
@@ -57,7 +142,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (!password.equals(password2)) {
             throw new MiException("Ambas contraseñas deben coincidir");
         }
-        if (phone < 1) {
+        if (phone.isEmpty() || phone== null) {
             throw new MiException("Inserte un número válido");
         }
         if (rol == null) {
