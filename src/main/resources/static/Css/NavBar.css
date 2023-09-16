@@ -1,52 +1,29 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    padding: 10px 20px;
+.contenedor_navbar {
+   display:flex;
+   align-items: center;
+   justify-content: space-between;
 }
 
 .logo {
-    height: 4rem;
+   height: 3rem;
 }
-.nav {
-    padding: 20px 20px;
-    height: 60px;
+
+.navbar{
     display: flex;
-    flex-direction: row;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
 }
-
-
-.nav_ul {
-    padding-left: 300px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-
-}
-
-.nav_ul_li {
-    list-style: none;
-}
-
-.nav_ul_li_a {
+.nav_a {
     font-family: "Roboto";
-    color: rgba(0, 0, 0, 0.80);
-    padding: 20px;
     font-size: 20px;
+    color: rgba(0, 0, 0, 0.80);
+    margin: 0 20px 0 20px;
     text-decoration: none;
 }
-
-.nav_ul_li_a_sesion {
+.nav_a_sesion{
     font-family: "Roboto";
-    padding: 20px;
     font-size: 20px;
+    color: rgba(0, 0, 0, 0.80);
+    margin: 0 20px 0 20px;
     text-decoration: none;
     background-color: #007bff;
     color: #fff;

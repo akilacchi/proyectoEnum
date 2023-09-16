@@ -1,19 +1,13 @@
-<nav th:fragment="nav_bar" class="nav">
-
-    <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
-
-    <div class="navbar">
-
-        <img class="logo" src="Img/logoReparoYa.png" alt="logoReparoYa">   
-
+<div th:fragment="nav_bar" class="nav">
+    <div class="contenedor_navbar">
+        <div class="contenedor_logo">
+            <img class="logo" src="Img/logoBlanco.png" alt="logoReparoYa">
+        </div>
+        <nav class="navbar">
+            <a class="nav_a" href="">Servicios</a>
+            <a class="nav_a" href="">Contacto</a>
+            <a class="nav_a" href="">Preguntas Frecuentes</a>
+            <a class="nav_a_sesion" href="">Iniciar Sesión</a>
+        </nav>
     </div>
-
-    <ul class="nav_ul">
-        <li class="nav_ul_li"> <a class="nav_ul_li_a" href="">Servicios</a></li>
-        <li class="nav_ul_li"> <a class="nav_ul_li_a" href="">Contacto</a></li>
-        <li class="nav_ul_li"> <a class="nav_ul_li_a" href="">Preguntas Frecuentes</a></li>
-        <li class="nav_ul_li"> <a th:href="@{/RegistroUser/}" class="nav_ul_li_a_sesion" href="inicio de sesion">Iniciar Sesión</a></li>
-    </ul>
-
-
-</nav>
+</div>
