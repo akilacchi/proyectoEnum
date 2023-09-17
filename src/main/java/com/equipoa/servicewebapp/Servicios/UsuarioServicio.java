@@ -43,6 +43,7 @@ public class UsuarioServicio implements UserDetailsService {
             usr.setPhone(phone);
             usr.setRol(rol);
             usr.setProvincia(provincia);
+            usr.setActivo(true);
             usr.setFecharegistro(new Date());
 
             Imagen imagen = imagenServicio.guarddar(archivo);
@@ -67,6 +68,7 @@ public class UsuarioServicio implements UserDetailsService {
             cliente.setPhone(phone);
             cliente.setProvincia(provincia);
             cliente.setFecharegistro(new Date());;
+            cliente.setActivo(true);
             cliente.setRol(Rol.CLIENTE); // Establecer el rol como "cliente"
             cliente.setDireccion(direccion);
             cliente.setCalificacionesEmitidas(new ArrayList<>());

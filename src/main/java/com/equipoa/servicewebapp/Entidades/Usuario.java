@@ -18,6 +18,9 @@ public class Usuario {
     private String phone;
     private Date fecharegistro;
     private String direccion;
+    private Boolean activo;
+
+
     @OneToOne
     private Imagen profilePicture;
 
@@ -109,6 +112,15 @@ public class Usuario {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
 
     public Date getFecharegistro() {
         return fecharegistro;

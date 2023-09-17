@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
@@ -19,4 +20,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
     @Query("SELECT u FROM Usuario u WHERE u.rol = :rol")
     public List<Usuario> findAllByRol(@Param("rol") Rol rol);
+
+    @Query("SELECT u FROM Usuario u WHERE u.ID = :id")
+    public Optional<Usuario> findById(@Param("id") Long id);
 }
