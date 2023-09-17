@@ -32,6 +32,11 @@ public class PortalController {
     public String index(){
         return "index.html";
     }
+    
+    @GetMapping("/servicio")
+    public String servicio(){
+        return "servicio.html";
+    }
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo){
@@ -80,5 +85,6 @@ public class PortalController {
         modelo.addAttribute("provincia", getProvincias());
         return "selectClienteProveedor.html";
     }
-
+    
+    
 }
