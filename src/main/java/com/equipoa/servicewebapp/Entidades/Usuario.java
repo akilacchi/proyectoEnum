@@ -2,8 +2,10 @@ package com.equipoa.servicewebapp.Entidades;
 
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -13,8 +15,15 @@ public class Usuario {
     private String email;
     private String name;
     private String password;
-    private int phone;
+    private String phone;
     private Date fecharegistro;
+    private String direccion;
+    private Boolean activo;
+
+
+    @OneToOne
+    private Imagen profilePicture;
+
     @Enumerated(EnumType.STRING)
     private Rol rol;
     @Enumerated(EnumType.STRING)
@@ -22,16 +31,19 @@ public class Usuario {
 
     @ManyToOne
     private Ocupaciones ocupacion;
+    @OneToMany(mappedBy = "cliente")
+    private List<Trabajo> trabajosCliente;
 
-    public Ocupaciones getOcupacion() {
-        return ocupacion;
-    }
+    @OneToMany(mappedBy = "proveedor")
+    private List<Trabajo> trabajosProveedor;
 
-    public void setOcupacion(Ocupaciones ocupacion) {
-        this.ocupacion = ocupacion;
-    }
+    @OneToMany(mappedBy = "clienteEmisor")
+    private List<Calificacion> calificacionesEmitidas;
 
-    public Usuario(String email, String name, String password, int phone, Date fecharegistro, Rol rol, Provincias provincia) {
+    @OneToMany(mappedBy = "proveedorReceptor")
+    private List<Calificacion> calificacionesRecibidas;
+
+    public Usuario(String email, String name, String password, String phone, Date fecharegistro, Rol rol, Provincias provincia, String direccion) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -39,6 +51,31 @@ public class Usuario {
         this.fecharegistro = fecharegistro;
         this.rol = rol;
         this.provincia = provincia;
+        this.direccion = direccion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Usuario(String email, String name, String password, String phone, Date fecharegistro, String direccion, Rol rol, Provincias provincia, Ocupaciones ocupacion, List<Trabajo> trabajosCliente, List<Trabajo> trabajosProveedor, List<Calificacion> calificacionesEmitidas, List<Calificacion> calificacionesRecibidas) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.fecharegistro = fecharegistro;
+        this.direccion = direccion;
+        this.rol = rol;
+        this.provincia = provincia;
+        this.ocupacion = ocupacion;
+        this.trabajosCliente = trabajosCliente;
+        this.trabajosProveedor = trabajosProveedor;
+        this.calificacionesEmitidas = calificacionesEmitidas;
+        this.calificacionesRecibidas = calificacionesRecibidas;
     }
 
     public Usuario() {
@@ -68,13 +105,22 @@ public class Usuario {
         this.password = password;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
 
     public Date getFecharegistro() {
         return fecharegistro;
@@ -106,5 +152,53 @@ public class Usuario {
 
     public void setID(Long ID) {
         this.ID = ID;
+    }
+
+    public List<Trabajo> getTrabajosCliente() {
+        return trabajosCliente;
+    }
+
+    public void setTrabajosCliente(List<Trabajo> trabajosCliente) {
+        this.trabajosCliente = trabajosCliente;
+    }
+
+    public List<Trabajo> getTrabajosProveedor() {
+        return trabajosProveedor;
+    }
+
+    public void setTrabajosProveedor(List<Trabajo> trabajosProveedor) {
+        this.trabajosProveedor = trabajosProveedor;
+    }
+
+    public List<Calificacion> getCalificacionesEmitidas() {
+        return calificacionesEmitidas;
+    }
+
+    public void setCalificacionesEmitidas(List<Calificacion> calificacionesEmitidas) {
+        this.calificacionesEmitidas = calificacionesEmitidas;
+    }
+
+    public List<Calificacion> getCalificacionesRecibidas() {
+        return calificacionesRecibidas;
+    }
+
+    public void setCalificacionesRecibidas(List<Calificacion> calificacionesRecibidas) {
+        this.calificacionesRecibidas = calificacionesRecibidas;
+    }
+
+    public Imagen getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Imagen profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public Ocupaciones getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(Ocupaciones ocupacion) {
+        this.ocupacion = ocupacion;
     }
 }

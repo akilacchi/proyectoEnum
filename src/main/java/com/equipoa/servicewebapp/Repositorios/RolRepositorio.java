@@ -17,8 +17,8 @@ public interface RolRepositorio extends JpaRepository<Usuario, Long> {
     @Query("SELECT u FROM Usuario u WHERE u.rol = 'PROVEEDOR'")
     public List<Usuario> buscarTodosLosProveedores();
 
-    @Query("SELECT u FROM Usuario u WHERE u.rol = 'PROVEEDOR' AND u.ocupacion.nombre = :ocupacion")
-    public List<Usuario> buscarProveedoresPorOcupacion(@Param("ocupacion") String ocupacion);
+//    @Query("SELECT u FROM Usuario u WHERE u.rol = 'PROVEEDOR' AND u.ocupacion.nombre = :ocupacion")
+//    public List<Usuario> buscarProveedoresPorOcupacion(@Param("ocupacion") String ocupacion);
 
     @Query("SELECT u FROM Usuario u WHERE u.rol = 'CLIENTE'")
     public List<Usuario> buscarTodosLosClientes();

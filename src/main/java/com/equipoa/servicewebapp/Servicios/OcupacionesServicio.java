@@ -13,9 +13,14 @@ public class OcupacionesServicio {
 OcupacionesRepositorio ocupacionesRepositorio;
     public void crearNuevaOcupacion(String nombre) throws MiException {
         validar(nombre);
+        if (ocupacionesRepositorio.buscarOcupacion(nombre)== null){
+
         Ocupaciones ocupacion = new Ocupaciones();
         ocupacion.setOcupacion(nombre);
         ocupacionesRepositorio.save(ocupacion);
+        }else {
+            throw new MiException("Ocupacion ya existente");
+        }
     }
 
     public void eliminarOcupacion(String nombre) throws MiException {
@@ -23,6 +28,8 @@ OcupacionesRepositorio ocupacionesRepositorio;
         Ocupaciones ocupacion = ocupacionesRepositorio.buscarOcupacion(nombre);
         if(ocupacion!= null){
             ocupacionesRepositorio.delete(ocupacion);
+        }else{
+            throw new MiException("Ocupacion Inexistente");
         }
     }
 
