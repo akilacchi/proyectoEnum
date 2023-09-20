@@ -1,0 +1,64 @@
+.main {
+    flex: 1;
+    padding: 160px 80px;
+}
+
+.description {
+    font-family: "Roboto";
+    font-size: 40px;
+    margin: 20px 0;
+    color: rgba(0, 0, 0, 0.80);
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 250px;
+}
+
+.input_submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.populares {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titulo_populares {
+    font-family: "Roboto";
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.60);
+}
+
+.list_populares {
+    font-family: "Roboto";
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.list_populares_li{
+    list-style: none;
+    padding: 0 5px;
+}
+.list_populares_a{
+    font-family: "Roboto";
+    color: rgba(0, 0, 0, 0.60);
+    padding: 5px;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid;
+    border-radius: 20px;
+    
+    
+}
