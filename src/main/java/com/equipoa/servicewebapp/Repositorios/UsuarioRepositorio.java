@@ -22,5 +22,8 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
     public List<Usuario> findAllByRol(@Param("rol") Rol rol);
 
     @Query("SELECT u FROM Usuario u WHERE u.ID = :id")
-    public Optional<Usuario> findById(@Param("id") Long id);
+    public Usuario findById(Long id);
+
+//    @Query("SELECT u FROM Usuario u WHERE DATEDIFF(current date, u.fecharegistro)= :dias")
+//    public List<Usuario> buscarPorAntiguedad(int dias);
 }

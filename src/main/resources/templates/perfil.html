@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xlmns:th="https://www.thymeleaf.org/" lang="es">
+<html xmlns:th="https://www.thymeleaf.org/" lang="es">
 <head>
     <meta charset="UTF-8">
     <title>perfil</title>
@@ -10,7 +10,12 @@
 <div class="perfil">
 
     <div class="pfp">
-      
+        <p>Nombre: <span th:text="${usuario.name}"></span></p>
+        <p>Fecha de Registro: <span th:text="${usuario.fecharegistro}"></span></p>
+        <p>ID : <span th:text="${usuario.ID}"></span> </p>
+<!--        <img th:src="${usuario.profilePicture}" alt="Foto de Perfil">-->
+        <img th:src="@{/img/perfil/__${usuario.ID}__}" alt="Foto de Perfil">
+<!--        <img th:src="@{/img/perfil/__$(session.usuariosession.id)__}" alt="Foto de Perfil">-->
     </div>
 
 </div>

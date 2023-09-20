@@ -54,13 +54,7 @@ public class Usuario {
         this.direccion = direccion;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public Usuario(String email, String name, String password, String phone, Date fecharegistro, String direccion, Rol rol, Provincias provincia, Ocupaciones ocupacion, List<Trabajo> trabajosCliente, List<Trabajo> trabajosProveedor, List<Calificacion> calificacionesEmitidas, List<Calificacion> calificacionesRecibidas) {
         this.email = email;
@@ -81,6 +75,13 @@ public class Usuario {
     public Usuario() {
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
     public String getEmail() {
         return email;
     }

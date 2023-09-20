@@ -47,23 +47,29 @@ public class PortalController {
 
     @GetMapping("/")
     public String index(HttpSession session){
-        Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
-        if(loggeado.getRol().toString().equals("ADMIN")){
-            return "redirect:/admindashboard/";
-        }
+//        Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
+//        if(loggeado.getRol().toString().equals("ADMIN")){
+//            return "redirect:/admindashboard/";
+//        }else{
         return "index.html";
+
+//        }
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @GetMapping("/perfil")
     public String perfil(ModelMap modelo, HttpSession session){
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        if (usuario!=null){
         modelo.put("usuario", usuario);
-        return "usuario_modificar.html";
+        return "perfil.html";
+        }else{
+            return "redirect:/login";
+        }
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
-    @GetMapping("/perfil/{id}")
+    @PostMapping("/perfil/{id}")
     public String actualizar(MultipartFile archivo, Long id, String email, String nombre, String direccion, String phone, String password, String password2){
         try {
         usuarioServicio.actualizarCliente(archivo,email,nombre, direccion ,phone , password, password2);

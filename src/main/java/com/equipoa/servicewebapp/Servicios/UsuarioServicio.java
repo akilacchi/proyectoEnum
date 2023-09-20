@@ -5,7 +5,6 @@ import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
-import com.equipoa.servicewebapp.Repositorios.ImagenRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -164,7 +163,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     public Usuario getOne(Long id){
-        return usuarioRepositorio.getOne(String.valueOf(id));
+        System.out.println("a");
+        return usuarioRepositorio.findById(id);
     }
 
     @Override
