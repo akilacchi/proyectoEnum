@@ -1,0 +1,26 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+  
+
+}
+
+.footer_ol {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.footer_ol_li {
+    list-style: none;
+}
+
+.footer_ol_li_a {
+    font-family: "Roboto";
+    color:rgba(0, 0, 0, 0.80);
+    padding: 20px;
+    font-size: 20px;
+    text-decoration: none;
+}

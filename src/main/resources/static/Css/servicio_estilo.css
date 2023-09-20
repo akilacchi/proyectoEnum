@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto"; /* Aplica "Roboto" a todos los elementos */
+}
+
+body {
+    /* La fuente ya se define en el selector universal (*) */
+    margin: 0;
+    padding: 0;
+    background-image: url(https://img.freepik.com/foto-gratis/vista-superior-martillo-acero-otros-elementos-herramientas-construccion_23-2150576394.jpg?w=740&t=st=1695042391~exp=1695042991~hmac=bbe904719871fc1067b9a24034266ca31b24a5725f9346c5ed7fa6ece022e9ec);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Estilos para el contenedor de las tarjetas */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0 100px; /* Margen a los lados izquierdo y derecho */
+    margin-bottom: 500px; /* Margen en la parte inferior */
+}
+
+/* Estilos para cada tarjeta */
+.card {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(25% - 40px); /* 33.33% del ancho del contenedor, menos los márgenes */
+    transition: all 400ms ease;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Agrega efecto Hover a las tarjetas */
+.card:hover {
+    transform: translateY(-3%); /* Aumenta el tamaño al hacer hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Agrega una sombra suave */
+}
+
+/* Estilos para la imagen (ajusta según tus imágenes) */
+/* Estilos para la imagen (ajustar el tamaño y recortar si es necesario) */
+.card img {
+    width: 100%;
+    height: 150px; /* Tamaño fijo para todas las imágenes */
+    object-fit: cover;
+}
+
+/* Otros estilos para el contenido (títulos, párrafos, etc.) */
+.card h3 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 16px;
+    color: #6a6a6a;
+}
+
+/* Puedes agregar estilos para los enlaces si es necesario */
+.card a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    margin-top: 10px;
+    color: #007bff;
+    border: 1px solid #007bff;
+    font-weight: bold;
+    transition: all 400ms ease;
+}
+
+.card a:hover {
+    background: #007bff;
+    color: #fff;
+}

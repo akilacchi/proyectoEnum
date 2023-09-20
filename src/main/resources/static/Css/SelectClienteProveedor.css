@@ -1,0 +1,202 @@
+
+    /* Estilos generales */
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: white;
+      font-family: Arial;
+    }
+
+    .contenedor-formulario {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 60vw;
+      height: 65vh;
+      background: #fff;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.5s;
+      justify-content: flex-end;
+    }
+
+    .contenedor-formulario:hover {
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .imagen-formulario {
+      position: absolute;
+      left: 0;
+      margin-left: 0;
+      color: #fff;
+      height: 100%;
+      width: 60%;
+      background: linear-gradient(rgba(8, 8, 8, 0.9), rgb(92, 92, 107));
+      clip-path: polygon(0 0, 100% 0, 30% 100%, 0% 100%);
+    }
+
+    .imagen-formulario .texto p {
+      font-size: 12px;
+    }
+
+    .imagen-formulario .texto h2 {
+      font-size: 34px;
+      margin-bottom: 20px;
+    }
+
+    .imagen-formulario .texto {
+      position: absolute;
+      right: 20px;
+      padding: 30px;
+      margin-top: 80px;
+      width: 90%;
+    }
+
+   
+    .cuerpo-formulario {
+      margin: 50px 60px 0;
+    }
+
+    .cuerpo-formulario .encabezado {
+      text-align: right;
+    }
+
+    .cuerpo-formulario .encabezado h2 {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .cuerpo-formulario .encabezado p {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .cuerpo-formulario .encabezado a {
+      text-decoration: none;
+      color: rgba(68, 106, 233, 0.986);
+    }
+
+    .formulario {
+      display: none;
+    }
+
+    .formulario.mostrar {
+      display: block;
+    }
+
+    .seleccion {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .seleccion .opcion {
+      display: inline-block;
+      margin: 0 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .seleccion img {
+      width: 150px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+      border-radius: 8px;
+    }
+
+    .seleccion img:hover {
+      border-color: #007BFF;
+    }
+
+    .seleccion p {
+      font-size: 16px;
+      font-weight: bold;
+      font-family: "Arial", sans-serif;
+      color: #333;
+    }
+
+    
+    .grupo-formulario {
+      margin: 30px 0;
+    }
+
+    .grupo-formulario label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .grupo-formulario input[type='password'],
+    .grupo-formulario input[type='text'],
+    .grupo-formulario input[type='email'],
+    .grupo-formulario input[type='number'] {
+      width: 100%;
+      padding: 8px 15px;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+
+    .grupo-formulario .grupo-input.centro {
+      text-align: center;
+    }
+
+    .grupo-formulario .grupo-input button {
+      position: relative;
+      background: rgba(68, 106, 233, 0.986);
+      width: 100px;
+      padding: 10px 15px;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      z-index: 1;
+      overflow: hidden;
+      margin-left: 35%;
+    }
+
+    .grupo-formulario .grupo-input button::before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100px;
+      border-radius: 5px;
+      left: 0;
+      top: 0;
+      transition: transform 0.5s;
+    }
+
+    .grupo-formulario .grupo-input button:hover::before {
+      transform: translateX(100px);
+      z-index: -1;
+    }
+
+    .grupo-formulario .grupo-input.flex .recordar input {
+      margin-right: 5px;
+    }
+
+    .grupo-formulario .grupo-input.flex .recordar {
+      display: flex;
+      align-items: center;
+    }
+
+    .grupo-formulario .grupo-input.flex {
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .grupo-formulario .grupo-input.flex a {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.8);
+    }
