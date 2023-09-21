@@ -15,7 +15,7 @@ public class ImagenServicio {
     @Autowired
     private ImagenRepositorio imagenRepositorio;
 
-    public Imagen guarddar(MultipartFile archivo) throws MiException{
+    public Imagen guardar(MultipartFile archivo) throws MiException{
         if(archivo!= null){
             try {
                 Imagen imagen = new Imagen();

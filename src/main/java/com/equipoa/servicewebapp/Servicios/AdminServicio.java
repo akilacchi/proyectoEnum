@@ -76,7 +76,7 @@ public class AdminServicio {
                 }
             }
 
-            Imagen imagen = imagenServicio.guarddar(archivo);
+            Imagen imagen = imagenServicio.guardar(archivo);
             usr.setProfilePicture(imagen);
 
             usuarioRepositorio.save(usr);
