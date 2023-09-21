@@ -55,6 +55,11 @@ public class PortalController {
 
 //        }
     }
+    
+     @GetMapping("/provedores")
+    public String adminDashboard() {
+        return "card.html";
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @GetMapping("/perfil")

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/Header.css">
+    <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+    <link rel="stylesheet" href="/Css/stylesCard.css">
+    <style>
+        /* Estilo CSS para el contenedor principal */
+        .container {
+            display: flex;
+        }
+
+        /* Estilo CSS para el filtro en el lado izquierdo */
+        .filtro-box {
+            width: 150px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: left; /* Cambio de alineación a izquierda */
+            margin-right: 20px;
+        }
+
+        /* Estilo CSS para las casillas de verificación */
+        .filtro-box label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Estilo CSS para la tarjeta rectangular */
+        .user-card {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 200px;
+            height: 300px;
+            transition: background-color 0.3s;
+        }
+
+        /* Estilo CSS para la imagen de perfil */
+        .user-avatar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        /* Estilo CSS para el nombre del usuario */
+        .user-info h1 {
+            font-size: 24px;
+            margin: 5px 0;
+        }
+
+        /* Estilo CSS para las estrellas de calificación */
+        .rating .star {
+            font-size: 24px;
+            color: gold;
+            margin-right: 2px;
+        }
+
+        .rating .full-star {
+            color: gold;
+        }
+
+        .rating .half-star {
+            color:  black;
+        }
+
+        /* Estilo CSS para el efecto hover en la tarjeta */
+        .user-card:hover {
+            background-color: #d3d0d0;
+        }
+    </style>
+    <title>Tarjeta con Botón VER MÁS</title>
+</head>
+<body>
+    <header class="header">
+        <nav th:replace="/navbar :: nav_bar"></nav>  
+    </header>
+    <div class="container">
+        <div class="filtro-box">
+            <h2>Filtrar por</h2>
+            <!-- Cambio de cuadro desplegable a casillas de verificación -->
+            <label><input type="radio" name="filtro" value="antiguedad"> Antigüedad de proveedor</label>
+            <label><input type="radio" name="filtro" value="calificacion"> Mejor calificación</label>
+            <label><input type="radio" name="filtro" value="solicitados"> Más solicitados</label>
+            <label><input type="radio" name="filtro" value="tarifas"> Tarifas más bajas</label>
+            <button class="ver-mas-button">BUSCAR</button>
+        </div>
+
+        <div class="user-card">
+            <div class="user-avatar">
+                <img src="/Img/card/blank-profile-picture-973460_960_720.webp" alt="Imagen de perfil">
+            </div>
+            <div class="user-info">
+                <h1>JUAN CARLOS</h1>
+                <h3>Electricista</h3>
+                <p>10 años de servicio como electricista.</p>
+                <div class="rating">
+                    <span class="star full-star">&#9733;</span>
+                    <span class="star full-star">&#9733;</span>
+                    <span class="star full-star">&#9733;</span>
+                    <span class="star full-star">&#9733;</span>
+                    <span class="star half-star">&#9734;</span>
+                </div>
+                <button class="ver-mas-button">VER MÁS</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tu código JavaScript para aplicar filtros irá aquí
+    </script>
+</body>
+</html>
