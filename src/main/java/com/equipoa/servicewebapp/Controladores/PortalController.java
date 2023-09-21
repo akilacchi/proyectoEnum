@@ -57,16 +57,17 @@ public class PortalController {
 //        }
     }
 
-    @GetMapping("/provedores")
-    public String adminDashboard() {
+    @GetMapping("/buscarProveedores")
+    public String buscarProveedores(@RequestParam String ocupacion, Model model) {
+        List<Usuario> proveedores = usuarioServicio.obtenerProveedoresPorOcupacion(ocupacion);
+        model.addAttribute("proveedores", proveedores);
         return "card.html";
     }
-    
-     @GetMapping("/servicios")
+
+    @GetMapping("/servicios")
     public String servicios() {
         return "servicios.html";
     }
-
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @GetMapping("/perfil")

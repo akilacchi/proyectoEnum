@@ -22,11 +22,11 @@ public class Calificacion {
     private String comentario;
 
     @ManyToOne
-//    @JoinColumn(name = "cliente_emisor_id")
+    @JoinColumn(name = "cliente_emisor_id")
     private Usuario clienteEmisor; // el cliente que deja la calificación
 
     @ManyToOne
-//    @JoinColumn(name = "proveedor_receptor_id")
+    @JoinColumn(name = "proveedor_receptor_id")
     private Usuario proveedorReceptor; // el proveedor que recibe la calificación
 
     public Calificacion() {
