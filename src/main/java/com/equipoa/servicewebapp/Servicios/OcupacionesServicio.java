@@ -5,6 +5,7 @@ import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OcupacionesServicio {
@@ -31,6 +32,7 @@ OcupacionesRepositorio ocupacionesRepositorio;
         }
     }
 
+    @Transactional
     public void eliminarOcupacion(String nombre) throws MiException {
         validar(nombre);
         Ocupaciones ocupacion = ocupacionesRepositorio.buscarOcupacion(nombre);
@@ -41,6 +43,7 @@ OcupacionesRepositorio ocupacionesRepositorio;
         }
     }
 
+    @Transactional
     public void modificarOcupacion(String nombre, String nuevoNombre) throws MiException {
         validar(nombre);
         Ocupaciones ocupacion = ocupacionesRepositorio.buscarOcupacion(nombre);

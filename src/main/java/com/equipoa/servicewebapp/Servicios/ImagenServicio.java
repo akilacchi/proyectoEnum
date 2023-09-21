@@ -5,6 +5,7 @@ import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.ImagenRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class ImagenServicio {
     @Autowired
     private ImagenRepositorio imagenRepositorio;
 
+    @Transactional
     public Imagen guardar(MultipartFile archivo) throws MiException{
         if(archivo!= null){
             try {
@@ -32,6 +34,7 @@ public class ImagenServicio {
         return null;
     }
 
+    @Transactional
     public Imagen actualizar(MultipartFile archivo, Long idImagen) throws MiException{
         if(archivo!= null){
             try {

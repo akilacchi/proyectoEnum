@@ -74,16 +74,12 @@ public class UsuarioServicio implements UserDetailsService {
             cliente.setPhone(phone);
             cliente.setProvincia(provincia);
             cliente.setFecharegistro(new Date());
-            ;
+
             cliente.setActivo(true);
             cliente.setRol(Rol.CLIENTE); // Establecer el rol como "cliente"
             cliente.setDireccion(direccion);
             cliente.setCalificacionesEmitidas(new ArrayList<>());
             cliente.setTrabajosCliente(new ArrayList<>());
-
-//            if(ocupacionesServicio.buscarOcupacion("Cliente")!=null){
-//                cliente.setOcupacion(ocupacionesServicio.buscarOcupacion("Cliente"));
-//            }
 
             Imagen imagen = imagenServicio.guardar(archivo);
             cliente.setProfilePicture(imagen);
@@ -95,6 +91,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+    @Transactional
     public void actualizarCliente(MultipartFile archivo, String email, String nombre, String nuevaDireccion, String phone, String password, String password2) throws MiException {
         validar(email, nombre, password, password2, phone);
 
@@ -136,6 +133,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuarioRepositorio.delete(clienteExistente);
     }
 
+    @Transactional
     public void crearProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) throws MiException {
         Usuario proveedor = new Usuario();
 
@@ -144,10 +142,7 @@ public class UsuarioServicio implements UserDetailsService {
             proveedor.setRol(Rol.PROVEEDOR);                                        //rol de proveedor seteado por defecto
             proveedor.setName(name);
 
-
-
             proveedor.setOcupacion(ocupacionesServicio.buscarOcupacion(ocupacion)); //ocupacion seteado por parametro en lista
-
 
             proveedor.setProvincia(provincia);
             proveedor.setActivo(true);                                              //seteado com usuario activo por defecto
@@ -167,7 +162,6 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    @Transactional(readOnly = true)
     public List<Usuario> obtenerTodosLosClientes() {
         List<Usuario> clientes = usuarioRepositorio.findAllByRol(Rol.CLIENTE);
         return clientes;
