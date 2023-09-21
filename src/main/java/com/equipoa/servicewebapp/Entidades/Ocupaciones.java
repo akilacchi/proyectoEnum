@@ -1,9 +1,11 @@
 package com.equipoa.servicewebapp.Entidades;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Ocupaciones {
@@ -12,6 +14,10 @@ public class Ocupaciones {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     public String nombre;
+
+    // Relación muchos-a-muchos con Proveedor
+    @OneToMany(mappedBy = "ocupacion")
+    private List<Usuario> proveedores;
 
     public Ocupaciones() {
     }
@@ -35,4 +41,13 @@ public class Ocupaciones {
     public Long getId() {
         return id;
     }
+
+    public List<Usuario> getProveedores() {
+        return proveedores;
+    }
+
+    public void setProveedores(List<Usuario> proveedores) {
+        this.proveedores = proveedores;
+    }
+    
 }

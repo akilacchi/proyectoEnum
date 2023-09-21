@@ -24,8 +24,8 @@
                 </p>
             </section>
             <section>
-                <form action="" method="get">
-                    <input class="input" type="text" name="barra de busqueda" placeholder="Buscar un servicio..." required>
+                <form th:action="@{/buscarProveedores}" method="get">
+                    <input class="input" type="text" name="ocupacion" placeholder="Buscar un servicio..." required>
                     <input class="input_submit" type="submit" value="Buscar">
                 </form>
             </section>

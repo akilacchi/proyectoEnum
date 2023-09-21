@@ -12,11 +12,12 @@ import java.util.Optional;
 
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
+
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
     public Usuario buscarPorEmail(@Param("email") String email);
 
     @Query("SELECT u FROM Usuario u WHERE u.phone = :phone")
-    public Usuario buscarPorTelefono(@Param("phone") String phone );
+    public Usuario buscarPorTelefono(@Param("phone") String phone);
 
     @Query("SELECT u FROM Usuario u WHERE u.rol = :rol")
     public List<Usuario> findAllByRol(@Param("rol") Rol rol);
@@ -24,6 +25,11 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
     @Query("SELECT u FROM Usuario u WHERE u.ID = :id")
     public Usuario findById(Long id);
 
+    @Query("SELECT u FROM Usuario u WHERE u.ID = :id")
+    public Optional<Usuario> findByIdList(@Param("id") Long id);
+
 //    @Query("SELECT u FROM Usuario u WHERE DATEDIFF(current date, u.fecharegistro)= :dias")
 //    public List<Usuario> buscarPorAntiguedad(int dias);
+    @Query("SELECT u FROM Usuario u WHERE u.rol = :rol AND u.ocupacion.nombre = :ocupacionNombre")
+    List<Usuario> findAllByRolAndOcupacionNombre(@Param("rol") Rol rol, @Param("ocupacionNombre") String ocupacionNombre);
 }

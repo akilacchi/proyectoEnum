@@ -29,11 +29,12 @@ public class PortalController {
     public List<Ocupaciones> getOcupaciones() {
         return ocupacionesRepositorio.findAll();
     }
-    public Rol[] getRol(){
-        return  Rol.values();
+
+    public Rol[] getRol() {
+        return Rol.values();
     }
 
-    public Provincias[] getProvincias(){
+    public Provincias[] getProvincias() {
         return Provincias.values();
     }
 
@@ -46,7 +47,7 @@ public class PortalController {
     private OcupacionesServicio ocupacionesServicio;
 
     @GetMapping("/")
-    public String index(HttpSession session){
+    public String index(HttpSession session) {
 //        Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
 //        if(loggeado.getRol().toString().equals("ADMIN")){
 //            return "redirect:/admindashboard/";
@@ -55,30 +56,37 @@ public class PortalController {
 
 //        }
     }
-    
-     @GetMapping("/provedores")
-    public String adminDashboard() {
+
+//    @GetMapping("/provedores")
+//    public String adminDashboard() {
+//        return "card.html";
+//    }
+
+    @GetMapping("/buscarProveedores")
+    public String buscarProveedores(@RequestParam String ocupacion, Model model) {
+        List<Usuario> proveedores = usuarioServicio.obtenerProveedoresPorOcupacion(ocupacion);
+        model.addAttribute("proveedores", proveedores);
         return "card.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @GetMapping("/perfil")
-    public String perfil(ModelMap modelo, HttpSession session){
+    public String perfil(ModelMap modelo, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
-        if (usuario!=null){
-        modelo.put("usuario", usuario);
-        return "perfil.html";
-        }else{
+        if (usuario != null) {
+            modelo.put("usuario", usuario);
+            return "perfil.html";
+        } else {
             return "redirect:/login";
         }
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @PostMapping("/perfil/{id}")
-    public String actualizar(MultipartFile archivo, Long id, String email, String nombre, String direccion, String phone, String password, String password2){
+    public String actualizar(MultipartFile archivo, Long id, String email, String nombre, String direccion, String phone, String password, String password2) {
         try {
-        usuarioServicio.actualizarCliente(archivo,email,nombre, direccion ,phone , password, password2);
-        }catch (MiException e){
+            usuarioServicio.actualizarCliente(archivo, email, nombre, direccion, phone, password, password2);
+        } catch (MiException e) {
             System.err.println(e.getMessage());
             return "usuario_modificar.html";
         }
@@ -86,37 +94,37 @@ public class PortalController {
     }
 
     @GetMapping("/login")
-    public String login(@RequestParam(required = false) String error, ModelMap modelo){
-        if(error!=null){
-            modelo.put("error","Usuario o contraseña inválidos");
+    public String login(@RequestParam(required = false) String error, ModelMap modelo) {
+        if (error != null) {
+            modelo.put("error", "Usuario o contraseña inválidos");
             System.err.println("bruv");
-        }else{
+        } else {
             System.out.println("coolbeans");
         }
         return "login.html";
     }
 
     @PostMapping("/logincheck")
-    public String logincheck(){
+    public String logincheck() {
         System.out.println("pog");
         return "redirect:/";
     }
 
     @GetMapping("/registrar")
-    public String registrar(Model modelo){
-        modelo.addAttribute("rol",getRol());
-        modelo.addAttribute("ocupaciones",getOcupaciones());
+    public String registrar(Model modelo) {
+        modelo.addAttribute("rol", getRol());
+        modelo.addAttribute("ocupaciones", getOcupaciones());
         modelo.addAttribute("provincia", getProvincias());
         return "registro.html";
     }
 
     @PostMapping("/registro")
     public String registro(@RequestParam MultipartFile archivo, @RequestParam String email, @RequestParam String name,
-                           @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
-                           @RequestParam Rol rol, @RequestParam Provincias provincia){
+            @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
+            @RequestParam Rol rol, @RequestParam Provincias provincia) {
         try {
             System.out.println("holas");
-            usuarioServicio.crearUsuario(archivo,email,name,password,password2,phone,rol, provincia);
+            usuarioServicio.crearUsuario(archivo, email, name, password, password2, phone, rol, provincia);
         } catch (MiException e) {
             System.err.println(e);
             return "index.html";

@@ -20,11 +20,11 @@ public class Trabajo {
     private Long id;
 
     @ManyToOne
-//    @JoinColumn(name = "cliente_id") // cliente que solicita el trabajo
+    @JoinColumn(name = "cliente_id") // cliente que solicita el trabajo
     private Usuario cliente;
 
     @ManyToOne
-//    @JoinColumn(name = "proveedor_id") // proveedor que realiza el trabajo
+    @JoinColumn(name = "proveedor_id") // proveedor que realiza el trabajo
     private Usuario proveedor;
 
     //verificar argumentos de la entidad

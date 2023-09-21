@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
@@ -20,7 +21,6 @@ public class Usuario {
     private String direccion;
     private Boolean activo;
 
-
     @OneToOne
     private Imagen profilePicture;
 
@@ -30,7 +30,9 @@ public class Usuario {
     private Provincias provincia;
 
     @ManyToOne
+    @JoinColumn(name = "ocupacion_id")
     private Ocupaciones ocupacion;
+
     @OneToMany(mappedBy = "cliente")
     private List<Trabajo> trabajosCliente;
 
@@ -53,8 +55,6 @@ public class Usuario {
         this.provincia = provincia;
         this.direccion = direccion;
     }
-
-
 
     public Usuario(String email, String name, String password, String phone, Date fecharegistro, String direccion, Rol rol, Provincias provincia, Ocupaciones ocupacion, List<Trabajo> trabajosCliente, List<Trabajo> trabajosProveedor, List<Calificacion> calificacionesEmitidas, List<Calificacion> calificacionesRecibidas) {
         this.email = email;
@@ -82,6 +82,7 @@ public class Usuario {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
     public String getEmail() {
         return email;
     }
@@ -121,7 +122,6 @@ public class Usuario {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
-
 
     public Date getFecharegistro() {
         return fecharegistro;
