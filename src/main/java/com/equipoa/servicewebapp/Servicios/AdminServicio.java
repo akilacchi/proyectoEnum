@@ -98,9 +98,9 @@ public class AdminServicio {
             throw new MiException("Ocupación inexistente");
         }
 
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent()) {
-            usuario = respuesta.get();
+        Usuario respuesta = usuarioRepositorio.findById(id);
+        if (respuesta!= null) {
+            usuario = respuesta;
             usuario.setOcupacion(ocupacion);
 
             usuarioRepositorio.save(usuario);
@@ -127,9 +127,9 @@ public class AdminServicio {
         Usuario usuario = new Usuario();
         validar(id, email, phone, rol, "a");
 
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent()) {
-            usuario = respuesta.get();
+        Usuario respuesta = usuarioRepositorio.findById(id);
+        if (respuesta!= null) {
+            usuario = respuesta;
             usuario.setRol(rol);
 
             usuarioRepositorio.save(usuario);
@@ -169,9 +169,9 @@ public class AdminServicio {
         Usuario usuario = new Usuario();
         Boolean valorActual;
 
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent()) {
-            usuario = respuesta.get();
+        Usuario respuesta = usuarioRepositorio.findById(id);
+        if (respuesta!=null) {
+            usuario = respuesta;
             valorActual = usuario.getActivo();
             usuario.setActivo(!valorActual);
 

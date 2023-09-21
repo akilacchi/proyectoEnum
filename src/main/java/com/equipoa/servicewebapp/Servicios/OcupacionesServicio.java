@@ -23,6 +23,14 @@ OcupacionesRepositorio ocupacionesRepositorio;
         }
     }
 
+    public Ocupaciones buscarOcupacion(String ocuppacion) throws MiException {
+        if(ocupacionesRepositorio.buscarOcupacion(ocuppacion)!=null){
+            return ocupacionesRepositorio.buscarOcupacion(ocuppacion);
+        }else{
+            throw new MiException("Ocupacion inexistente");
+        }
+    }
+
     public void eliminarOcupacion(String nombre) throws MiException {
         validar(nombre);
         Ocupaciones ocupacion = ocupacionesRepositorio.buscarOcupacion(nombre);

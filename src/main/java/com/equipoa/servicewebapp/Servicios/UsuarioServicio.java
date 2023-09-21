@@ -5,7 +5,6 @@ import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
-import com.equipoa.servicewebapp.Repositorios.ImagenRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,8 +16,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +33,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private ImagenServicio imagenServicio;
+
+    @Autowired
+    private OcupacionesServicio ocupacionesServicio;
 
     @Transactional
     public void crearUsuario(MultipartFile archivo, String email, String name, String password, String password2, String phone, Rol rol, Provincias provincia) throws MiException {
@@ -59,7 +64,7 @@ public class UsuarioServicio implements UserDetailsService {
     //Crud Cliente
     @Transactional
     public void crearCliente(MultipartFile archivo,String email, String name, String password, String password2, String phone, Rol rol, Provincias provincia, String direccion) throws MiException {
-        //validarCliente(email, name, password, password2, phone);
+        validar(email, name, password, password2, phone,rol);
         if (usuarioRepositorio.buscarPorEmail(email) == null && usuarioRepositorio.buscarPorTelefono(phone) == null) {
             Usuario cliente = new Usuario();
             cliente.setEmail(email);
@@ -74,6 +79,10 @@ public class UsuarioServicio implements UserDetailsService {
             cliente.setCalificacionesEmitidas(new ArrayList<>());
             cliente.setTrabajosCliente(new ArrayList<>());
 
+            if(ocupacionesServicio.buscarOcupacion("Cliente")!=null){
+                cliente.setOcupacion(ocupacionesServicio.buscarOcupacion("Cliente"));
+            }
+
             Imagen imagen = imagenServicio.guarddar(archivo);
             cliente.setProfilePicture(imagen);
 
@@ -84,7 +93,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    public void actualizarCliente(MultipartFile archivo,String email, String nuevoNombre, String nuevaDireccion, String nuevoPhone) throws MiException {
+    public void actualizarCliente(MultipartFile archivo,String email, String nombre, String nuevaDireccion, String phone, String password, String password2) throws MiException {
+        validar(email,nombre,password,password2,phone,Rol.CLIENTE);
+
         // Buscamos al cliente por su dirección de correo electrónico
         Usuario cliente = usuarioRepositorio.buscarPorEmail(email);
 
@@ -93,9 +104,10 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
         // Actualizamos los datos del cliente
-        cliente.setName(nuevoNombre);
+        cliente.setName(nombre);
         cliente.setDireccion(nuevaDireccion);
-        cliente.setPhone(nuevoPhone);
+        cliente.setPhone(phone);
+        cliente.setPassword(new BCryptPasswordEncoder().encode(password));
 
         Long idImagen = null;
         if (cliente.getProfilePicture() != null){
@@ -128,9 +140,6 @@ public class UsuarioServicio implements UserDetailsService {
         return clientes;
     }
 
-
-
-
     private void validar(String email, String name, String password, String password2, String phone, Rol rol) throws MiException {
         if (email.trim().isEmpty() || email == null) {
             throw new MiException("Email no puede estar vacío");
@@ -153,6 +162,11 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+    public Usuario getOne(Long id){
+        System.out.println("a");
+        return usuarioRepositorio.findById(id);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
@@ -166,6 +180,10 @@ public class UsuarioServicio implements UserDetailsService {
             // Agregar el rol a la lista de permisos
             GrantedAuthority p = new SimpleGrantedAuthority(rol);
             permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession sesion = attr.getRequest().getSession(true);
+            sesion.setAttribute("usuariosession", usuario);
 
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {

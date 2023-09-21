@@ -1,10 +1,15 @@
 package com.equipoa.servicewebapp.Controladores;
 
+import com.equipoa.servicewebapp.Entidades.Ocupaciones;
+import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
+import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
+import com.equipoa.servicewebapp.Servicios.OcupacionesServicio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,10 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class PortalController {
 
+    public List<Ocupaciones> getOcupaciones() {
+        return ocupacionesRepositorio.findAll();
+    }
     public Rol[] getRol(){
         return  Rol.values();
     }
@@ -29,9 +40,44 @@ public class PortalController {
     @Autowired
     UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private OcupacionesRepositorio ocupacionesRepositorio;
+    @Autowired
+    private OcupacionesServicio ocupacionesServicio;
+
     @GetMapping("/")
-    public String index(){
+    public String index(HttpSession session){
+//        Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
+//        if(loggeado.getRol().toString().equals("ADMIN")){
+//            return "redirect:/admindashboard/";
+//        }else{
         return "index.html";
+
+//        }
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
+    @GetMapping("/perfil")
+    public String perfil(ModelMap modelo, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        if (usuario!=null){
+        modelo.put("usuario", usuario);
+        return "perfil.html";
+        }else{
+            return "redirect:/login";
+        }
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
+    @PostMapping("/perfil/{id}")
+    public String actualizar(MultipartFile archivo, Long id, String email, String nombre, String direccion, String phone, String password, String password2){
+        try {
+        usuarioServicio.actualizarCliente(archivo,email,nombre, direccion ,phone , password, password2);
+        }catch (MiException e){
+            System.err.println(e.getMessage());
+            return "usuario_modificar.html";
+        }
+        return "redirect:/pefil";
     }
 
     @GetMapping("/login")
@@ -47,12 +93,14 @@ public class PortalController {
 
     @PostMapping("/logincheck")
     public String logincheck(){
+        System.out.println("pog");
         return "redirect:/";
     }
 
     @GetMapping("/registrar")
     public String registrar(Model modelo){
         modelo.addAttribute("rol",getRol());
+        modelo.addAttribute("ocupaciones",getOcupaciones());
         modelo.addAttribute("provincia", getProvincias());
         return "registro.html";
     }
