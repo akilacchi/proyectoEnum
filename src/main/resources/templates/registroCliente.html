@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Registro de cliente</title>
-</head>
-<body>
-<div>
-    <h1> Registro de Clientes </h1>
-    <br>
-    <form action="/r/registrocliente" method="post" enctype="multipart/form-data">
-        <label>Ingrese su nombre</label>
-        <input name="name" type="text" placeholder="Nombre">
-        <br>
-        <label>Ingrese su Email</label>
-        <input name="email" type="email" placeholder="fernando@chiquito.com">
-        <br>
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/Css/Login.css">
+        <link rel="stylesheet" type="text/css" href="/css/Header.css">
+        <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+        <title>Registro de cliente</title>
+    </head>
+    <body>
+        <div>
+            <header class="header">
+                <nav th:replace="/navbarSinInicioSesion :: nav_bar_sin_inicio"></nav>
+            </header>
+            <h1> Registro de Clientes </h1>
+            <br>
+            <form action="/r/registrocliente" method="post" enctype="multipart/form-data">
+                <label>Ingrese su nombre</label>
+                <input name="name" type="text" placeholder="Nombre">
+                <br>
+                <label>Ingrese su Email</label>
+                <input name="email" type="email" placeholder="fernando@chiquito.com">
+                <br>
 
-        <label>Suba una foto de perfil</label>
-        <input name="archivo" type="file">
+                <label>Suba una foto de perfil</label>
+                <input name="archivo" type="file">
 
-        <br>
-        <label>Ingrese su contraseña</label>
-        <input name="password" type="password" placeholder="********">
-        <br>
-        <label>Repita su contraseña</label>
-        <input name="password2" type="password" placeholder="********">
-        <br>
-        <label>Ingrese su número de teléfono</label>
-        <input name="phone" type="text" placeholder="56 9 1234 5678">
-        <br>
-        <label>Ingrese su calle/ dirección</label>
-        <input name="direccion" type="text" placeholder="Ej: Calle Las Camelias">
-        <br>
-        <label>Seleccione su provincia</label>
-        <select id="provincia" name="provincia">
-            <option th:each="p: ${provincia}" th:value="${p}"
-                    th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
-        </select>
-        <br>
-        <button type="submit">Registrarse!</button>
-    </form>
-</div>
-</body>
+                <br>
+                <label>Ingrese su contraseña</label>
+                <input name="password" type="password" placeholder="********">
+                <br>
+                <label>Repita su contraseña</label>
+                <input name="password2" type="password" placeholder="********">
+                <br>
+                <label>Ingrese su número de teléfono</label>
+                <input name="phone" type="text" placeholder="56 9 1234 5678">
+                <br>
+                <label>Ingrese su calle/ dirección</label>
+                <input name="direccion" type="text" placeholder="Ej: Calle Las Camelias">
+                <br>
+                <label>Seleccione su provincia</label>
+                <select id="provincia" name="provincia">
+                    <option th:each="p: ${provincia}" th:value="${p}"
+                            th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
+                </select>
+                <br>
+                <button type="submit">Registrarse!</button>
+            </form>
+        </div>
+    </body>
 </html>
