@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" type="text/css" href="/Css/SelectClienteProveedor.css">
+        <title>Registrar</title>
+    </head>
+
+    <body>
+        <div class="contenedor-formulario">
+            <div class="imagen-formulario">
+                <div class="texto">
+                    <h2>¡Bienvenido!<br></h2>
+                </div>
+            </div>
+            <div class="cuerpo-formulario">
+                <div class="encabezado">
+                    <h2>Registro</h2>
+                    <p>¿Ya tienes una cuenta? <a href="">Inicia sesión</a></p>
+                </div>
+                <!-- Sección de selección de tipo (Cliente o Proveedor) -->
+                <div class="seleccion">
+                    <div class="opcion" id="clienteopcion">
+                        <a th:href="@{/registrar}">
+                            <img src="/Img/icono-usuario.png" alt="Cliente" >
+                            <p>Cliente</p>
+                        </a>
+                    </div>
+                    <div class="opcion" id="proveedorOption">
+                        <a th:href="@{/registrarProveedor}">
+                            <img src="/Img/icono-profesional.png" alt="Proveedor">
+                            <p>Proveedor</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </body>
+
+</html>

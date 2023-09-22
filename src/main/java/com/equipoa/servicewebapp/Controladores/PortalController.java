@@ -69,6 +69,11 @@ public class PortalController {
         return "servicios.html";
     }
 
+    @GetMapping("/seleccionar")
+    public String seleccionar() {
+        return "selector.html";
+    }
+
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @GetMapping("/perfil")
     public String perfil(ModelMap modelo, HttpSession session) {
