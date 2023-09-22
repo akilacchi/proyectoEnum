@@ -8,88 +8,6 @@
     <link rel="stylesheet" type="text/css" href="/css/Header.css">
     <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
     <link rel="stylesheet" href="/Css/stylesCard.css">
-    <style>
-        /* Estilo CSS para el contenedor principal */
-        .container {
-            display: flex;
-        }
-
-        /* Estilo CSS para el filtro en el lado izquierdo */
-        .filtro-box {
-            width: 150px;
-            background-color: #f2f2f2;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            text-align: left;
-            /* Cambio de alineación a izquierda */
-            margin-right: 20px;
-            font-family: 'Roboto'
-        }
-
-        /* Estilo CSS para las casillas de verificación */
-        .filtro-box label {
-            display: block;
-            margin-bottom: 5px;
-            font-family: 'Roboto'
-        }
-
-        /* Estilo CSS para la tarjeta rectangular */
-        .user-card {
-            background-color: #f2f2f2;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 200px;
-            height: 300px;
-            transition: background-color 0.3s;
-        }
-
-        /* Estilo CSS para la imagen de perfil */
-        .user-avatar img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        /* Estilo CSS para el nombre del usuario */
-        .user-info h1 {
-            font-size: 24px;
-            margin: 5px 0;
-            font-family: 'Roboto'
-        }
-        .user-info h3 {
-            font-size: 20px;
-            margin: 5px 0;
-            font-family: 'Roboto'
-        }
-
-        /* Estilo CSS para las estrellas de calificación */
-        .rating .star {
-            font-size: 24px;
-            color: gold;
-            margin-right: 2px;
-            font-family: 'Roboto'
-        }
-
-        .rating .full-star {
-            color: gold;
-        }
-
-        .rating .half-star {
-            color: black;
-        }
-
-        /* Estilo CSS para el efecto hover en la tarjeta */
-        .user-card:hover {
-            background-color: #d3d0d0;
-        }
-    </style>
     <title>Tarjeta con Botón VER MÁS</title>
 </head>
 
@@ -108,6 +26,10 @@
             <label><input type="radio" name="filtro" value="solicitados"> Más solicitados</label>
             <label><input type="radio" name="filtro" value="tarifas"> Tarifas más bajas</label>
             <button class="ver-mas-button">BUSCAR</button>
+            <br>
+            <br>
+            <br>
+            <a href="/">Página Principal</a>
         </div>
         <!-- Usamos Thymeleaf para iterar sobre cada proveedor en la lista -->
         <div th:each="proveedor : ${proveedores}" class="user-card">
@@ -134,15 +56,14 @@
                 </div>
 
                 <button class="ver-mas-button">VER MÁS</button>
+
+                
             </div>
         </div>
 
 
     </div>
 
-    <div>
-        <a href="/">Volver a la página principal</a>
-    </div>
 
 </body>
 
