@@ -87,9 +87,9 @@ public class AdminController {
     }
 
     @PostMapping("/ocupacion")
-    public String postOcupacion(@RequestParam String ocupacion) {
+    public String postOcupacion(@RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam String descripcion) {
         try {
-            ocupacionesServicio.crearNuevaOcupacion(ocupacion);
+            ocupacionesServicio.crearNuevaOcupacion(archivo, nombre, descripcion);
             System.out.println("coolbeans");
         } catch (MiException e) {
             System.err.println(e.getMessage());
@@ -106,9 +106,13 @@ public class AdminController {
     }
 
     @PostMapping("/ocupacionmodificar")
-    public String ocupacionModificar(Long id, String ocupacion) {
+    public String ocupacionModificar(MultipartFile archivo, String nombre, String nuevoNombre, String descripcion) {
+        if(archivo == null){
+            System.err.println("archivo no llego a controller");
+        }
+
         try {
-            adminServicio.modificarOcupacion(id, ocupacion);
+            adminServicio.modificarOcupacion(archivo, nombre, nuevoNombre, descripcion);
         } catch (MiException e) {
             System.err.println(e.getMessage());
         }

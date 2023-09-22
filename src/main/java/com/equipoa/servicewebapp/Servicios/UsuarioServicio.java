@@ -111,10 +111,14 @@ public class UsuarioServicio implements UserDetailsService {
         Long idImagen = null;
         if (cliente.getProfilePicture() != null) {
             idImagen = cliente.getProfilePicture().getId();
-        }
-        Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            cliente.setProfilePicture(imagen);
+        } else {
+            Imagen imagen = imagenServicio.guardar(archivo);
+            cliente.setProfilePicture(imagen);
 
-        cliente.setProfilePicture(imagen);
+        }
+
 
         // Guardamos los cambios en la base de datos
         usuarioRepositorio.save(cliente);
@@ -157,7 +161,7 @@ public class UsuarioServicio implements UserDetailsService {
             proveedor.setProfilePicture(imagen);                                    //foto de perfil
 
             usuarioRepositorio.save(proveedor);
-        }else{
+        } else {
             throw new MiException("Usuario ya registrado");
         }
     }

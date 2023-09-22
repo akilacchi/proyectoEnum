@@ -20,7 +20,6 @@ public class Usuario {
     private String direccion;
     private Boolean activo;
 
-
     @OneToOne
     private Imagen profilePicture;
 

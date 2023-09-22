@@ -111,31 +111,32 @@ public class AdminServicio {
     }
 
     @Transactional
-    public void crearOcupacion(String ocupacion) throws MiException {
+    public void crearOcupacion(MultipartFile archivo, String ocupacion, String descripcion) throws MiException {
         if (ocupacion.trim().isEmpty() || ocupacion == null) {
             throw new MiException("Ocupacion no puede estar vacia");
+        } else if (descripcion.trim().isEmpty() || descripcion == null) {
+            throw new MiException("Descripcion no puede estar vacia");
         } else if (ocupacionesRepositorio.buscarOcupacion(ocupacion) != null) {
             throw new MiException("Ocupacion ya existente");
         } else {
-            ocupacionesServicio.crearNuevaOcupacion(ocupacion);
+            ocupacionesServicio.crearNuevaOcupacion(archivo, ocupacion, descripcion);
         }
     }
 
     @Transactional
-    public void modificarOcupacion(Long id, String ocupacion) throws MiException {
-        if (ocupacion.trim().isEmpty() || ocupacion == null) {
-            throw new MiException("Ocupacion no puede estar vacia");
-        } else if (!ocupacionesRepositorio.findById(id).isPresent()) {
-            throw new MiException("Ocupacion inexistente");
-        } else {
-            Optional<Ocupaciones> respuesta = ocupacionesRepositorio.findById(id);
-            if (respuesta.isPresent()) {
-                Ocupaciones ocupaciones = respuesta.get();
-                ocupaciones.setOcupacion(ocupacion);
-                System.out.println("cool beans");
-                ocupacionesRepositorio.save(ocupaciones);
-            }
+    public void modificarOcupacion(MultipartFile archivo, String nombre, String nuevoNombre, String descripcion) throws MiException {
+        if (nombre.trim().isEmpty() || nombre == null) {
+            throw new MiException("Nombre no puede estar vacio");
         }
+        if (nuevoNombre.trim().isEmpty() || nuevoNombre == null) {
+            throw new MiException("Nuevo nombre no puede estar vacio");
+        }
+        if (descripcion.trim().isEmpty() || descripcion == null) {
+            throw new MiException("Descripcion no puede estar vacia");
+        }
+        ocupacionesServicio.modificarOcupacion(archivo, nombre, nuevoNombre, descripcion);
+        Ocupaciones ocupacion = ocupacionesRepositorio.buscarOcupacion(nombre);
+
     }
 
 
