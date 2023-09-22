@@ -1,7 +1,10 @@
 package com.equipoa.servicewebapp.Entidades;
 
+import com.equipoa.servicewebapp.Enum.Estados;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,15 +34,30 @@ public class Trabajo {
     private String descripcion;
     private Date fechaInicio;
     private Date fechaFin;
+    
+    @Enumerated(EnumType.STRING)
+    Estados estado;
 
-    public Trabajo(Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin) {
+    public Trabajo(Long id, Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) {
+        this.id = id;
         this.cliente = cliente;
         this.proveedor = proveedor;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.estado = estado;
     }
 
+    public Estados getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estados estado) {
+        this.estado = estado;
+    }
+    
+
+  
     public Trabajo() {
     }
 

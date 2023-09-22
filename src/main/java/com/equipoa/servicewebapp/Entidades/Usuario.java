@@ -202,4 +202,8 @@ public class Usuario {
     public void setOcupacion(Ocupaciones ocupacion) {
         this.ocupacion = ocupacion;
     }
+
+    public void setOcupacion(String ocupacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

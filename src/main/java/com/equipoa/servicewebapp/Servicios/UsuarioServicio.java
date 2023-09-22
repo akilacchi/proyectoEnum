@@ -145,7 +145,8 @@ public class UsuarioServicio implements UserDetailsService {
         // Eliminamos al cliente de la base de datos
         usuarioRepositorio.delete(clienteExistente);
     }
-
+    
+    @Transactional
     public void crearProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) throws MiException {
         Usuario proveedor = new Usuario();
 
@@ -171,7 +172,51 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("Usuario ya registrado");
         }
     }
-
+    
+   @Transactional
+   
+    public void actualizarProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) throws MiException{
+        validar(email, name, password, password2, phone);
+        Usuario proveedor = usuarioRepositorio.buscarPorEmail(email);
+        if(proveedor==null || !proveedor.getRol().equals(Rol.PROVEEDOR)){
+            
+            throw new MiException("Proveedor no encontrado");
+        }else{
+            
+            proveedor.setEmail(email);
+            proveedor.setName(name);
+            proveedor.setPhone(phone);
+            proveedor.setProvincia(provincia);
+            proveedor.setOcupacion(ocupacionesServicio.buscarOcupacion(ocupacion));
+         
+            usuarioRepositorio.save(proveedor);
+            
+            
+            
+        }
+        
+    }
+    
+    @Transactional(readOnly=true)
+    public List<Usuario> obtenerTodosLosProveedores(){
+        
+        List<Usuario> proveedores = usuarioRepositorio.findAllByRol(Rol.PROVEEDOR);
+        return proveedores;
+        
+    }
+    
+    @Transactional
+    
+    public void eliminarProveedor(String email) throws MiException{
+        
+        Usuario proveedor=usuarioRepositorio.buscarPorEmail(email);
+        if(proveedor==null || !proveedor.equals(Rol.PROVEEDOR)){
+            throw new MiException("El proveedor que intenta eliminar no existe");
+        }else{
+            
+            usuarioRepositorio.delete(proveedor);
+        }
+    }
     @Transactional(readOnly = true)
     public List<Usuario> obtenerTodosLosClientes() {
         List<Usuario> clientes = usuarioRepositorio.findAllByRol(Rol.CLIENTE);
@@ -196,12 +241,7 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    @Transactional(readOnly = true)
-    public List<Usuario> obtenerTodosLosProveedores() {
-        List<Usuario> proveedores = usuarioRepositorio.findAllByRol(Rol.PROVEEDOR);
-        return proveedores;
-    }
-
+   
     @Transactional(readOnly = true)
     public List<Usuario> obtenerProveedoresPorOcupacion(String ocupacionNombre) {
         return usuarioRepositorio.findAllByRolAndOcupacionNombre(Rol.PROVEEDOR, ocupacionNombre);
