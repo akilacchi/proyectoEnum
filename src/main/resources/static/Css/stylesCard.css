@@ -1,45 +1,45 @@
+/* Estilo CSS para el contenedor principal */
+.container {
+    display: flex;
+}
+
+/* Estilo CSS para el filtro en el lado izquierdo */
+.filtro-box {
+    width: 220px;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: left;
+    /* Cambio de alineación a izquierda */
+    margin-right: 40px;
+    font-family: 'Roboto';
+}
+
+/* Estilo CSS para las casillas de verificación */
+.filtro-box label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: 'Roboto';
+}
+
 /* Estilo CSS para la tarjeta rectangular */
 .user-card {
     background-color: #f2f2f2;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
+    margin: 20px; /* Ajusta el valor de acuerdo a la cantidad de espacio que deseas */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 200px; /* Ancho de la tarjeta */
-    height: 300px; /* Altura de la tarjeta, ajusta según tus preferencias */
-    transition: background-color 0.3s; /* Transición de color de fondo */
+    width: 200px;
+    height: 300px;
+    transition: background-color 0.3s;
 }
 
-/* Estilo para el filtro caja centrada a la izquierda */
-.filtro-box {
-    width: 150px; /* Ancho de la caja del filtro */
-    background-color: #f2f2f2; /* Color de fondo de la caja */
-    border: 1px solid #ddd; /* Borde de la caja */
-    border-radius: 5px; /* Radio de borde para esquinas redondeadas */
-    padding: 10px; /* Espaciado interno de la caja */
-    text-align: center; /* Centrar el contenido del filtro horizontalmente */
-    margin-left: 20px; /* Margen izquierdo para centrar a la izquierda */
-}
-
-/* Estilo para el select del filtro */
-#filtro-opciones {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-/* Estilo para las opciones del select */
-#filtro-opciones option {
-    font-size: 14px;
-    background-color: #fff;
-    color: #333;
-}
-
-/* Estilo para la imagen de perfil */
+/* Estilo CSS para la imagen de perfil */
 .user-avatar img {
     width: 100px;
     height: 100px;
@@ -47,30 +47,35 @@
     margin-bottom: 10px;
 }
 
-/* Estilo para el nombre del usuario */
+/* Estilo CSS para el nombre del usuario */
 .user-info h1 {
     font-size: 24px;
     margin: 5px 0;
+    font-family: 'Roboto';
+}
+.user-info h3 {
+    font-size: 20px;
+    margin: 5px 0;
+    font-family: 'Roboto';
 }
 
-/* Estilo para las estrellas de calificación */
+/* Estilo CSS para las estrellas de calificación */
 .rating .star {
     font-size: 24px;
     color: gold;
-    margin-right: 2px; /* Ajusta el espaciado entre las estrellas */
+    margin-right: 5px;
+    font-family: 'Roboto';
 }
 
-/* Estilo para las estrellas completas */
 .rating .full-star {
     color: gold;
 }
 
-/* Estilo para las estrellas medias (vacías) */
 .rating .half-star {
-    color:  black;
+    color: black;
 }
 
-/* Estilo para el efecto hover */
+/* Estilo CSS para el efecto hover en la tarjeta */
 .user-card:hover {
     background-color: #d3d0d0; /* Cambia el color de fondo al pasar el cursor */
 }
