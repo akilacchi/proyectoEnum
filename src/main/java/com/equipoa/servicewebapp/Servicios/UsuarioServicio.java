@@ -87,13 +87,6 @@ public class UsuarioServicio implements UserDetailsService {
             cliente.setCalificacionesEmitidas(new ArrayList<>());
             cliente.setTrabajosCliente(new ArrayList<>());
 
-//            if(ocupacionesServicio.buscarOcupacion("Cliente")!=null){
-//                cliente.setOcupacion(ocupacionesServicio.buscarOcupacion("Cliente"));
-//            }
-            if (ocupacionesServicio.buscarOcupacion("Cliente") != null) {
-                cliente.setOcupacion(ocupacionesServicio.buscarOcupacion("Cliente"));
-            }
-
             Imagen imagen = imagenServicio.guardar(archivo);
             cliente.setProfilePicture(imagen);
 
@@ -104,6 +97,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+    @Transactional
     public void actualizarCliente(MultipartFile archivo, String email, String nombre, String nuevaDireccion, String phone, String password, String password2) throws MiException {
 
         validar(email, nombre, password, password2, phone);
@@ -124,10 +118,13 @@ public class UsuarioServicio implements UserDetailsService {
         Long idImagen = null;
         if (cliente.getProfilePicture() != null) {
             idImagen = cliente.getProfilePicture().getId();
-        }
-        Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            cliente.setProfilePicture(imagen);
+        } else {
+            Imagen imagen = imagenServicio.guardar(archivo);
+            cliente.setProfilePicture(imagen);
 
-        cliente.setProfilePicture(imagen);
+        }
 
         // Guardamos los cambios en la base de datos
         usuarioRepositorio.save(cliente);
@@ -145,7 +142,7 @@ public class UsuarioServicio implements UserDetailsService {
         // Eliminamos al cliente de la base de datos
         usuarioRepositorio.delete(clienteExistente);
     }
-    
+
     @Transactional
     public void crearProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) throws MiException {
         Usuario proveedor = new Usuario();
@@ -154,7 +151,9 @@ public class UsuarioServicio implements UserDetailsService {
         if (usuarioRepositorio.buscarPorEmail(email) == null && usuarioRepositorio.buscarPorTelefono(phone) == null) {
             proveedor.setRol(Rol.PROVEEDOR);                                        //rol de proveedor seteado por defecto
             proveedor.setName(name);
+
             proveedor.setOcupacion(ocupacionesServicio.buscarOcupacion(ocupacion)); //ocupacion seteado por parametro en lista
+
             proveedor.setProvincia(provincia);
             proveedor.setActivo(true);                                              //seteado com usuario activo por defecto
             proveedor.setEmail(email);
@@ -172,52 +171,51 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("Usuario ya registrado");
         }
     }
-    
+
    @Transactional
    
-    public void actualizarProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) throws MiException{
+    public void actualizarProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) throws MiException {
         validar(email, name, password, password2, phone);
         Usuario proveedor = usuarioRepositorio.buscarPorEmail(email);
-        if(proveedor==null || !proveedor.getRol().equals(Rol.PROVEEDOR)){
-            
+        if (proveedor == null || !proveedor.getRol().equals(Rol.PROVEEDOR)) {
+
             throw new MiException("Proveedor no encontrado");
-        }else{
-            
+        } else {
+
             proveedor.setEmail(email);
             proveedor.setName(name);
             proveedor.setPhone(phone);
             proveedor.setProvincia(provincia);
             proveedor.setOcupacion(ocupacionesServicio.buscarOcupacion(ocupacion));
-         
+
             usuarioRepositorio.save(proveedor);
-            
-            
-            
+
         }
-        
+
     }
-    
-    @Transactional(readOnly=true)
-    public List<Usuario> obtenerTodosLosProveedores(){
-        
+
+    @Transactional(readOnly = true)
+    public List<Usuario> obtenerTodosLosProveedores() {
+
         List<Usuario> proveedores = usuarioRepositorio.findAllByRol(Rol.PROVEEDOR);
         return proveedores;
-        
+
     }
-    
+
     @Transactional
-    
-    public void eliminarProveedor(String email) throws MiException{
-        
-        Usuario proveedor=usuarioRepositorio.buscarPorEmail(email);
-        if(proveedor==null || !proveedor.equals(Rol.PROVEEDOR)){
+
+    public void eliminarProveedor(String email) throws MiException {
+
+        Usuario proveedor = usuarioRepositorio.buscarPorEmail(email);
+        if (proveedor == null || !proveedor.equals(Rol.PROVEEDOR)) {
             throw new MiException("El proveedor que intenta eliminar no existe");
-        }else{
-            
+        } else {
+
             usuarioRepositorio.delete(proveedor);
         }
     }
     @Transactional(readOnly = true)
+
     public List<Usuario> obtenerTodosLosClientes() {
         List<Usuario> clientes = usuarioRepositorio.findAllByRol(Rol.CLIENTE);
         return clientes;
@@ -241,7 +239,6 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-   
     @Transactional(readOnly = true)
     public List<Usuario> obtenerProveedoresPorOcupacion(String ocupacionNombre) {
         return usuarioRepositorio.findAllByRolAndOcupacionNombre(Rol.PROVEEDOR, ocupacionNombre);
@@ -260,7 +257,6 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("proveedor o ocupación no encontrados");
         }
     }
-
 
     public Usuario getOne(Long id) {
         System.out.println("a");

@@ -32,49 +32,22 @@ public class AdminServicio {
     private OcupacionesServicio ocupacionesServicio;
 
     @Transactional
-    public void crearUsuario(MultipartFile archivo, String email, String name, String password, String password2, String phone, Rol rol, Provincias provincia, String ocupacion) throws MiException {
+    public void crearAdmin(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia) throws MiException {
 
-        validar(email, name, password, password2, phone, rol, provincia);
+        validar(email, name, password, password2, phone, Rol.ADMIN, provincia);
 
         if (usuarioRepositorio.buscarPorEmail(email) == null && usuarioRepositorio.buscarPorTelefono(phone) == null) {
             Usuario usr = new Usuario();
-            Ocupaciones ocupaciones = new Ocupaciones();
 
             usr.setEmail(email);
             usr.setName(name);
             usr.setPassword(new BCryptPasswordEncoder().encode(password));
             usr.setPhone(phone);
-            usr.setRol(rol);
+            usr.setRol(Rol.ADMIN);
             usr.setProvincia(provincia);
             usr.setActivo(true);
             usr.setFecharegistro(new Date());
 
-//            Set Roles automatico para cliente y admin si no existe.
-            if(ocupacion.trim().isEmpty()){
-                ocupacionesServicio.crearNuevaOcupacion("Cliente");
-            }else if(ocupacionesRepositorio.buscarOcupacion(ocupacion)!=null){
-                ocupaciones = ocupacionesRepositorio.buscarOcupacion(ocupacion);
-            }else{
-                throw new MiException("Ocupacion inexistente");
-            }
-
-            if (rol.equals(Rol.PROVEEDOR)) {
-                usr.setOcupacion(ocupaciones);
-            } else if (rol.equals(Rol.CLIENTE)) {
-                Ocupaciones ocupacionesa = ocupacionesRepositorio.buscarOcupacion("Cliente");
-                if (ocupaciones != null) {
-                    usr.setOcupacion(ocupacionesa);
-                } else {
-                    ocupacionesServicio.crearNuevaOcupacion("Cliente");
-                }
-            } else {
-                Ocupaciones ocupacionesb = ocupacionesRepositorio.buscarOcupacion("Admin");
-                if (ocupaciones != null) {
-                    usr.setOcupacion(ocupacionesb);
-                } else {
-                    ocupacionesServicio.crearNuevaOcupacion("Admin");
-                }
-            }
 
             Imagen imagen = imagenServicio.guardar(archivo);
             usr.setProfilePicture(imagen);
@@ -99,7 +72,7 @@ public class AdminServicio {
         }
 
         Usuario respuesta = usuarioRepositorio.findById(id);
-        if (respuesta!= null) {
+        if (respuesta != null) {
             usuario = respuesta;
             usuario.setOcupacion(ocupacion);
 
@@ -123,78 +96,75 @@ public class AdminServicio {
     }
 
     @Transactional
-    public void modificarRol(Long id, String email, String phone, Rol rol) throws MiException {
-        Usuario usuario = new Usuario();
-        validar(id, email, phone, rol, "a");
-
-        Usuario respuesta = usuarioRepositorio.findById(id);
-        if (respuesta!= null) {
-            usuario = respuesta;
-            usuario.setRol(rol);
-
-            usuarioRepositorio.save(usuario);
-
-        } else if (usuarioRepositorio.buscarPorTelefono(phone) != null) {
-            usuario = usuarioRepositorio.buscarPorTelefono(phone);
-            usuario.setRol(rol);
-
-            usuarioRepositorio.save(usuario);
-
-        } else if (usuarioRepositorio.buscarPorEmail(email) != null) {
-            usuario = usuarioRepositorio.buscarPorTelefono(email);
-            usuario.setRol(rol);
-
-            usuarioRepositorio.save(usuario);
-
-        } else {
+    public void modificarRol(Long id) throws MiException {
+        if (id < 1) {
+            throw new MiException("ID incorrecto");
+        } else if (usuarioRepositorio.findById(id) == null) {
             throw new MiException("Usuario inexistente");
+        } else if (usuarioRepositorio.findById(id).getRol() != Rol.CLIENTE) {
+            throw new MiException("Usuario debe tener rol Cliente");
+        } else {
+            Usuario usuario = usuarioRepositorio.findById(id);
+            usuario.setRol(Rol.PROVEEDOR);
+            usuarioRepositorio.save(usuario);
         }
     }
 
     @Transactional
-    public void crearOcupacion(String ocupacion) throws MiException {
+    public void crearOcupacion(MultipartFile archivo, String ocupacion, String descripcion) throws MiException {
         if (ocupacion.trim().isEmpty() || ocupacion == null) {
             throw new MiException("Ocupacion no puede estar vacia");
+        } else if (descripcion.trim().isEmpty() || descripcion == null) {
+            throw new MiException("Descripcion no puede estar vacia");
         } else if (ocupacionesRepositorio.buscarOcupacion(ocupacion) != null) {
             throw new MiException("Ocupacion ya existente");
         } else {
-            ocupacionesServicio.crearNuevaOcupacion(ocupacion);
+            ocupacionesServicio.crearNuevaOcupacion(archivo, ocupacion, descripcion);
         }
     }
 
-//  Encuentra un usuario y setea su estado "Activo" a lo opuesto que tenga actualmente
     @Transactional
-    public void darDeBajaOAlta(Long id, String email, String phone) throws MiException {
-        validar(id,email,phone, Rol.PROVEEDOR, "a");
-        Usuario usuario = new Usuario();
-        Boolean valorActual;
-
-        Usuario respuesta = usuarioRepositorio.findById(id);
-        if (respuesta!=null) {
-            usuario = respuesta;
-            valorActual = usuario.getActivo();
-            usuario.setActivo(!valorActual);
-
-            usuarioRepositorio.save(usuario);
-
-        } else if (usuarioRepositorio.buscarPorTelefono(phone) != null) {
-            usuario = usuarioRepositorio.buscarPorTelefono(phone);
-            valorActual = usuario.getActivo();
-            usuario.setActivo(!valorActual);
-
-            usuarioRepositorio.save(usuario);
-
-        } else if (usuarioRepositorio.buscarPorEmail(email) != null) {
-            usuario = usuarioRepositorio.buscarPorTelefono(email);
-            valorActual = usuario.getActivo();
-            usuario.setActivo(!valorActual);
-
-            usuarioRepositorio.save(usuario);
-
-        } else {
-            throw new MiException("Usuario inexistente");
+    public void modificarOcupacion(MultipartFile archivo, String nombre, String nuevoNombre, String descripcion) throws MiException {
+        if (nombre.trim().isEmpty() || nombre == null) {
+            throw new MiException("Nombre no puede estar vacio");
         }
+        if (nuevoNombre.trim().isEmpty() || nuevoNombre == null) {
+            throw new MiException("Nuevo nombre no puede estar vacio");
+        }
+        if (descripcion.trim().isEmpty() || descripcion == null) {
+            throw new MiException("Descripcion no puede estar vacia");
+        }
+        ocupacionesServicio.modificarOcupacion(archivo, nombre, nuevoNombre, descripcion);
+        Ocupaciones ocupacion = ocupacionesRepositorio.buscarOcupacion(nombre);
 
+    }
+
+
+    //  Encuentra un usuario y setea su estado "Activo" a lo opuesto que tenga actualmente
+    @Transactional
+    public void desactivarUsuario(Long id) throws MiException {
+        if (id < 1) {
+            throw new MiException("ID Inexistente");
+        } else if (usuarioRepositorio.findById(id) == null) {
+            throw new MiException("Usuario Inexistente");
+        } else {
+            Usuario usuario = usuarioRepositorio.findById(id);
+            usuario.setActivo(false);
+            usuarioRepositorio.save(usuario);
+        }
+    }
+
+    @Transactional
+    public void activarUsuario(Long id) throws MiException {
+        if (id < 1) {
+            throw new MiException("ID Inexistente");
+        } else if (usuarioRepositorio.findById(id) == null) {
+            throw new MiException("Usuario Inexistente");
+        } else {
+            Usuario usuario = usuarioRepositorio.findById(id);
+            usuario.setActivo(true);
+            usuarioRepositorio.save(usuario);
+        }
     }
 
 
@@ -223,7 +193,8 @@ public class AdminServicio {
     }
 
     //    Validacion general
-    public void validar(String email, String name, String password, String password2, String phone, Rol rol, Provincias provincia) throws MiException {
+    public void validar(String email, String name, String password, String password2, String phone, Rol
+            rol, Provincias provincia) throws MiException {
         if (email.trim().isEmpty() || email == null) {
             throw new MiException("Email no puede estar vacío");
         }

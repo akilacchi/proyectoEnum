@@ -32,4 +32,11 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 //    public List<Usuario> buscarPorAntiguedad(int dias);
     @Query("SELECT u FROM Usuario u WHERE u.rol = :rol AND u.ocupacion.nombre = :ocupacionNombre")
     List<Usuario> findAllByRolAndOcupacionNombre(@Param("rol") Rol rol, @Param("ocupacionNombre") String ocupacionNombre);
+
+    @Query("SELECT u FROM Usuario u WHERE u.activo = true")
+    public List<Usuario> findAllActivo();
+
+    @Query("SELECT u FROM Usuario u WHERE u.activo = false")
+    public List<Usuario> findAllInactivo();
+
 }
