@@ -1,11 +1,13 @@
 package com.equipoa.servicewebapp.Servicios;
 
+import com.equipoa.servicewebapp.Entidades.Calificacion;
 import com.equipoa.servicewebapp.Entidades.Imagen;
 import com.equipoa.servicewebapp.Entidades.Ocupaciones;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
+import com.equipoa.servicewebapp.Repositorios.CalificacionRepositorio;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ import java.util.Optional;
 
 @Service
 public class AdminServicio {
+
+    @Autowired
+    private CalificacionRepositorio calificacionRepositorio;
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -167,6 +172,20 @@ public class AdminServicio {
         }
     }
 
+    @Transactional
+    public void eliminarCalificaion(Long id) throws MiException {
+        if (id < 1 || id == null) {
+            throw new MiException("Idimposible o nulo");
+        }
+
+        Optional<Calificacion> respuesta = calificacionRepositorio.findById(id);
+        if (!respuesta.isPresent()) {
+            throw new MiException("Calificaion no encontrada");
+        } else {
+            calificacionRepositorio.delete(respuesta.get());
+        }
+
+    }
 
     //    Validar datos no nulos para modificaciones del admin
     public void validar(Long id, String email, String phone, Rol rol, String ocupacion) throws MiException {
