@@ -38,6 +38,8 @@ public class PortalController {
         return Provincias.values();
     }
 
+
+
     @Autowired
     UsuarioServicio usuarioServicio;
 
@@ -45,6 +47,7 @@ public class PortalController {
     private OcupacionesRepositorio ocupacionesRepositorio;
     @Autowired
     private OcupacionesServicio ocupacionesServicio;
+
 
     @GetMapping("/")
     public String index(HttpSession session) {
@@ -65,7 +68,8 @@ public class PortalController {
     }
 
     @GetMapping("/servicios")
-    public String servicios() {
+    public String servicios(ModelMap modelo) {
+        modelo.addAttribute("listaOcupaciones",getOcupaciones());
         return "servicios.html";
     }
 

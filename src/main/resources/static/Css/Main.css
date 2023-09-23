@@ -7,7 +7,7 @@
     font-family: "Roboto";
     font-size: 40px;
     margin: 20px 0;
-    color: rgba(0, 0, 0, 0.80);
+    color: #040D12;
 }
 
 .input {
@@ -16,10 +16,11 @@
     border-radius: 5px;
     font-size: 16px;
     width: 250px;
+    
 }
 
 .input_submit {
-    background-color: #007bff;
+    background-color: #5C8374;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -37,7 +38,7 @@
 .titulo_populares {
     font-family: "Roboto";
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.60);
+    color: #040D12;
 }
 
 .list_populares {
@@ -53,7 +54,7 @@
 }
 .list_populares_a{
     font-family: "Roboto";
-    color: rgba(0, 0, 0, 0.60);
+    color: #183D3D;
     padding: 5px;
     font-size: 14px;
     text-decoration: none;
