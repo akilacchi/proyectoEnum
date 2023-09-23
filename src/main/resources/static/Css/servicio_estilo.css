@@ -9,7 +9,7 @@ body {
     /* La fuente ya se define en el selector universal (*) */
     margin: 0;
     padding: 0;
-    background-image: url(https://img.freepik.com/foto-gratis/vista-superior-martillo-acero-otros-elementos-herramientas-construccion_23-2150576394.jpg?w=740&t=st=1695042391~exp=1695042991~hmac=bbe904719871fc1067b9a24034266ca31b24a5725f9346c5ed7fa6ece022e9ec);
+    background-color: #93B1A6;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -30,12 +30,14 @@ body {
     text-align: center;
     margin: 20px;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 5px;
     width: calc(25% - 40px); /* 33.33% del ancho del contenedor, menos los márgenes */
     transition: all 400ms ease;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+    background-color: #5C8374;
+    box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
+    min-height: 400px;
+    overflow: hidden; /* Oculta el contenido que exceda la altura máxima */
+    max-height: 400px;
 }
 
 /* Agrega efecto Hover a las tarjetas */
@@ -55,28 +57,24 @@ body {
 /* Otros estilos para el contenido (títulos, párrafos, etc.) */
 .card h3 {
     font-size: 20px;
+    color: #040D12;
     font-weight: 400;
     margin-bottom: 15px;
 }
 
 .card p {
     font-size: 16px;
-    color: #6a6a6a;
+    color: #040D12;
+    overflow: auto;
 }
 
-/* Puedes agregar estilos para los enlaces si es necesario */
-.card a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 10px;
-    margin-top: 10px;
-    color: #007bff;
-    border: 1px solid #007bff;
-    font-weight: bold;
-    transition: all 400ms ease;
-}
-
-.card a:hover {
-    background: #007bff;
-    color: #fff;
+.ver-mas-button {
+    background-color: #183D3D; /* Cambia el color de fondo del botón "VER MÁS" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 10px 20px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 5px; /* Añade espacio superior para separar los botones */
 }

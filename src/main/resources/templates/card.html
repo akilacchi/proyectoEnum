@@ -28,8 +28,7 @@
             <button class="ver-mas-button">BUSCAR</button>
             <br>
             <br>
-            <br>
-            <a href="/">Página Principal</a>
+            <br><a href="/" class="p-p-button">Página Principal</a>
         </div>
         <!-- Usamos Thymeleaf para iterar sobre cada proveedor en la lista -->
         <div th:each="proveedor : ${proveedores}" class="user-card">
@@ -54,17 +53,10 @@
                     <span class="star full-star">&#9733;</span>
                     <span class="star half-star">&#9734;</span>
                 </div>
-
                 <button class="ver-mas-button">VER MÁS</button>
-
-                
             </div>
         </div>
-
-
     </div>
-
-
 </body>
 
 </html>

@@ -90,6 +90,17 @@
     margin-top: 10px; /* Añade espacio superior para separar los botones */
 }
 
+.p-p-button{
+    background-color: #183D3D; /* Cambia el color de fondo del botón "BUSCAR" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 5px 10px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 10px;
+    text-decoration: none;
+}
 /* Estilo CSS para las estrellas de calificación */
 .rating .star {
     font-size: 24px;
