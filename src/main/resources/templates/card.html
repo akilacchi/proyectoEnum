@@ -29,10 +29,9 @@
                 <button class="ver-mas-button">BUSCAR</button>
 
             </div>
-            <!-- Usamos Thymeleaf para iterar sobre cada proveedor en la lista -->
             <div th:each="proveedor : ${proveedores}" class="user-card">
                 <div class="user-avatar">
-                    <img src="/Img/card/blank-profile-picture-973460_960_720.webp" alt="Imagen de perfil">
+                    <img th:src="@{/img/perfil/__${proveedor.ID}__}" alt="Foto de Perfil">
                 </div>
                 <div class="user-info">
                     <!-- Usamos la propiedad name del objeto proveedor -->
@@ -43,7 +42,6 @@
 
                     <p th:text="'10 años de servicio como ' + ${proveedor.ocupacion.nombre} + '.'">10 años de servicio como
                         electricista.</p>
-
 
                     <div class="rating">
                         <span class="star full-star">&#9733;</span>
