@@ -13,6 +13,9 @@
         <p>Nombre: <span th:text="${usuario.name}"></span></p>
         <p>Fecha de Registro: <span th:text="${usuario.fecharegistro}"></span></p>
         <p>ID : <span th:text="${usuario.ID}"></span> </p>
+
+        <button> <a th:href="@{/logout}">Cerrar sesión</a></button>
+        <br>
         <img th:src="@{/img/perfil/__${usuario.ID}__}" alt="Foto de Perfil">
     </div>
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<div>
+    <h1>Acciones de administrador</h1>
+    <br>
+    <ol>
+        <li>
+            <a th:href="@{/admindashboard/crearAdmin}">Crear nuevo Administrador</a>
+        </li>
+        <li>
+            <a th:href="@{/admindashboard/crearocupacion}">Crear ocupacion</a>
+        </li>
+        <li>
+            <a th:href="@{/admindashboard/modificarocupacion}">Modifcar ocupacion </a>
+        </li>
+        <li>
+            <a th:href="@{/admindashboard/borrarocupacion}">Borrar ocupacion</a>
+        </li>
+        <li>
+            <a th:href="@{/admindashboard/activar}">dar baja/alta Usuario</a>
+        </li>
+        <li>
+           <a th:href="@{/admindashboard/cambiorol}">cambiar rol usuario</a>
+        </li>
+    </ol>
+</div>
+
+</body>
+</html>

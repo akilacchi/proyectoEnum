@@ -9,7 +9,7 @@
 <body>
 
 <div>
-    <h1> Registro de usuario </h1>
+    <h1> Registro de Administrador </h1>
     <br>
     <form action="/admindashboard/registro" method="post" enctype="multipart/form-data">
         <label>Ingrese su nombre</label>
@@ -31,24 +31,13 @@
         <br>
         <label>Ingrese su número de teléfono</label>
         <input name="phone" type="text" placeholder="56 9 1234 5678">
-        <br>
-        <label>Seleccione su rol</label>
-        <select id="rol" name="rol">
-            <option th:each="r: ${rol}" th:value="${r}"
-                    th:text="${#strings.capitalize(r.toString().toLowerCase())}"></option>
-        </select>
+
         <br>
         <label>Seleccione su provincia</label>
         <select id="provincia" name="provincia">
             <option th:each="p: ${provincia}" th:value="${p}"
                     th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
         </select>
-        <br>
-        <label>Seleccione su ocupacion</label>
-        <select id="ocupacion" name="ocupacion">
-            <option th:each="o : ${listaOcupacion}" th:value="${o.nombre}" th:text="${o.nombre}"></option>
-        </select>
-
         <br>
 
         <button type="submit">Registrarse!</button>
