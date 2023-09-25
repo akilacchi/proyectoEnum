@@ -60,7 +60,7 @@
     max-width: 550px;
     text-align: center;
     margin: 40px;
-    padding: 30px;
+    padding: 20px 0px 10px 40px;
     border-radius: 20px;
     background-color: #5C8374;
     box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
@@ -73,6 +73,7 @@
 
 
 .cuerpo-formulario .encabezado h2 {
+    font-family: 'Roboto';
     margin-bottom: 15px;
     color: white;
 }

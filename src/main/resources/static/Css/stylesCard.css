@@ -1,6 +1,7 @@
 /* Estilo CSS para el contenedor principal */
 .container {
     display: flex;
+    padding: 30px;
 }
 
 /* Estilo CSS para el filtro en el lado izquierdo */
