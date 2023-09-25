@@ -30,7 +30,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
 //    @Query("SELECT u FROM Usuario u WHERE DATEDIFF(current date, u.fecharegistro)= :dias")
 //    public List<Usuario> buscarPorAntiguedad(int dias);
-    @Query("SELECT u FROM Usuario u WHERE u.rol = :rol AND u.ocupacion.nombre = :ocupacionNombre")
+    @Query("SELECT u FROM Usuario u WHERE u.rol = :rol AND u.ocupacion.nombre LIKE %:ocupacionNombre%")
     List<Usuario> findAllByRolAndOcupacionNombre(@Param("rol") Rol rol, @Param("ocupacionNombre") String ocupacionNombre);
 
     @Query("SELECT u FROM Usuario u WHERE u.activo = true")
