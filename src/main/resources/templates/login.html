@@ -5,46 +5,37 @@
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/Css/Login.css">
-         <link rel="stylesheet" type="text/css" href="/css/Header.css">
+        <link rel="stylesheet" type="text/css" href="/css/Header.css">
         <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
-        <link rel="stylesheet" type="text/css" href="/css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
         <title>Iniciar sesión</title>
     </head>
     <body>
         <header class="header">
             <nav th:replace="/navbarSinInicioSesion :: nav_bar_sin_inicio"></nav>
         </header>
-        <div class="contenedor">
-            <div class="contenedor-formulario">
-                <div class="cuerpo-formulario">
-                    <div class="encabezado">
-                        <h2>Iniciar Sesión</h2>
-                        <p>¿No tienes una cuenta? <a th:href="@{/seleccionar}">Crea tu cuenta</a></p>
-                    </div>
+        <div class="cuerpo-formulario">
+            <div class="encabezado">
+                <h2>Iniciar Sesión</h2>
+                <p>¿No tienes una cuenta? <a th:href="@{/seleccionar}">Crea tu cuenta</a></p>
+            </div>
 
-                    <div class="grupo-formulario">
-                        <form action="/logincheck" method="post">
-                            <div class="grupo-input">
-                                <input type="text" name="email" placeholder="fernando@chiquito.com">
-                            </div>
-                            <div class="grupo-input">
-                                <input type="password" name="password" placeholder="********">
-                            </div>
-                            <div class="grupo-input flex">
-                                <div class="recordar"><input type="checkbox" id="checkbox"> <label for="checkbox">Recordarme</label></div>
-                                <div class="olvidar"><a href="#">¿Olvidaste tu contraseña?</a></div>
-                            </div>
-                            <div class="grupo-input centro">
-                                <button type="submit">Iniciar sesión</button>
-                            </div>
-                        </form>
+            <div class="grupo-formulario">
+                <form action="/logincheck" method="post">
+                    <div class="grupo-input">
+                        <input type="text" name="email" placeholder="fernando@chiquito.com">
                     </div>
-                </div>
-                <div class="imagen-formulario">
-                    <div class="texto">
-                        <h2 class="bienvenido">¡Bienvenido!</h2>
+                    <div class="grupo-input">
+                        <input type="password" name="password" placeholder="********">
                     </div>
-                </div>
+                    <div class="grupo-input flex">
+                        <div class="recordar"><input type="checkbox" id="checkbox"> <label for="checkbox">Recordarme</label></div>
+                        <div class="olvidar"><a href="#">¿Olvidaste tu contraseña?</a></div>
+                    </div>
+                    <div class="grupo-input centro">
+                        <button type="submit">Iniciar sesión</button>
+                    </div>
+                </form>
             </div>
         </div>
     </body>

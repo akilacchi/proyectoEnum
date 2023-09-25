@@ -1,19 +1,8 @@
-
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
-.contenedor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  background: white;
-  font-family: Arial;
-}
-
 
 .contenedor .contenedor-formulario {
   position: relative;
@@ -64,10 +53,21 @@
   width: 300px;
   margin: 15px 0px;
 }
+.cuerpo-formulario{
+  max-width: 550px;
+  text-align: center;
+  margin: 40px;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: #5C8374;
+  box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
+}
 
 .cuerpo-formulario .encabezado {
   margin: 0px 100px;
+  text-align: center;
 }
+
 
 .cuerpo-formulario .encabezado h2 {
   margin-bottom: 15px;
@@ -78,7 +78,14 @@
 }
 .cuerpo-formulario .encabezado a {
   text-decoration: none;
-  color: rgba(68, 106, 233, 0.986);
+  background-color: #183D3D; /* Cambia el color de fondo del botón "VER MÁS" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 3px 5px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 5px; /* Añade espacio superior para separar los botones */
 }
 
 .grupo-formulario .grupo-input input[type='password'],
@@ -94,17 +101,14 @@
   text-align: center;
 }
 .grupo-formulario .grupo-input button {
-  position: relative;
-  background: rgb(68, 106, 233, 0.986);
-  width: 100px;
-  padding: 0px 20px;
-  border: none;
-  color: #fff;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-  z-index: 1;
-  overflow: hidden;
+  background-color: #183D3D; /* Cambia el color de fondo del botón "VER MÁS" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 10px 20px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 5px; /* Añade espacio superior para separar los botones */
 }
 
 .grupo-formulario .grupo-input button::before {
@@ -140,7 +144,14 @@
 
 .grupo-formulario .grupo-input.flex a {
   text-decoration: none;
-  color: rgba(68, 106, 233, 0.986);
+  background-color: #183D3D; /* Cambia el color de fondo del botón "VER MÁS" */
+  color: white; /* Cambia el color del texto a blanco para que sea legible */
+  padding: 5px 10px; /* Ajusta el espaciado del botón según tus preferencias */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Roboto';
+  margin-top: 5px; /* Añade espacio superior para separar los botones */
 }
 
 /*responsividad*/
