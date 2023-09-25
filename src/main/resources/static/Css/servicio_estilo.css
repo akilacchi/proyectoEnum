@@ -36,7 +36,6 @@ body {
     background-color: #5C8374;
     box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
     min-height: 400px;
-    overflow: hidden; /* Oculta el contenido que exceda la altura máxima */
     max-height: 400px;
 }
 

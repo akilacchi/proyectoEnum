@@ -1,0 +1,65 @@
+/* Estilos para el cuerpo de la página */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #93B1A6; /* Cambia el color de fondo según tus preferencias */
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para la página de contenido */
+.page-content {
+    max-width: 600px; /* Ancho máximo del contenido */
+    margin: 10px 20px; /* Centra el contenido horizontalmente */
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #5C8374; /* Cambia el color de fondo del contenido según tus preferencias */
+    box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
+    margin-left: 200px;
+    
+}
+
+/* Estilos para el formulario */
+form {
+    display: grid; /* Utilizamos CSS Grid para organizar los elementos */
+    grid-template-rows: repeat(2, auto); /* Creamos dos filas de altura automática */
+    grid-template-columns: 1fr 1fr; /* Creamos dos columnas de igual ancho */
+    grid-gap: 40px; /* Espacio entre las filas y columnas */
+    align-items: center; /* Centra verticalmente los elementos en el formulario */
+    position: relative;
+}
+
+
+/* Estilos adicionales para el contenedor del botón */
+.form-row {
+    text-align: left; /* Esto centrará cualquier contenido dentro de .form-row horizontalmente */
+    background: none;
+    color: #040D12;
+    font-size: 18px;
+    padding: 0px 20px 10px 10px;
+}
+
+/* Estilos para los elementos del formulario (etiquetas y entradas) */
+label, input, select {
+    margin-bottom: 10px;
+    width: 100%; /* Establece el ancho de todos los elementos al 100% */
+}
+
+
+/* Estilos para los elementos del formulario (etiquetas y entradas) */
+label, input, select {
+    margin-bottom: 10px;
+    height: 100%; /* Establece la altura de todos los elementos al 100% */
+}
+
+/* Estilos para el botón de registro */
+button[type="regist"] {
+    background-color: #183D3D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin: 0 auto; /* Esto centrará horizontalmente el botón en su contenedor */
+    display: block; /* Esto hace que el botón sea un bloque para que ocupe todo el ancho del contenedor */
+}
