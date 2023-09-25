@@ -36,7 +36,7 @@ body {
     background-color: #5C8374;
     box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
     min-height: 400px;
-    max-height: 400px;
+    max-height: 450px;
 }
 
 /* Agrega efecto Hover a las tarjetas */
@@ -58,13 +58,16 @@ body {
     font-size: 20px;
     color: #040D12;
     font-weight: 400;
-    margin-bottom: 15px;
+    margin: 15px;
+    color: white;
 }
 
 .card p {
     font-size: 16px;
     color: #040D12;
     overflow: auto;
+    color: white;
+    margin: 5px;
 }
 
 .ver-mas-button {
@@ -75,5 +78,6 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Roboto';
-    margin-top: 5px; /* Añade espacio superior para separar los botones */
+    margin-top: 20px; 
+    text-decoration: none;
 }

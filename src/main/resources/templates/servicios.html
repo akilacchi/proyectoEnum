@@ -16,17 +16,7 @@
     <nav th:replace="/navbar :: nav_bar"></nav>
 </header>
 <div class="container">
-    <div class="card">
-        <figure>
-            <img src="Img/Service/Albanil.jpg" alt="">
-        </figure>
-        <div class="contenido">
-            <h3>Albanil</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quae consequuntur culpa esse ex, minima
-                aspernatur sunt necessitatibus accusantium dolores?</p>
-            <a href="#">Ver Mas</a>
-        </div>
-    </div>
+    
         <div class="card" th:each="o: ${listaOcupaciones}">
             <figure>
                 <img th:src="@{/img/ocupacion/__${o.id}__}" alt="">
@@ -34,7 +24,8 @@
             <div class="contenido">
                 <h3 th:text="${o.nombre}"></h3>
                 <p th:text="${o.descripcion}"></p>
-                <a href="#">Ver Mas</a>
+                <br>
+                <a class="ver-mas-button" href="#">Ver Mas</a>
             </div>
     </div>
 

@@ -3,55 +3,65 @@
     <head>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/Css/Login.css">
         <link rel="stylesheet" type="text/css" href="/css/Header.css">
         <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
         <link rel="stylesheet" type="text/css" href="/css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/registrocliente.css">
         <title>Registro de proveedor</title>
     </head>
     <body>
         <header class="header">
             <nav th:replace="/navbarSinInicioSesion :: nav_bar_sin_inicio"></nav>
         </header>
-        <div>
-            <h1> Registro de proveedor de servicios </h1>
-            <br>
+        <div class="page-content">
+            <h1>Registro de proveedor de servicios</h1>
+
             <form action="/r/registroproveedor" method="post" enctype="multipart/form-data">
-                <label>Ingrese su nombre</label>
-                <input name="name" type="text" placeholder="Nombre">
-                <br>
-                <label>Ingrese su Email</label>
-                <input name="email" type="email" placeholder="fernando@chiquito.com">
-                <br>
+                <div class="form-row">
+                    <label>Ingrese su nombre</label>
+                    <input name="name" type="text" placeholder="Nombre">
 
-                <label>Suba una foto de perfil</label>
-                <input name="archivo" type="file">
+                    <label>Ingrese su Email</label>
+                    <input name="email" type="email" placeholder="fernando@chiquito.com">
 
-                <br>
-                <label>Ingrese su contraseña</label>
-                <input name="password" type="password" placeholder="********">
-                <br>
-                <label>Repita su contraseña</label>
-                <input name="password2" type="password" placeholder="********">
-                <br>
-                <label>Ingrese su número de teléfono</label>
-                <input name="phone" type="text" placeholder="56 9 1234 5678">
-                <br>
-                <label>Seleccione su provincia</label>
-                <select id="provincia" name="provincia">
-                    <option th:each="p: ${provincia}" th:value="${p}"
-                            th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
-                </select>
-                <br>
-                <label>Seleccione su ocupacion</label>
-                <select id="ocupacion" name="ocupacion">
-                    <option th:each="o : ${listaOcupacion}" th:value="${o.nombre}" th:text="${o.nombre}"></option>
-                </select>
+                    <label>Suba una foto de perfil</label>
+                    <input name="archivo" type="file">
 
-                <br>
+                    <label>Ingrese su teléfono</label>
+                    <input name="phone" type="text" placeholder="56 9 1234 5678">
 
-                <button type="submit">Registrarse!</button>
-            </form>
+                </div>
+                <div class="form-row">
+                    <br>
+
+                    <label>Ingrese su contraseña</label>
+                    <input name="password" type="password" placeholder="********">
+
+                    <label>Repita su contraseña</label>
+                    <input name="password2" type="password" placeholder="********">
+
+
+                    <label>Seleccione su provincia</label>
+                    <select id="provincia" name="provincia">
+                        <option th:each="p: ${provincia}" th:value="${p}"
+                                th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
+                    </select>
+
+                    <label>Seleccione su ocupacion</label>
+                    <select id="ocupacion" name="ocupacion">
+                        <option th:each="o : ${listaOcupacion}" th:value="${o.nombre}" th:text="${o.nombre}"></option>
+                    </select>
+                    <div class="grupo-input centro">
+                        <button type="submit">Registrarse!</button> 
+                    </div>
+
+                </div>
+
+
+
+            </form>  
+            
+
         </div>
     </body>
 </html>
