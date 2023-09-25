@@ -15,10 +15,7 @@ body {
     background-color: #5C8374; /* Cambia el color de fondo del contenido según tus preferencias */
     box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
     margin-left: 200px;
-
-}
-.page-content h1 {
-    color:white;
+    
 }
 
 /* Estilos para el formulario */
@@ -41,11 +38,6 @@ form {
     padding: 0px 20px 10px 10px;
 }
 
-input {
-     box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
-     border-radius: 5px;
-    }
-
 /* Estilos para los elementos del formulario (etiquetas y entradas) */
 label, input, select {
     margin-bottom: 10px;
@@ -57,8 +49,6 @@ label, input, select {
 label, input, select {
     margin-bottom: 10px;
     height: 100%; /* Establece la altura de todos los elementos al 100% */
-    border: none;
-   
 }
 
 /* Estilos para el botón de registro */
