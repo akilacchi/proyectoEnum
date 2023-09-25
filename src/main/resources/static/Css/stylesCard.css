@@ -13,6 +13,7 @@
     /* Cambio de alineación a izquierda */
     margin-right: 40px;
     font-family: 'Roboto';
+    color: white;
 
     /* Añade sombra a la tarjeta */
     box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
@@ -58,6 +59,7 @@
     color: #040D12;
     margin: 5px 0;
     font-family: 'Roboto';
+    color: white;
 }
 .user-info h3 {
     font-size: 20px;
