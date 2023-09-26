@@ -6,6 +6,7 @@ import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
+import com.equipoa.servicewebapp.Servicios.NotificacionServicio;
 import com.equipoa.servicewebapp.Servicios.OcupacionesServicio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -41,6 +39,9 @@ public class PortalController {
 
     @Autowired
     UsuarioServicio usuarioServicio;
+
+    @Autowired
+    NotificacionServicio notificacionServicio;
 
     @Autowired
     private OcupacionesRepositorio ocupacionesRepositorio;
@@ -85,7 +86,7 @@ public class PortalController {
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @PostMapping("/perfil/{id}")
-    public String actualizar(MultipartFile archivo, Long id, String email, String nombre, String direccion, String phone, String password, String password2) {
+    public String actualizar(MultipartFile archivo, @PathVariable Long id, String email, String nombre, String direccion, String phone, String password, String password2) {
         try {
             usuarioServicio.actualizarCliente(archivo, email, nombre, direccion, phone, password, password2);
         } catch (MiException e) {
@@ -118,6 +119,32 @@ public class PortalController {
         modelo.addAttribute("ocupaciones", getOcupaciones());
         modelo.addAttribute("provincia", getProvincias());
         return "registro.html";
+    }
+
+    @GetMapping("/perfil/notificaciones")
+    public String centroDeNotificaciones(HttpSession session, ModelMap modelo) {
+        Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
+        if (loggeado == null) {
+            return "redirect:/login";
+        } else {
+            modelo.addAttribute("listaNotificaiones", loggeado.getNotificacionesEnviadas());
+            return "centroNotificaciones";
+        }
+    }
+
+    @PostMapping("/perfil/notificaiones/{id}")
+    public String NotificacionBorrar(@PathVariable Long idNotificacion, HttpSession session) {
+        Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
+        if (loggeado == null){
+            return "redirect:/";
+        }else{
+            try {
+                notificacionServicio.eliminarNotificacion(loggeado, idNotificacion);
+            } catch (MiException e) {
+                System.err.println(e.getMessage());;
+            }
+            return "redirect:/perfil/notificaiones";
+        }
     }
 
     @PostMapping("/registro")

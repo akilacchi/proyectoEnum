@@ -68,11 +68,11 @@ public class AdminController {
     @GetMapping("/crearAdmin")
     public String crearUser(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("provincia", getProvincias());
-        if (validarAdmin(session)) {
+//        if (validarAdmin(session)) {
             return "registroAdmin.html";
-        } else {
-            return "redirect:/admindashboard/";
-        }
+//        } else {
+//            return "redirect:/admindashboard/";
+//        }
 
     }
 

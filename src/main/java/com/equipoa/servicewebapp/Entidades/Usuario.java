@@ -21,10 +21,10 @@ public class Usuario {
     private String direccion;
     private Boolean activo;
 
-    @OneToMany
+    @OneToMany(mappedBy = "remitente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Notificaciones> notificacionesEnviadas;
 
-    @OneToMany
+    @OneToMany(mappedBy = "receptor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Notificaciones> notificacionesRecividas;
 
     @OneToOne

@@ -11,9 +11,11 @@ public class Notificaciones {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "remitente_id")
     private Usuario remitente;           //Usuario que envia la notificacion
 
     @ManyToOne
+    @JoinColumn(name = "receptor_id")
     private Usuario receptor;            //Usuario que recibe la notificacion
 
     private String mensaje;             //Mensaje de la notificacion
