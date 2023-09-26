@@ -1,5 +1,6 @@
 package com.equipoa.servicewebapp;
 
+import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -19,29 +20,27 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
     public UsuarioServicio userSrvc;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userSrvc).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                        .antMatchers("/css/*","/js/*","/img/*","/**")
+                        .antMatchers("/css/*", "/js/*", "/img/*", "/**", "/ws/**")
                         .permitAll()
                 .and().formLogin()
                         .loginPage("/login")
                         .loginProcessingUrl("/logincheck")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/perfil")
                         .permitAll()
                 .and().logout()
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll()
                 .and().csrf().disable();
-
-
     }
 }

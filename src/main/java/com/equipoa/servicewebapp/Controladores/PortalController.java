@@ -39,7 +39,6 @@ public class PortalController {
     }
 
 
-
     @Autowired
     UsuarioServicio usuarioServicio;
 
@@ -51,13 +50,7 @@ public class PortalController {
 
     @GetMapping("/")
     public String index(HttpSession session) {
-//        Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
-//        if(loggeado.getRol().toString().equals("ADMIN")){
-//            return "redirect:/admindashboard/";
-//        }else{
         return "index.html";
-
-//        }
     }
 
     @GetMapping("/buscarProveedores")
@@ -69,7 +62,7 @@ public class PortalController {
 
     @GetMapping("/servicios")
     public String servicios(ModelMap modelo) {
-        modelo.addAttribute("listaOcupaciones",getOcupaciones());
+        modelo.addAttribute("listaOcupaciones", getOcupaciones());
         return "servicios.html";
     }
 
@@ -129,8 +122,8 @@ public class PortalController {
 
     @PostMapping("/registro")
     public String registro(@RequestParam MultipartFile archivo, @RequestParam String email, @RequestParam String name,
-            @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
-            @RequestParam Rol rol, @RequestParam Provincias provincia) {
+                           @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
+                           @RequestParam Rol rol, @RequestParam Provincias provincia) {
         try {
             System.out.println("holas");
             usuarioServicio.crearUsuario(archivo, email, name, password, password2, phone, rol, provincia);

@@ -26,14 +26,15 @@ public class CalificacionServicio {
         Usuario proveedor = new Usuario();
 
         Calificacion calificacion = new Calificacion();
-
-        if (usuarioRepositorio.findById(idCliente) == null) {
+        Optional<Usuario> respuestaCliente = usuarioRepositorio.findById(idCliente);
+        Optional<Usuario> respuestaProveedor = usuarioRepositorio.findById(idProveedor);
+        if (!respuestaCliente.isPresent()) {
             throw new MiException("Cliente no encontrado");
-        } else if (usuarioRepositorio.findById(idProveedor) == null) {
+        } else if (!respuestaProveedor.isPresent()) {
             throw new MiException("Proveedor no encontrado");
         } else {
-            cliente = usuarioRepositorio.findById(idCliente);
-            proveedor = usuarioRepositorio.findById(idProveedor);
+            cliente = respuestaCliente.get();
+            proveedor = respuestaProveedor.get();
 
             calificacion.setClienteEmisor(cliente);
             calificacion.setProveedorReceptor(proveedor);
@@ -57,10 +58,12 @@ public class CalificacionServicio {
 
 
         Optional<Calificacion> respuesta = calificacionRepositorio.findById(idCalificacion);
+        Optional<Usuario> respuestaCliente = usuarioRepositorio.findById(idCliente);
+        Optional<Usuario> respuestaProveedor = usuarioRepositorio.findById(idProveedor);
 
-        if (usuarioRepositorio.findById(idCliente) == null) {
+        if (!respuestaCliente.isPresent()) {
             throw new MiException("Cliente no encontrado");
-        } else if (usuarioRepositorio.findById(idProveedor) == null) {
+        } else if (!respuestaProveedor.isPresent()) {
             throw new MiException("Proveedor no encontrado");
         } else if (!respuesta.isPresent()) {
             throw new MiException("Calificacion no encontrda");
@@ -68,8 +71,8 @@ public class CalificacionServicio {
 
             Calificacion calificacion = respuesta.get();
 
-            cliente = usuarioRepositorio.findById(idCliente);
-            proveedor = usuarioRepositorio.findById(idProveedor);
+            cliente = respuestaCliente.get();
+            proveedor = respuestaProveedor.get();
 
             calificacion.setClienteEmisor(cliente);
             calificacion.setProveedorReceptor(proveedor);

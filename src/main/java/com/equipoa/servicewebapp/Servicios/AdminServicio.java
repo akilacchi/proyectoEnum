@@ -76,9 +76,9 @@ public class AdminServicio {
             throw new MiException("Ocupación inexistente");
         }
 
-        Usuario respuesta = usuarioRepositorio.findById(id);
-        if (respuesta != null) {
-            usuario = respuesta;
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            usuario = respuesta.get();
             usuario.setOcupacion(ocupacion);
 
             usuarioRepositorio.save(usuario);
@@ -104,12 +104,16 @@ public class AdminServicio {
     public void modificarRol(Long id) throws MiException {
         if (id < 1) {
             throw new MiException("ID incorrecto");
-        } else if (usuarioRepositorio.findById(id) == null) {
+        }
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+
+        if (!respuesta.isPresent()) {
             throw new MiException("Usuario inexistente");
-        } else if (usuarioRepositorio.findById(id).getRol() != Rol.CLIENTE) {
+        } else if (respuesta.get().getRol() != Rol.CLIENTE) {
             throw new MiException("Usuario debe tener rol Cliente");
         } else {
-            Usuario usuario = usuarioRepositorio.findById(id);
+            Usuario usuario = respuesta.get();
             usuario.setRol(Rol.PROVEEDOR);
             usuarioRepositorio.save(usuario);
         }
@@ -150,12 +154,14 @@ public class AdminServicio {
     public void desactivarUsuario(Long id) throws MiException {
         if (id < 1) {
             throw new MiException("ID Inexistente");
-        } else if (usuarioRepositorio.findById(id) == null) {
-            throw new MiException("Usuario Inexistente");
-        } else {
-            Usuario usuario = usuarioRepositorio.findById(id);
+        }
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (usuarioRepositorio.findById(id).isPresent()) {
+            Usuario usuario = respuesta.get();
             usuario.setActivo(false);
             usuarioRepositorio.save(usuario);
+        } else {
+            throw new MiException("Usuario Inexistente");
         }
     }
 
@@ -163,10 +169,12 @@ public class AdminServicio {
     public void activarUsuario(Long id) throws MiException {
         if (id < 1) {
             throw new MiException("ID Inexistente");
-        } else if (usuarioRepositorio.findById(id) == null) {
+        }
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (!respuesta.isPresent()) {
             throw new MiException("Usuario Inexistente");
         } else {
-            Usuario usuario = usuarioRepositorio.findById(id);
+            Usuario usuario = respuesta.get();
             usuario.setActivo(true);
             usuarioRepositorio.save(usuario);
         }

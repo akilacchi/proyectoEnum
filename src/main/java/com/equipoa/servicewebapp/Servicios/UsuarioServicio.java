@@ -260,7 +260,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     public Usuario getOne(Long id) {
         System.out.println("a");
-        return usuarioRepositorio.findById(id);
+        return usuarioRepositorio.findById(id).get();
     }
 
     @Override

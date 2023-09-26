@@ -21,6 +21,12 @@ public class Usuario {
     private String direccion;
     private Boolean activo;
 
+    @OneToMany
+    private List<Notificaciones> notificacionesEnviadas;
+
+    @OneToMany
+    private List<Notificaciones> notificacionesRecividas;
+
     @OneToOne
     private Imagen profilePicture;
 
@@ -201,6 +207,22 @@ public class Usuario {
 
     public void setOcupacion(Ocupaciones ocupacion) {
         this.ocupacion = ocupacion;
+    }
+
+    public List<Notificaciones> getNotificacionesEnviadas() {
+        return notificacionesEnviadas;
+    }
+
+    public void setNotificacionesEnviadas(List<Notificaciones> notificacionesEnviadas) {
+        this.notificacionesEnviadas = notificacionesEnviadas;
+    }
+
+    public List<Notificaciones> getNotificacionesRecividas() {
+        return notificacionesRecividas;
+    }
+
+    public void setNotificacionesRecividas(List<Notificaciones> notificacionesRecividas) {
+        this.notificacionesRecividas = notificacionesRecividas;
     }
 
     public void setOcupacion(String ocupacion) {
