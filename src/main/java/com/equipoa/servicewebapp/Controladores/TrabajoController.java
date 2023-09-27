@@ -1,9 +1,3 @@
-/*
-<<<<<<< HEAD
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.equipoa.servicewebapp.Controladores;
 
 import com.equipoa.servicewebapp.Entidades.Calificacion;
@@ -86,7 +80,7 @@ public class TrabajoController {
     public String calificarTrabajo(@PathVariable Long idTrabajo, @ModelAttribute Calificacion calificacion) {
         try {
             trabajoServicio.calificarTrabajo(idTrabajo, calificacion.getComentario(), calificacion.getPuntuacion());
-            return "redirect:/trabajos"; // Redirige a la lista de trabajos o a una página de éxito
+            return "redirect:/trabajo"; // Redirige a la lista de trabajos o a una página de éxito
         } catch (MiException e) {
             return "error";
         }

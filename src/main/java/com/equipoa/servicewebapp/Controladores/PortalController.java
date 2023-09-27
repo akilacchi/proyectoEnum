@@ -142,22 +142,4 @@ public class PortalController {
         return "redirect:/";
     }
 
-    @GetMapping("/verComentarios")
-    public String verComentarios(@RequestParam Long idProveedor, Model model) {
-        Usuario proveedor = usuarioServicio.obtenerProveedorConCalificaciones(idProveedor);
-        if (proveedor != null) {
-            model.addAttribute("proveedor", proveedor); // añade el objeto proveedor completo al modelo
-            List<Calificacion> calificaciones = proveedor.getCalificacionesRecibidas();
-            if (calificaciones != null) {
-                double promedio = calificaciones.stream()
-                        .mapToInt(Calificacion::getPuntuacion)
-                        .average()
-                        .orElse(0.0);
-                model.addAttribute("calificaciones", calificaciones);
-                model.addAttribute("promedio", promedio);
-            }
-        }
-        return "detallesProveedor";
-    }
-
 }

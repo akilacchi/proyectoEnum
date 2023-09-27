@@ -29,7 +29,7 @@ public class Calificacion {
     @ManyToOne
     @JoinColumn(name = "proveedor_receptor_id")
     private Usuario proveedorReceptor; // el proveedor que recibe la calificación
-    
+
     @OneToOne
     @JoinColumn(name = "trabajo_id")
     private Trabajo trabajo; // el trabajo que está siendo calificado
