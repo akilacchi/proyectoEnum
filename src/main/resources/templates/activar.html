@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Activar/Desactivar Usuarios</title>
-</head>
-<body>
-<div>
-    <h1>Activar/Desactivar Usuarios</h1>
-    <br>
-    <form method="post" action="/admindashboard/setactivo">
-        <h2>Seleccionar usuario a activar</h2>
-        <br>
-        <select name="id" id="id">
-            <option th:each="i : ${inactivos}" th:value="${i.ID}"
-                    th:text="${i.name +', esta activo?'+ i.activo }"></option>
-        </select>
-        <br>
-        <button type="submit">Activar!</button>
-    </form>
-    <br>
-    <h2>O</h2>
-    <br>
-    <form method="post" action="/admindashboard/setinactivo">
-        <h2>Seleccionar usuario a desactivar</h2>
-        <br>
-        <select name="id" id="id">
-            <option th:each="a : ${activos}" th:value="${a.ID}"
-                    th:text="${a.name +', esta activo?'+ a.activo }"></option>
+    <head>
+        <meta charset="UTF-8">
+        <title>Activar/Desactivar Usuarios</title>
+    </head>
+    <body>
+        <div>
+            <h1>Activar/Desactivar Usuarios</h1>
+            <br>
+            <form method="post" action="/admindashboard/setactivo">
+                <h2>Seleccionar usuario a activar</h2>
+                <br>
+                <select name="id" id="id">
+                    <option th:each="i : ${inactivos}" th:value="${i.ID}"
+                            th:text="${i.name +', esta activo?'+ i.activo }"></option>
+                </select>
+                <br>
+                <button type="submit">Activar!</button>
+            </form>
+            <br>
+            <h2>O</h2>
+            <br>
+            <form method="post" action="/admindashboard/setinactivo">
+                <h2>Seleccionar usuario a desactivar</h2>
+                <br>
+                <select name="id" id="id">
+                    <option th:each="a : ${activos}" th:value="${a.ID}"
+                            th:text="${a.name +', esta activo?'+ a.activo }"></option>
 
-        </select>
-        <br>
-        <button type="submit">desctivar!</button>
-    </form>
-</div>
-</body>
+                </select>
+                <br>
+                <button type="submit">desctivar!</button>
+            </form>
+        </div>
+    </body>
 </html>

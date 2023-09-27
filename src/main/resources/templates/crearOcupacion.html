@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/" lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Ocupacion</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/styleregistro.css}"/>
-</head>
-<body>
-<h1>Crear Opcupaciones</h1>
-<!-- Elemento select fuera del formulario -->
-<label>Seleccione Ocupacion</label>
-<br>
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Ocupacion</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/styleregistro.css}"/>
+    </head>
+    <body>
+        <h1>Crear Opcupaciones</h1>
+        <!-- Elemento select fuera del formulario -->
+        <label>Seleccione Ocupacion</label>
+        <br>
 
-<!-- Formulario para crear la ocupación y subir la imagen -->
-<form id="formularioCrear" method="post" action="/admindashboard/ocupacion" enctype="multipart/form-data">
-    <label>Ingrese ocupacion</label>
-    <br>
-    <input type="text" name="nombre" placeholder="Ocupacion aquí">
-    <br>
-    <label>Suba una foto de perfil</label>
-    <br>
-    <input name="archivo" type="file">
-    <br>
-    <label>Ingrese descripción de la ocupación</label>
-    <br>
-    <textarea name="descripcion"></textarea>
-    <br>
+        <!-- Formulario para crear la ocupación y subir la imagen -->
+        <form id="formularioCrear" method="post" action="/admindashboard/ocupacion" enctype="multipart/form-data">
+            <label>Ingrese ocupacion</label>
+            <br>
+            <input type="text" name="nombre" placeholder="Ocupacion aquí">
+            <br>
+            <label>Suba una foto de perfil</label>
+            <br>
+            <input name="archivo" type="file">
+            <br>
+            <label>Ingrese descripción de la ocupación</label>
+            <br>
+            <textarea name="descripcion"></textarea>
+            <br>
 
-    <button type="submit">Crear Ocupacion
-    </button>
-</form>
+            <button type="submit">Crear Ocupacion
+            </button>
+        </form>
 
-</body>
+    </body>
 </html>

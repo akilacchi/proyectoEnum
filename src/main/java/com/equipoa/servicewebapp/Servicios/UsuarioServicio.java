@@ -1,11 +1,13 @@
 package com.equipoa.servicewebapp.Servicios;
 
+import com.equipoa.servicewebapp.Entidades.Calificacion;
 import com.equipoa.servicewebapp.Entidades.Imagen;
 import com.equipoa.servicewebapp.Entidades.Ocupaciones;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
+import com.equipoa.servicewebapp.Repositorios.CalificacionRepositorio;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private OcupacionesServicio ocupacionesServicio;
+
+    @Autowired
+    CalificacionRepositorio calificacionRepositorio;
 
     @Transactional
     public void crearUsuario(MultipartFile archivo, String email, String name, String password, String password2, String phone, Rol rol, Provincias provincia) throws MiException {
@@ -172,8 +177,8 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-   @Transactional
-   
+    @Transactional
+
     public void actualizarProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) throws MiException {
         validar(email, name, password, password2, phone);
         Usuario proveedor = usuarioRepositorio.buscarPorEmail(email);
@@ -203,7 +208,6 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-
     public void eliminarProveedor(String email) throws MiException {
 
         Usuario proveedor = usuarioRepositorio.buscarPorEmail(email);
@@ -214,8 +218,8 @@ public class UsuarioServicio implements UserDetailsService {
             usuarioRepositorio.delete(proveedor);
         }
     }
-    @Transactional(readOnly = true)
 
+    @Transactional(readOnly = true)
     public List<Usuario> obtenerTodosLosClientes() {
         List<Usuario> clientes = usuarioRepositorio.findAllByRol(Rol.CLIENTE);
         return clientes;
@@ -286,6 +290,17 @@ public class UsuarioServicio implements UserDetailsService {
             return null;
         }
 
+    }
+
+    @Transactional(readOnly = true)
+    public Usuario obtenerProveedorConCalificaciones(Long idProveedor) {
+        Usuario proveedor = usuarioRepositorio.findById(idProveedor);
+        if (proveedor != null && proveedor.getRol() == Rol.PROVEEDOR) {
+            List<Calificacion> calificaciones = calificacionRepositorio.findAllByProveedorReceptor(proveedor);
+            proveedor.setCalificacionesRecibidas(calificaciones);
+            return proveedor;
+        }
+        return null;
     }
 
 }

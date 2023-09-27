@@ -68,8 +68,8 @@ public class AdminController {
 
     @PostMapping("/registro")
     public String registro(@RequestParam MultipartFile archivo, @RequestParam String email, @RequestParam String name,
-                           @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
-                           @RequestParam Provincias provincia) {
+            @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
+            @RequestParam Provincias provincia) {
         try {
             System.out.println("Registro admin existoso");
             adminServicio.crearAdmin(archivo, email, name, password, password2, phone, provincia);
@@ -98,7 +98,6 @@ public class AdminController {
         }
     }
 
-
     @GetMapping("/modificarocupacion")
     public String modificarOcupacion(ModelMap modelo) {
         modelo.addAttribute("listaOcupacion", getOcupaciones());
@@ -107,7 +106,7 @@ public class AdminController {
 
     @PostMapping("/ocupacionmodificar")
     public String ocupacionModificar(MultipartFile archivo, String nombre, String nuevoNombre, String descripcion) {
-        if(archivo == null){
+        if (archivo == null) {
             System.err.println("archivo no llego a controller");
         }
 

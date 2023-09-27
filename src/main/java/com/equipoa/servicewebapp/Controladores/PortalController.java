@@ -1,5 +1,6 @@
 package com.equipoa.servicewebapp.Controladores;
 
+import com.equipoa.servicewebapp.Entidades.Calificacion;
 import com.equipoa.servicewebapp.Entidades.Ocupaciones;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping("/")
@@ -38,8 +40,6 @@ public class PortalController {
         return Provincias.values();
     }
 
-
-
     @Autowired
     UsuarioServicio usuarioServicio;
 
@@ -47,7 +47,6 @@ public class PortalController {
     private OcupacionesRepositorio ocupacionesRepositorio;
     @Autowired
     private OcupacionesServicio ocupacionesServicio;
-
 
     @GetMapping("/")
     public String index(HttpSession session) {
@@ -64,12 +63,13 @@ public class PortalController {
     public String buscarProveedores(@RequestParam String ocupacion, Model model) {
         List<Usuario> proveedores = usuarioServicio.obtenerProveedoresPorOcupacion(ocupacion);
         model.addAttribute("proveedores", proveedores);
+        model.addAttribute("listaOcupaciones", getOcupaciones());
         return "card.html";
     }
 
     @GetMapping("/servicios")
     public String servicios(ModelMap modelo) {
-        modelo.addAttribute("listaOcupaciones",getOcupaciones());
+        modelo.addAttribute("listaOcupaciones", getOcupaciones());
         return "servicios.html";
     }
 
@@ -140,6 +140,24 @@ public class PortalController {
         }
 
         return "redirect:/";
+    }
+
+    @GetMapping("/verComentarios")
+    public String verComentarios(@RequestParam Long idProveedor, Model model) {
+        Usuario proveedor = usuarioServicio.obtenerProveedorConCalificaciones(idProveedor);
+        if (proveedor != null) {
+            model.addAttribute("proveedor", proveedor); // añade el objeto proveedor completo al modelo
+            List<Calificacion> calificaciones = proveedor.getCalificacionesRecibidas();
+            if (calificaciones != null) {
+                double promedio = calificaciones.stream()
+                        .mapToInt(Calificacion::getPuntuacion)
+                        .average()
+                        .orElse(0.0);
+                model.addAttribute("calificaciones", calificaciones);
+                model.addAttribute("promedio", promedio);
+            }
+        }
+        return "detallesProveedor";
     }
 
 }

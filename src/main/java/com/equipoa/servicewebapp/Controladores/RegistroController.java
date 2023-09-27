@@ -21,13 +21,14 @@ import java.util.List;
 @RequestMapping("/r")
 public class RegistroController {
 
-
     public List<Ocupaciones> getOcupaciones() {
         return ocupacionesRepositorio.findAll();
     }
+
     public Rol[] getRol() {
         return Rol.values();
     }
+
     public Provincias[] getProvincias() {
         return Provincias.values();
     }
@@ -52,9 +53,9 @@ public class RegistroController {
     }
 
     @PostMapping("/registrocliente")
-    public String registroCliente(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String direccion){
+    public String registroCliente(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String direccion) {
         try {
-            usuarioServicio.crearCliente(archivo,email,name,password,password2,phone,provincia,direccion);
+            usuarioServicio.crearCliente(archivo, email, name, password, password2, phone, provincia, direccion);
         } catch (MiException e) {
             System.err.println(e.getMessage());
         }
@@ -62,16 +63,16 @@ public class RegistroController {
     }
 
     @GetMapping("/proveedor")
-    public String proveedor(ModelMap modelo){
+    public String proveedor(ModelMap modelo) {
         modelo.addAttribute("provincia", getProvincias());
         modelo.addAttribute("listaOcupacion", getOcupaciones());
         return "registroProveedor.html";
     }
 
     @PostMapping("/registroproveedor")
-    public String registroProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion){
+    public String registroProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) {
         try {
-            usuarioServicio.crearProveedor(archivo,email,name,password,password2,phone,provincia,ocupacion);
+            usuarioServicio.crearProveedor(archivo, email, name, password, password2, phone, provincia, ocupacion);
         } catch (MiException e) {
             System.err.println(e.getMessage());
         }

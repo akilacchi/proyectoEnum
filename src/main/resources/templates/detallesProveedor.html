@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Comentarios y Puntuaciones del Proveedor</title>
+
+</head>
+
+<body>
+    <h1>Comentarios y Puntuaciones Recibidas</h1>
+    <p>Proveedor</p>
+    <p>Nombre: <span th:text="${proveedor.name}"></span></p>
+    <div class="user-avatar">
+        <img th:src="@{/img/perfil/__${proveedor.ID}__}"
+            onerror="this.src='/Img/card/blank-profile-picture-973460_960_720.webp'" alt="Foto de Perfil" />
+    </div>
+    <p>Provincia: <span th:text="${proveedor.provincia}"></span></p>
+    <p>Ocupación: <span th:if="${proveedor.ocupacion != null}" th:text="${proveedor.ocupacion.nombre}"></span></p>
+    <p th:if="${promedio != null}">Promedio de Puntuaciones: <span th:text="${promedio}"></span></p>
+    <div th:if="${calificaciones != null}">
+        <ul>
+            <li th:each="calificacion : ${calificaciones}">
+                <span th:text="${calificacion.clienteEmisor.name}"></span>
+                <span th:text="${calificacion.puntuacion}"></span>
+                <span th:text="${calificacion.comentario}"></span>
+            </li>
+        </ul>
+    </div>
+    <div th:if="${calificaciones == null}">
+        <p>No hay comentarios ni puntuaciones para mostrar.</p>
+    </div>
+</body>
+
+</html>

@@ -10,13 +10,11 @@ package com.equipoa.servicewebapp.Enum;
  * @author alejandrasuarez
  */
 public enum Estados {
-    
+
     ACEPTADO,
     EN_PROCESO,
     RECHAZADO,
     CANCELADO,
     FINALIZADO
-    
-    
-    
+
 }

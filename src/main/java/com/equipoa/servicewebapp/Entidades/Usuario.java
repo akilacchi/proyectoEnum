@@ -6,6 +6,7 @@ import com.equipoa.servicewebapp.Enum.Rol;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 public class Usuario {
@@ -17,7 +18,10 @@ public class Usuario {
     private String name;
     private String password;
     private String phone;
+    
+    @CreatedDate
     private Date fecharegistro;
+    
     private String direccion;
     private Boolean activo;
 
@@ -41,7 +45,7 @@ public class Usuario {
 
     @OneToMany(mappedBy = "clienteEmisor")
     private List<Calificacion> calificacionesEmitidas;
-
+    
     @OneToMany(mappedBy = "proveedorReceptor")
     private List<Calificacion> calificacionesRecibidas;
 

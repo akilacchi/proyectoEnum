@@ -53,7 +53,6 @@ public class AdminServicio {
             usr.setActivo(true);
             usr.setFecharegistro(new Date());
 
-
             Imagen imagen = imagenServicio.guardar(archivo);
             usr.setProfilePicture(imagen);
 
@@ -144,7 +143,6 @@ public class AdminServicio {
 
     }
 
-
     //  Encuentra un usuario y setea su estado "Activo" a lo opuesto que tenga actualmente
     @Transactional
     public void desactivarUsuario(Long id) throws MiException {
@@ -212,8 +210,7 @@ public class AdminServicio {
     }
 
     //    Validacion general
-    public void validar(String email, String name, String password, String password2, String phone, Rol
-            rol, Provincias provincia) throws MiException {
+    public void validar(String email, String name, String password, String password2, String phone, Rol rol, Provincias provincia) throws MiException {
         if (email.trim().isEmpty() || email == null) {
             throw new MiException("Email no puede estar vacío");
         }

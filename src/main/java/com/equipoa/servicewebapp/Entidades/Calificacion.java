@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -28,15 +29,29 @@ public class Calificacion {
     @ManyToOne
     @JoinColumn(name = "proveedor_receptor_id")
     private Usuario proveedorReceptor; // el proveedor que recibe la calificación
+    
+    @OneToOne
+    @JoinColumn(name = "trabajo_id")
+    private Trabajo trabajo; // el trabajo que está siendo calificado
 
     public Calificacion() {
     }
 
-    public Calificacion(int puntuacion, String comentario, Usuario clienteEmisor, Usuario proveedorReceptor) {
+    public Calificacion(Long id, int puntuacion, String comentario, Usuario clienteEmisor, Usuario proveedorReceptor, Trabajo trabajo) {
+        this.id = id;
         this.puntuacion = puntuacion;
         this.comentario = comentario;
         this.clienteEmisor = clienteEmisor;
         this.proveedorReceptor = proveedorReceptor;
+        this.trabajo = trabajo;
+    }
+
+    public Trabajo getTrabajo() {
+        return trabajo;
+    }
+
+    public void setTrabajo(Trabajo trabajo) {
+        this.trabajo = trabajo;
     }
 
     public int getPuntuacion() {

@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/" lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Modificar Ocupacion</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/styleregistro.css}"/>
-</head>
-<body>
-<h1>Modificar ocupcion</h1>
-<!-- Elemento select fuera del formulario -->
-<label>Seleccione Ocupacion</label>
-<br>
-<select id="nombreSelect">
-    <option th:each="o :  ${listaOcupacion}" th:value="${o.nombre}" th:text="${o.nombre}"></option>
-</select>
+    <head>
+        <meta charset="UTF-8">
+        <title>Modificar Ocupacion</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/styleregistro.css}"/>
+    </head>
+    <body>
+        <h1>Modificar ocupcion</h1>
+        <!-- Elemento select fuera del formulario -->
+        <label>Seleccione Ocupacion</label>
+        <br>
+        <select id="nombreSelect">
+            <option th:each="o :  ${listaOcupacion}" th:value="${o.nombre}" th:text="${o.nombre}"></option>
+        </select>
 
-<!-- Formulario para modificar la ocupación y subir la imagen -->
-<form id="formularioModificar" method="post" action="/admindashboard/ocupacionmodificar" enctype="multipart/form-data">
-    <label>Ingrese ocupacion</label>
-    <br>
-    <input type="text" name="nuevoNombre" placeholder="Ocupacion aquí">
-    <br>
-    <label>Suba una foto de perfil</label>
-    <br>
-    <input name="archivo" type="file">
-    <br>
-    <label>Ingrese descripción de la ocupación</label>
-    <br>
-    <textarea name="descripcion"></textarea>
-    <br>
-    <!-- Campo oculto para almacenar el nombre de la ocupación -->
-    <input type="hidden" name="nombre" id="nombreOcupacion">
-    <br>
-    <button type="button" onclick="prepararEnvio()">Modificar Ocupacion</button>
-</form>
+        <!-- Formulario para modificar la ocupación y subir la imagen -->
+        <form id="formularioModificar" method="post" action="/admindashboard/ocupacionmodificar" enctype="multipart/form-data">
+            <label>Ingrese ocupacion</label>
+            <br>
+            <input type="text" name="nuevoNombre" placeholder="Ocupacion aquí">
+            <br>
+            <label>Suba una foto de perfil</label>
+            <br>
+            <input name="archivo" type="file">
+            <br>
+            <label>Ingrese descripción de la ocupación</label>
+            <br>
+            <textarea name="descripcion"></textarea>
+            <br>
+            <!-- Campo oculto para almacenar el nombre de la ocupación -->
+            <input type="hidden" name="nombre" id="nombreOcupacion">
+            <br>
+            <button type="button" onclick="prepararEnvio()">Modificar Ocupacion</button>
+        </form>
 
-<script>
-    function prepararEnvio() {
-        // Obtén el valor seleccionado del elemento <select>
-        var nombreOcupacionSeleccionada = document.getElementById("nombreSelect").value;
+        <script>
+            function prepararEnvio() {
+                // Obtén el valor seleccionado del elemento <select>
+                var nombreOcupacionSeleccionada = document.getElementById("nombreSelect").value;
 
-        // Establece el valor en el campo oculto del formulario
-        document.getElementById("nombreOcupacion").value = nombreOcupacionSeleccionada;
+                // Establece el valor en el campo oculto del formulario
+                document.getElementById("nombreOcupacion").value = nombreOcupacionSeleccionada;
 
-        // Envía el formulario
-        document.getElementById("formularioModificar").submit();
-    }
-</script>
-</body>
+                // Envía el formulario
+                document.getElementById("formularioModificar").submit();
+            }
+        </script>
+    </body>
 </html>
