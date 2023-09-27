@@ -80,7 +80,7 @@ public class TrabajoController {
     public String calificarTrabajo(@PathVariable Long idTrabajo, @ModelAttribute Calificacion calificacion) {
         try {
             trabajoServicio.calificarTrabajo(idTrabajo, calificacion.getComentario(), calificacion.getPuntuacion());
-            return "redirect:/trabajo"; // Redirige a la lista de trabajos o a una página de éxito
+            return "redirect:/trabajo"; 
         } catch (MiException e) {
             return "error";
         }
