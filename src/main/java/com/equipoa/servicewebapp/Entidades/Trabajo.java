@@ -2,6 +2,7 @@ package com.equipoa.servicewebapp.Entidades;
 
 import com.equipoa.servicewebapp.Enum.Estados;
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

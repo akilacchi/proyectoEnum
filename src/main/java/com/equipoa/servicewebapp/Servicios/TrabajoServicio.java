@@ -46,13 +46,12 @@ public class TrabajoServicio {
     TrabajoRepositorio trabajoRepositorio;
     
     @Transactional
-    public void registrarTrabajo(Long id, Usuario cliente, Usuario proveedor,String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException{
-        validar(id,cliente,proveedor,descripcion,fechaInicio,fechaFin);
+    public void registrarTrabajo(String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException{
+        validar(descripcion,fechaInicio,fechaFin);
         Trabajo trabajo=new Trabajo();
         
-        trabajo.setId(id);
-        trabajo.setCliente(cliente);
-        trabajo.setProveedor(proveedor);
+        
+        
         trabajo.setDescripcion(descripcion);
         trabajo.setFechaInicio(fechaInicio);
         trabajo.setFechaFin(fechaFin);
@@ -97,14 +96,9 @@ public class TrabajoServicio {
 
         return trabajos;
     }
-    public void validar(Long id, Usuario cliente, Usuario proveedor,String descripcion, Date fechaInicio, Date fechaFin) throws MiException{
+    public void validar(String descripcion, Date fechaInicio, Date fechaFin) throws MiException{
         
-        if(cliente==null){
-            throw new MiException("Cliente no puede ser nulo");
-        }
-        if(proveedor==null){
-            throw new MiException("Proveedor no puede ser nulo");
-        }
+        
         if(descripcion==null || descripcion.trim().isEmpty()){
             
             throw new MiException("Debe agregar una descripción del trabajo");
@@ -116,7 +110,11 @@ public class TrabajoServicio {
         if(fechaFin==null){
             throw new MiException("Debe agregar fecha final");
         }
-    }
+        
+        
+        }
+    
+  
     
     
 }
