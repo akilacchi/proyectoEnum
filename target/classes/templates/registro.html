@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styleregistro.css}"/>
+</head>
+<body>
+
+<div>
+    <h1> Registro de usuario </h1>
+        <br>
+    <form action="/admindashboard/registro" method="post" enctype="multipart/form-data">
+        <label>Ingrese su nombre</label>
+        <input name="name" type="text" placeholder="Nombre">
+        <br>
+        <label>Ingrese su Email</label>
+        <input name="email" type="email" placeholder="fernando@chiquito.com">
+        <br>
+
+        <label>Suba una foto de perfil</label>
+        <input name="archivo" type="file">
+
+        <br>
+        <label>Ingrese su contraseña</label>
+        <input name="password" type="password" placeholder="********">
+        <br>
+        <label>Repita su contraseña</label>
+        <input name="password2" type="password" placeholder="********">
+        <br>
+        <label>Ingrese su número de teléfono</label>
+        <input name="phone" type="text" placeholder="56 9 1234 5678">
+        <br>
+        <label>Seleccione su rol</label>
+        <select id="rol" name="rol">
+            <option th:each="r: ${rol}" th:value="${r}" th:text="${#strings.capitalize(r.toString().toLowerCase())}"></option>
+        </select>
+        <br>
+        <label>Seleccione su provincia</label>
+        <select id="provincia" name="provincia">
+            <option th:each="p: ${provincia}" th:value="${p}" th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
+        </select>
+        <br>
+        <label>Seleccione su ocupacion</label>
+        <select id="ocupacion" name="ocupacion">
+            <option th:each="o : ${listaOcupacion}" th:value="${o.nombre}" th:text="${o.nombre}"></option>
+        </select>
+
+        <br>
+
+        <button type="submit">Registrarse!</button>
+    </form>
+</div>
+
+</body>
+</html>

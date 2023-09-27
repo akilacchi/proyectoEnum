@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>perfil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styleregistro.css}"/>
+</head>
+<body>
+<div class="perfil">
+
+    <div class="pfp">
+        <p>Nombre: <span th:text="${usuario.name}"></span></p>
+        <p>Fecha de Registro: <span th:text="${usuario.fecharegistro}"></span></p>
+        <p>ID : <span th:text="${usuario.ID}"></span> </p>
+
+        <button> <a th:href="@{/logout}">Cerrar sesión</a></button>
+        <button > <a th:href="@{/perfil/notificaciones}" th:text="${'Centro de notificaciones (' + usuario.notificacionesRecividas.size + ')'}"> </a></button>
+
+        <br>
+        <img th:src="@{/img/perfil/__${usuario.ID}__}" alt="Foto de Perfil">
+    </div>
+
+</div>
+</body>
+</html>

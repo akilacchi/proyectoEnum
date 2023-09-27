@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Enviar notificacion</title>
+</head>
+<body>
+<div>
+    <h1>Enviar a todos los usuarios</h1>
+    <form method="post" action="/admindashboard/notificacionenviada">
+        <h3>Crear notificaion</h3>
+        <br>
+        <label>Seleccione el usuario al que enviar la notificacion</label>
+        <br>
+        <select name="idReceptor" id="idReceptor">
+            <option th:each="u : ${listaUsuarios}" th:text="${u.email + ', ' + u.name + ', ' + u.ID}" th:value="${u.ID}"></option>
+        </select>
+        <br>
+        <label>Ingrese el mensaje de la notificacion</label>
+        <br>
+        <textarea name="mensaje"></textarea>
+        <br>
+        <button type="submit" >Notificar a todos los usuarios </button>
+    </form>
+</div>
+</body>
+</html>
