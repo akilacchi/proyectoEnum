@@ -127,12 +127,12 @@ public class PortalController {
         if (loggeado == null) {
             return "redirect:/login";
         } else {
-            modelo.addAttribute("listaNotificaiones", loggeado.getNotificacionesEnviadas());
+            modelo.addAttribute("listaNotificaciones", loggeado.getNotificacionesRecividas());
             return "centroNotificaciones";
         }
     }
 
-    @PostMapping("/perfil/notificaiones/{id}")
+    @PostMapping("/perfil/notificaciones/{idNotificacion}")
     public String NotificacionBorrar(@PathVariable Long idNotificacion, HttpSession session) {
         Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
         if (loggeado == null){
@@ -143,7 +143,7 @@ public class PortalController {
             } catch (MiException e) {
                 System.err.println(e.getMessage());;
             }
-            return "redirect:/perfil/notificaiones";
+            return "redirect:/";
         }
     }
 

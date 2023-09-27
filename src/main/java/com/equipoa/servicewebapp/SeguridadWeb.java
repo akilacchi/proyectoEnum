@@ -28,7 +28,7 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                        .antMatchers("/css/*", "/js/*", "/img/*", "/**", "/ws/**")
+                        .antMatchers("/css/*", "/js/*", "/img/*", "/**")
                         .permitAll()
                 .and().formLogin()
                         .loginPage("/login")

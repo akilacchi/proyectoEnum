@@ -21,10 +21,7 @@ public class Usuario {
     private String direccion;
     private Boolean activo;
 
-    @OneToMany(mappedBy = "remitente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Notificaciones> notificacionesEnviadas;
-
-    @OneToMany(mappedBy = "receptor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "receptor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Notificaciones> notificacionesRecividas;
 
     @OneToOne
@@ -207,14 +204,6 @@ public class Usuario {
 
     public void setOcupacion(Ocupaciones ocupacion) {
         this.ocupacion = ocupacion;
-    }
-
-    public List<Notificaciones> getNotificacionesEnviadas() {
-        return notificacionesEnviadas;
-    }
-
-    public void setNotificacionesEnviadas(List<Notificaciones> notificacionesEnviadas) {
-        this.notificacionesEnviadas = notificacionesEnviadas;
     }
 
     public List<Notificaciones> getNotificacionesRecividas() {

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
@@ -22,36 +24,39 @@ public class NotificacionServicio {
     NotificacionesRepositorio notificacionesRepositorio;
 
     @Transactional
-    public void crearNotificacion(String mensaje, Usuario remitente, Long idReceptor) throws MiException {
+    public void crearNotificacion(String mensaje, Usuario emisor, Long idReceptor) throws MiException {
         validar(mensaje);
-        if (remitente == null) {
+        if (emisor == null) {
             throw new MiException("Remitente inexistente");
         }
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(idReceptor);
+        Usuario receptor = usuarioRepositorio.findById(idReceptor)
+                .orElseThrow(() -> new MiException("Usuario receptor inexistente"));
 
-        if (respuesta.isPresent()) {
-            Notificaciones notificacion = new Notificaciones();
-            notificacion.setMensaje(mensaje);
+        Notificaciones notificacion = new Notificaciones();
 
-            notificacion.setRemitente(remitente);
-            notificacion.setReceptor(respuesta.get());
+        notificacion.setMensaje(mensaje);
+        notificacion.setEmisor(emisor);
+        notificacion.setReceptor(receptor);
 
-            notificacion.setFechaEnvio(new Date());
+        notificacion.setFechaEnvio(new Date());
 
-            notificacionesRepositorio.save(notificacion);
-        } else {
-            throw new MiException("Usuario receptor inexistente");
-        }
+        notificacionesRepositorio.save(notificacion);
     }
 
     @Transactional
-    public void eliminarNotificacion(Usuario usr, Long idNotidicacion) throws MiException {
+    public void eliminarNotificacion(Usuario usr, Long idNotificacion) throws MiException {
         if (usr == null) {
             throw new MiException("Usuario no encontrado");
         }
-        Optional<Notificaciones> respuesta = notificacionesRepositorio.findById(idNotidicacion);
+        Optional<Notificaciones> respuesta = notificacionesRepositorio.findById(idNotificacion);
+
         if (respuesta.isPresent()) {
-            notificacionesRepositorio.delete(respuesta.get());
+            Notificaciones notificacion = respuesta.get();
+
+            usr.getNotificacionesRecividas().remove(notificacion);
+            usuarioRepositorio.save(usr);
+
+            notificacionesRepositorio.delete(notificacion);
         } else {
             throw new MiException("Notificación no encontrada");
         }
@@ -59,9 +64,9 @@ public class NotificacionServicio {
 
     @Transactional
     public void eliminarTodasNotificaciones(Usuario usr) throws MiException {
-        if(usr == null){
+        if (usr == null) {
             throw new MiException("Usuario no encontrado");
-        }else{
+        } else {
             notificacionesRepositorio.deleteAll(usr.getNotificacionesRecividas());
         }
     }

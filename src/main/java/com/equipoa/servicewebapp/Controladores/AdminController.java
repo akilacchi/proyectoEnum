@@ -1,5 +1,6 @@
 package com.equipoa.servicewebapp.Controladores;
 
+import com.equipoa.servicewebapp.Entidades.Notificaciones;
 import com.equipoa.servicewebapp.Entidades.Ocupaciones;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
@@ -8,9 +9,12 @@ import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import com.equipoa.servicewebapp.Servicios.AdminServicio;
+import com.equipoa.servicewebapp.Servicios.NotificacionServicio;
 import com.equipoa.servicewebapp.Servicios.OcupacionesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +23,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admindashboard")
 public class AdminController {
+
+    @Autowired
+    private NotificacionServicio notificacionServicio;
 
     @Autowired
     private AdminServicio adminServicio;
@@ -68,11 +78,11 @@ public class AdminController {
     @GetMapping("/crearAdmin")
     public String crearUser(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("provincia", getProvincias());
-//        if (validarAdmin(session)) {
+        if (validarAdmin(session)) {
             return "registroAdmin.html";
-//        } else {
-//            return "redirect:/admindashboard/";
-//        }
+        } else {
+            return "redirect:/admindashboard/";
+        }
 
     }
 
@@ -211,12 +221,32 @@ public class AdminController {
     }
 
     @GetMapping("/enviarnotificacion")
-    public String enviarNotificacion(HttpSession session) {
+    public String enviarNotificacion(HttpSession session, ModelMap modelo) {
+        modelo.addAttribute("listaUsuarios", getActivos());
         if (validarAdmin(session)) {
             return "enviarNotificacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
+    }
+
+    @Transactional
+    @PostMapping("/notificacionenviada")
+    public String notificaionenviada(HttpSession session, String mensaje, Long idReceptor) {
+        if (validarAdmin(session)) {
+
+            Usuario admin = (Usuario) session.getAttribute("usuariosession");
+            Optional<Usuario> respuesta = usuarioRepositorio.findById(idReceptor);
+            if (respuesta.isPresent()) {
+                try {
+                    notificacionServicio.crearNotificacion(mensaje, admin, idReceptor);
+                } catch (MiException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        }
+        return "redirect:/admindashboard/";
+
     }
 
     private boolean validarAdmin(HttpSession session) {

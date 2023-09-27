@@ -2,6 +2,7 @@ package com.equipoa.servicewebapp.Entidades;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Notificaciones {
@@ -11,14 +12,14 @@ public class Notificaciones {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "remitente_id")
-    private Usuario remitente;           //Usuario que envia la notificacion
+    @JoinColumn(name = "emisor_id")
+    private Usuario emisor;              //Usuario que envia la notificacion
 
     @ManyToOne
     @JoinColumn(name = "receptor_id")
-    private Usuario receptor;            //Usuario que recibe la notificacion
+    private Usuario receptor;            //Usuarios que reciben la notificacion
 
-    private String mensaje;             //Mensaje de la notificacion
+    private String mensaje;              //Mensaje de la notificacion
 
     private Date fechaEnvio;
 
@@ -33,12 +34,12 @@ public class Notificaciones {
         this.id = id;
     }
 
-    public Usuario getRemitente() {
-        return remitente;
+    public Usuario getEmisor() {
+        return emisor;
     }
 
-    public void setRemitente(Usuario remitente) {
-        this.remitente = remitente;
+    public void setEmisor(Usuario emisor) {
+        this.emisor = emisor;
     }
 
     public Usuario getReceptor() {

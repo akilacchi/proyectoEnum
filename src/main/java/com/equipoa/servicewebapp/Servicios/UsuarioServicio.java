@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,6 +66,11 @@ public class UsuarioServicio implements UserDetailsService {
         } else {
             throw new MiException("Usuario ya registrado");
         }
+    }
+
+    @Transactional
+    public void eliminarNotificaion(Usuario usr, Long id){
+
     }
 
     //Crud Cliente
@@ -172,8 +178,8 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-   @Transactional
-   
+    @Transactional
+
     public void actualizarProveedor(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String ocupacion) throws MiException {
         validar(email, name, password, password2, phone);
         Usuario proveedor = usuarioRepositorio.buscarPorEmail(email);
@@ -214,6 +220,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuarioRepositorio.delete(proveedor);
         }
     }
+
     @Transactional(readOnly = true)
 
     public List<Usuario> obtenerTodosLosClientes() {
