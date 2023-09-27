@@ -57,7 +57,7 @@ public class AdminController {
 
     @GetMapping("/")
     public String adminDashboard() {
-        return "adminDashboard.html";
+        return "admin_db/adminDashboard.html";
     }
 
     @GetMapping("/crearAdmin")
