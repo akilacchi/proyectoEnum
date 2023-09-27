@@ -4,12 +4,14 @@ import javax.persistence.*;
 
 @Entity
 public class Imagen {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mime;
     private String nombre;
-    @Lob @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] contenido;
 
     public Imagen() {

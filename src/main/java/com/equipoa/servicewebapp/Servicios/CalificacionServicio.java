@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class CalificacionServicio {
+
     @Autowired
     private CalificacionRepositorio calificacionRepositorio;
 
@@ -52,9 +53,8 @@ public class CalificacionServicio {
             throw new MiException("Calificacion inexistente");
         }
 
-        Usuario cliente = new Usuario();
-        Usuario proveedor = new Usuario();
-
+        Usuario cliente;
+        Usuario proveedor;
 
         Optional<Calificacion> respuesta = calificacionRepositorio.findById(idCalificacion);
 
@@ -85,7 +85,7 @@ public class CalificacionServicio {
         if (idCliente < 1 || idCliente == null) {
             throw new MiException("Cliente inexistente");
         }
-        if (idCalificacion < 1 || idCalificacion == null) {
+        if (idCalificacion == null || idCalificacion < 1) {
             throw new MiException("Calificacion inexistente");
         }
 
@@ -96,7 +96,7 @@ public class CalificacionServicio {
             throw new MiException("Calificacion no encontrada");
         } else {
             Calificacion calificacion = respuesta.get();
-            if (calificacion.getClienteEmisor().getID() == idCliente) {
+            if (calificacion.getClienteEmisor().getID().equals(idCliente)) {
                 calificacionRepositorio.delete(calificacion);
                 System.out.println("Calificacion eliminada exitosamente");
             } else {

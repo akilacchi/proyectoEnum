@@ -22,10 +22,12 @@ private Long id;
  */
 package com.equipoa.servicewebapp.Servicios;
 
+import com.equipoa.servicewebapp.Entidades.Calificacion;
 import com.equipoa.servicewebapp.Entidades.Trabajo;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Estados;
 import com.equipoa.servicewebapp.Excepciones.MiException;
+import com.equipoa.servicewebapp.Repositorios.CalificacionRepositorio;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
 import java.util.Date;
 import java.util.List;
@@ -38,18 +40,23 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author alejandrasuarez
  */
-
 @Service
 public class TrabajoServicio {
-    
+
     @Autowired
     TrabajoRepositorio trabajoRepositorio;
-    
+
+    @Autowired
+    CalificacionRepositorio calificacionRepositorio;
+
+    @Autowired
+    CalificacionServicio calificacionServicio;
+
     @Transactional
-    public void registrarTrabajo(Long id, Usuario cliente, Usuario proveedor,String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException{
-        validar(id,cliente,proveedor,descripcion,fechaInicio,fechaFin);
-        Trabajo trabajo=new Trabajo();
-        
+    public void registrarTrabajo(Long id, Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException {
+        validar(id, cliente, proveedor, descripcion, fechaInicio, fechaFin);
+        Trabajo trabajo = new Trabajo();
+
         trabajo.setId(id);
         trabajo.setCliente(cliente);
         trabajo.setProveedor(proveedor);
@@ -57,9 +64,9 @@ public class TrabajoServicio {
         trabajo.setFechaInicio(fechaInicio);
         trabajo.setFechaFin(fechaFin);
         trabajo.setEstado(estado);
-        
+
         trabajoRepositorio.save(trabajo);
-        
+
     }
 
     public void actualizarTrabajo(Long id, Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException {
@@ -97,26 +104,65 @@ public class TrabajoServicio {
 
         return trabajos;
     }
-    public void validar(Long id, Usuario cliente, Usuario proveedor,String descripcion, Date fechaInicio, Date fechaFin) throws MiException{
-        
-        if(cliente==null){
+
+    public void validar(Long id, Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin) throws MiException {
+
+        if (cliente == null) {
             throw new MiException("Cliente no puede ser nulo");
         }
-        if(proveedor==null){
+        if (proveedor == null) {
             throw new MiException("Proveedor no puede ser nulo");
         }
-        if(descripcion==null || descripcion.trim().isEmpty()){
-            
+        if (descripcion == null || descripcion.trim().isEmpty()) {
+
             throw new MiException("Debe agregar una descripción del trabajo");
         }
-        
-        if(fechaInicio==null){
+
+        if (fechaInicio == null) {
             throw new MiException("Debe agregar fecha de inicio");
         }
-        if(fechaFin==null){
+        if (fechaFin == null) {
             throw new MiException("Debe agregar fecha final");
         }
     }
-    
-    
+
+    @Transactional
+    public void finalizarTrabajo(Long idTrabajo) throws MiException {
+        Optional<Trabajo> optTrabajo = trabajoRepositorio.findById(idTrabajo);
+        if (optTrabajo.isPresent()) {
+            Trabajo trabajo = optTrabajo.get();
+            trabajo.setEstado(Estados.FINALIZADO);
+            trabajoRepositorio.save(trabajo);
+        } else {
+            throw new MiException("Trabajo no encontrado");
+        }
+    }
+
+    @Transactional
+    public void calificarTrabajo(Long idTrabajo, String comentario, int puntuacion) throws MiException {
+        Optional<Trabajo> optTrabajo = trabajoRepositorio.findById(idTrabajo);
+        if (optTrabajo.isPresent() && optTrabajo.get().getEstado() == Estados.FINALIZADO) {
+            if (calificacionRepositorio.findByTrabajoId(idTrabajo).isPresent()) {
+                throw new MiException("El trabajo ya ha sido calificado");
+            }
+
+            Trabajo trabajo = optTrabajo.get();
+
+            //calificacionServicio.crearCalificacion(trabajo.getCliente().getID(), trabajo.getProveedor().getID(), comentario, puntuacion);
+
+            Calificacion calificacion = new Calificacion();
+            calificacion.setComentario(comentario);
+            calificacion.setPuntuacion(puntuacion);
+            calificacion.setTrabajo(trabajo);
+
+            // Aquí se asocian los usuarios a la calificación
+            calificacion.setClienteEmisor(trabajo.getCliente());
+            calificacion.setProveedorReceptor(trabajo.getProveedor());
+
+            calificacionRepositorio.save(calificacion);
+        } else {
+            throw new MiException("El trabajo no ha sido finalizado o no fue encontrado");
+        }
+    }
+
 }

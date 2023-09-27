@@ -2,6 +2,7 @@ package com.equipoa.servicewebapp.Entidades;
 
 import com.equipoa.servicewebapp.Enum.Estados;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -30,22 +33,34 @@ public class Trabajo {
     @JoinColumn(name = "proveedor_id") // proveedor que realiza el trabajo
     private Usuario proveedor;
 
+    @OneToOne(mappedBy = "trabajo")
+    private Calificacion calificacion; // la calificación para el trabajo
+
     //verificar argumentos de la entidad
     private String descripcion;
     private Date fechaInicio;
     private Date fechaFin;
-    
+
     @Enumerated(EnumType.STRING)
     Estados estado;
 
-    public Trabajo(Long id, Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) {
+    public Trabajo(Long id, Usuario cliente, Usuario proveedor, Calificacion calificacion, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) {
         this.id = id;
         this.cliente = cliente;
         this.proveedor = proveedor;
+        this.calificacion = calificacion;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.estado = estado;
+    }
+
+    public Calificacion getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Calificacion calificacion) {
+        this.calificacion = calificacion;
     }
 
     public Estados getEstado() {
@@ -55,9 +70,7 @@ public class Trabajo {
     public void setEstado(Estados estado) {
         this.estado = estado;
     }
-    
 
-  
     public Trabajo() {
     }
 
