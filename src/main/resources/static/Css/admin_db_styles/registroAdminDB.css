@@ -1,27 +1,56 @@
 body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     background-color: #93B1A6;
 }
 
-.filtro-box {
-    width: 400px;
+.card {
     background-color: #5C8374;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: left;
-    font-family: 'Roboto';
-    color: white;
-    box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
-    /* Establece la posición fija y la ubicación en la pantalla */
-    position: fixed;
-    top: 0; /* Anclar en la parte superior de la pantalla */
-    left: 0; /* Anclar en el lado izquierdo de la pantalla */
-    height: 100%; /* Ocupa toda la altura de la pantalla */
-    overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 60px auto;
 }
 
-.filtro-box a{
-    margin: 35px;
+
+
+.form-wrapper {
+    background-color: #5C8374; /* Cambia el color de fondo de los formularios */
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
 }
+
+.card h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.form-wrapper form {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.card label,
+.card input,
+.card select,
+.card button {
+    margin: 10px 0;
+    width: 100%;
+}
+
 
 .button{
     background-color: #183D3D; /* Cambia el color de fondo del botón "BUSCAR" */
