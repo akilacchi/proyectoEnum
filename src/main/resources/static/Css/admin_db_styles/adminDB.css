@@ -21,13 +21,13 @@ body {
 }
 
 .filtro-box a{
-    margin: 40px;
+    margin: 35px;
 }
 
 .button{
     background-color: #183D3D; /* Cambia el color de fondo del botón "BUSCAR" */
     color: white; /* Cambia el color del texto a blanco para que sea legible */
-    padding: 10px 10px; /* Ajusta el espaciado del botón según tus preferencias */
+    padding: 14px 30px; /* Ajusta el espaciado del botón según tus preferencias */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -38,4 +38,7 @@ body {
     flex-direction: column; /* Los botones se apilan verticalmente */
     justify-content: space-between; /* Distribuye los botones con espacio entre ellos */
     align-items: flex-start; /* Alinea los botones a la izquierda */
+    font-size: 20px;
+    align-items: center; /* Centra horizontalmente el contenido */
+    text-align: center; /* Centra el texto dentro del botón */
 }
