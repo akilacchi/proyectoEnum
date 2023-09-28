@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -22,8 +23,8 @@ public class CalificacionServicio {
     @Transactional
     public void crearCalificacion(Long idCliente, Long idProveedor, String comentario, int puntuacion) throws MiException {
         validar(idCliente, idProveedor, comentario, puntuacion);
-        Usuario cliente = new Usuario();
-        Usuario proveedor = new Usuario();
+        Usuario cliente;
+        Usuario proveedor;
 
         Calificacion calificacion = new Calificacion();
         Optional<Usuario> respuestaCliente = usuarioRepositorio.findById(idCliente);
@@ -53,8 +54,8 @@ public class CalificacionServicio {
             throw new MiException("Calificacion inexistente");
         }
 
-        Usuario cliente = new Usuario();
-        Usuario proveedor = new Usuario();
+        Usuario cliente;
+        Usuario proveedor;
 
 
         Optional<Calificacion> respuesta = calificacionRepositorio.findById(idCalificacion);
@@ -93,13 +94,14 @@ public class CalificacionServicio {
         }
 
         Optional<Calificacion> respuesta = calificacionRepositorio.findById(idCalificacion);
-        if (usuarioRepositorio.findById(idCliente) == null) {
+        Optional<Usuario> usr = usuarioRepositorio.findById(idCliente);
+        if (!usr.isPresent()) {
             throw new MiException("Cliente no encontrado");
         } else if (!respuesta.isPresent()) {
             throw new MiException("Calificacion no encontrada");
         } else {
             Calificacion calificacion = respuesta.get();
-            if (calificacion.getClienteEmisor().getID() == idCliente) {
+            if (Objects.equals(calificacion.getClienteEmisor().getID(), idCliente)) {
                 calificacionRepositorio.delete(calificacion);
                 System.out.println("Calificacion eliminada exitosamente");
             } else {

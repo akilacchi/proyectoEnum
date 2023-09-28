@@ -1,5 +1,6 @@
 package com.equipoa.servicewebapp.Controladores;
 
+import com.equipoa.servicewebapp.Entidades.Notificaciones;
 import com.equipoa.servicewebapp.Entidades.Ocupaciones;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
@@ -127,21 +128,27 @@ public class PortalController {
         if (loggeado == null) {
             return "redirect:/login";
         } else {
-            modelo.addAttribute("listaNotificaciones", loggeado.getNotificacionesRecividas());
-            return "centroNotificaciones";
+            try {
+                List<Notificaciones> lista = usuarioServicio.mostrarTodasLasNotificacionesUsr(loggeado.getID());
+                modelo.addAttribute("listaNotificaciones", lista);
+                return "centroNotificaciones";
+            } catch (MiException e) {
+                System.err.println(e.getMessage());
+                return "redirect:/login";
+            }
         }
     }
 
     @PostMapping("/perfil/notificaciones/{idNotificacion}")
     public String NotificacionBorrar(@PathVariable Long idNotificacion, HttpSession session) {
         Usuario loggeado = (Usuario) session.getAttribute("usuariosession");
-        if (loggeado == null){
+        if (loggeado == null) {
             return "redirect:/";
-        }else{
+        } else {
             try {
                 notificacionServicio.eliminarNotificacion(loggeado, idNotificacion);
             } catch (MiException e) {
-                System.err.println(e.getMessage());;
+                System.err.println(e.getMessage());
             }
             return "redirect:/";
         }

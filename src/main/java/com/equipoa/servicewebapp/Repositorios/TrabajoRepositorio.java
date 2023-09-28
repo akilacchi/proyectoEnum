@@ -19,5 +19,5 @@ import org.springframework.data.repository.query.Param;
 public interface TrabajoRepositorio extends JpaRepository<Trabajo, Long>{
     
     @Query("SELECT t FROM Trabajo t WHERE t.cliente.email=:email")
-    public List<Trabajo> buscarTrabajosPorUsuario(@Param("email") String email);
+    List<Trabajo> buscarTrabajosPorUsuario(@Param("email") String email);
 }

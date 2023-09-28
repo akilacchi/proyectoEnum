@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,11 +52,29 @@ public class NotificacionServicio {
 
         if (respuesta.isPresent()) {
             Notificaciones notificacion = respuesta.get();
+            System.err.println(usr.getEmail());
+            System.err.println(notificacion.getMensaje());
 
-            usr.getNotificacionesRecividas().remove(notificacion);
+            List<Notificaciones> lista = usr.getNotificacionesRecividas();
+            List<Notificaciones> aux = new ArrayList<>();
+            Integer indice = null;
+            for (int i = 0; i < lista.size(); i++) {
+                if (notificacion.getId() != lista.get(i).getId()) {
+                    aux.add(lista.get(i));
+                }
+            }
+
+
+//            System.out.println(lista == usr.getNotificacionesRecividas());
+//            System.out.println(lista.size());
+            usr.setNotificacionesRecividas(aux);
             usuarioRepositorio.save(usr);
 
-            notificacionesRepositorio.delete(notificacion);
+            notificacionesRepositorio.deleteById(notificacion.getId());
+
+//            notificacionesRepositorio.eliminarNotificacionPorId(notificacion.getId());
+//            notificacionesRepositorio.deleteById(usr.getID());
+            System.out.println(notificacion.getMensaje());
         } else {
             throw new MiException("Notificación no encontrada");
         }

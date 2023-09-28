@@ -29,7 +29,12 @@ public class ImagenController {
 
     @GetMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable Long id) { //id del usuario al que se enlaza la imagen
-        Usuario usuario = usuarioServicio.getOne(id);
+        Usuario usuario = null;
+        try {
+            usuario = usuarioServicio.getOne(id);
+        } catch (MiException e) {
+            System.err.println(e.getMessage());;
+        }
 
         byte[] imagen = usuario.getProfilePicture().getContenido();
 

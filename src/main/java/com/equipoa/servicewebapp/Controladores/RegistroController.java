@@ -5,7 +5,6 @@ import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
-import com.equipoa.servicewebapp.Servicios.OcupacionesServicio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +36,7 @@ public class RegistroController {
 
     @Autowired
     private OcupacionesRepositorio ocupacionesRepositorio;
-    @Autowired
-    private OcupacionesServicio ocupacionesServicio;
+
 
     @GetMapping("/")
     public String registro() {

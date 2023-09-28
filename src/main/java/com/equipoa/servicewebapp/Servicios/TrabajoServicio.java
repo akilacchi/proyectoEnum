@@ -27,42 +27,67 @@ import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Estados;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author alejandrasuarez
  */
 
 @Service
 public class TrabajoServicio {
-    
+
     @Autowired
     TrabajoRepositorio trabajoRepositorio;
-    
+
     @Transactional
-    public void registrarTrabajo(Long id, Usuario cliente, Usuario proveedor,String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException{
-        validar(id,cliente,proveedor,descripcion,fechaInicio,fechaFin);
-        Trabajo trabajo=new Trabajo();
-        
-        trabajo.setId(id);
+    public void registrarTrabajo(Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException {
+        validar(cliente, proveedor, descripcion, fechaInicio, fechaFin);
+        Trabajo trabajo = new Trabajo();
+
         trabajo.setCliente(cliente);
         trabajo.setProveedor(proveedor);
         trabajo.setDescripcion(descripcion);
         trabajo.setFechaInicio(fechaInicio);
         trabajo.setFechaFin(fechaFin);
         trabajo.setEstado(estado);
-        
+
         trabajoRepositorio.save(trabajo);
-        
+
     }
 
+    @Transactional
+    public void actualizarEstadoTrabajo(Long id, Estados estados) throws MiException {
+        if (id < 1) {
+            throw new MiException("Id incorrecto");
+        }
+        Optional<Trabajo> respuestaTrabajo = trabajoRepositorio.findById(id);
+
+        if (respuestaTrabajo.isPresent()) {
+            Trabajo trabajo = respuestaTrabajo.get();
+            if (!trabajo.getEstado().toString().equals(estados.toString())) {
+                trabajo.setEstado(estados);
+
+                trabajoRepositorio.save(trabajo);
+            } else {
+                throw new MiException("Estado no ha cambiado");
+            }
+        }
+    }
+
+    @Transactional
     public void actualizarTrabajo(Long id, Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException {
+        validar(cliente, proveedor, descripcion, fechaInicio, fechaFin);
+
+        if (id < 1) {
+            throw new MiException("Id incorrecto");
+        }
 
         Optional<Trabajo> respuestaTrabajo = trabajoRepositorio.findById(id);
 
@@ -84,39 +109,33 @@ public class TrabajoServicio {
 
     @Transactional(readOnly = true)
     public List<Trabajo> listaTrabajosPorUsuario(String email) {
-
-        List<Trabajo> trabajos = trabajoRepositorio.buscarTrabajosPorUsuario(email);
-        return trabajos;
+        return trabajoRepositorio.buscarTrabajosPorUsuario(email);
 
     }
 
     @Transactional(readOnly = true)
     public List<Trabajo> listaTrabajos() {
-
-        List<Trabajo> trabajos = trabajoRepositorio.findAll();
-
-        return trabajos;
+        return trabajoRepositorio.findAll();
     }
-    public void validar(Long id, Usuario cliente, Usuario proveedor,String descripcion, Date fechaInicio, Date fechaFin) throws MiException{
-        
-        if(cliente==null){
+
+    public void validar(Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin) throws MiException {
+
+        if (cliente == null) {
             throw new MiException("Cliente no puede ser nulo");
         }
-        if(proveedor==null){
+        if (proveedor == null) {
             throw new MiException("Proveedor no puede ser nulo");
         }
-        if(descripcion==null || descripcion.trim().isEmpty()){
-            
+        if (descripcion == null || descripcion.trim().isEmpty()) {
             throw new MiException("Debe agregar una descripción del trabajo");
         }
-        
-        if(fechaInicio==null){
+        if (fechaInicio == null) {
             throw new MiException("Debe agregar fecha de inicio");
         }
-        if(fechaFin==null){
+        if (fechaFin == null) {
             throw new MiException("Debe agregar fecha final");
         }
     }
-    
-    
+
+
 }
