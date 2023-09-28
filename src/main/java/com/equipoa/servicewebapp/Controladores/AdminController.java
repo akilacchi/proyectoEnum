@@ -83,7 +83,7 @@ public class AdminController {
 
     @GetMapping("/crearocupacion")
     public String crearOcupacion() {
-        return "crearOcupacion.html";
+        return "admin_db/crearOcupacion.html";
     }
 
     @PostMapping("/ocupacion")
