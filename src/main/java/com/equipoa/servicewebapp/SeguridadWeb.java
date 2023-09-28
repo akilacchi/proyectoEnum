@@ -1,5 +1,6 @@
 package com.equipoa.servicewebapp;
 
+import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

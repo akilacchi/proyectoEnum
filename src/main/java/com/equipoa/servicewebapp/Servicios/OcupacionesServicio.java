@@ -101,7 +101,6 @@ public class OcupacionesServicio {
 
     @Transactional(readOnly = true)
     public List<Ocupaciones> obtenerTodasLasOcupaciones() {
-        List<Ocupaciones> ocupaciones = ocupacionesRepositorio.buscarTodo();
-        return ocupaciones;
+        return ocupacionesRepositorio.buscarTodo();
     }
 }

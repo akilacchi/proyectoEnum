@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -23,18 +24,19 @@ public class CalificacionServicio {
     @Transactional
     public void crearCalificacion(Long idCliente, Long idProveedor, String comentario, int puntuacion) throws MiException {
         validar(idCliente, idProveedor, comentario, puntuacion);
-        Usuario cliente = new Usuario();
-        Usuario proveedor = new Usuario();
+        Usuario cliente;
+        Usuario proveedor;
 
         Calificacion calificacion = new Calificacion();
-
-        if (usuarioRepositorio.findById(idCliente) == null) {
+        Optional<Usuario> respuestaCliente = usuarioRepositorio.findById(idCliente);
+        Optional<Usuario> respuestaProveedor = usuarioRepositorio.findById(idProveedor);
+        if (!respuestaCliente.isPresent()) {
             throw new MiException("Cliente no encontrado");
-        } else if (usuarioRepositorio.findById(idProveedor) == null) {
+        } else if (!respuestaProveedor.isPresent()) {
             throw new MiException("Proveedor no encontrado");
         } else {
-            cliente = usuarioRepositorio.findById(idCliente);
-            proveedor = usuarioRepositorio.findById(idProveedor);
+            cliente = respuestaCliente.get();
+            proveedor = respuestaProveedor.get();
 
             calificacion.setClienteEmisor(cliente);
             calificacion.setProveedorReceptor(proveedor);
@@ -57,10 +59,12 @@ public class CalificacionServicio {
         Usuario proveedor;
 
         Optional<Calificacion> respuesta = calificacionRepositorio.findById(idCalificacion);
+        Optional<Usuario> respuestaCliente = usuarioRepositorio.findById(idCliente);
+        Optional<Usuario> respuestaProveedor = usuarioRepositorio.findById(idProveedor);
 
-        if (usuarioRepositorio.findById(idCliente) == null) {
+        if (!respuestaCliente.isPresent()) {
             throw new MiException("Cliente no encontrado");
-        } else if (usuarioRepositorio.findById(idProveedor) == null) {
+        } else if (!respuestaProveedor.isPresent()) {
             throw new MiException("Proveedor no encontrado");
         } else if (!respuesta.isPresent()) {
             throw new MiException("Calificacion no encontrda");
@@ -68,8 +72,8 @@ public class CalificacionServicio {
 
             Calificacion calificacion = respuesta.get();
 
-            cliente = usuarioRepositorio.findById(idCliente);
-            proveedor = usuarioRepositorio.findById(idProveedor);
+            cliente = respuestaCliente.get();
+            proveedor = respuestaProveedor.get();
 
             calificacion.setClienteEmisor(cliente);
             calificacion.setProveedorReceptor(proveedor);
@@ -90,13 +94,16 @@ public class CalificacionServicio {
         }
 
         Optional<Calificacion> respuesta = calificacionRepositorio.findById(idCalificacion);
-        if (usuarioRepositorio.findById(idCliente) == null) {
+        Optional<Usuario> usr = usuarioRepositorio.findById(idCliente);
+        if (!usr.isPresent()) {
             throw new MiException("Cliente no encontrado");
         } else if (!respuesta.isPresent()) {
             throw new MiException("Calificacion no encontrada");
         } else {
             Calificacion calificacion = respuesta.get();
-            if (calificacion.getClienteEmisor().getID().equals(idCliente)) {
+
+            if (Objects.equals(calificacion.getClienteEmisor().getID(), idCliente)) {
+
                 calificacionRepositorio.delete(calificacion);
                 System.out.println("Calificacion eliminada exitosamente");
             } else {

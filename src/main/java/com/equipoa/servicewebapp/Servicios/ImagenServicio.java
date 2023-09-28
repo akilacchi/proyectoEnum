@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -29,7 +28,7 @@ public class ImagenServicio {
                 return imagenRepositorio.save(imagen);
 
             } catch (Exception e) {
-                System.err.println(e.getMessage());;
+                System.err.println(e.getMessage());
             }
         }
         return null;
@@ -42,9 +41,10 @@ public class ImagenServicio {
                 Imagen imagen = new Imagen();
                 if (idImagen != null) {
                     Optional<Imagen> respuesta = imagenRepositorio.findById(idImagen);
-                    imagen = respuesta.get();
+                    if (respuesta.isPresent()) {
+                        imagen = respuesta.get();
+                    }
                 }
-
                 imagen.setMime(archivo.getContentType());
                 imagen.setNombre(archivo.getName());
                 imagen.setContenido(archivo.getBytes());
@@ -52,7 +52,7 @@ public class ImagenServicio {
                 return imagenRepositorio.save(imagen);
 
             } catch (Exception e) {
-                System.err.println(e.getMessage());;
+                System.err.println(e.getMessage());
             }
         }
         return null;

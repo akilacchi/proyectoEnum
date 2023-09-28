@@ -25,6 +25,9 @@ public class Usuario {
     private String direccion;
     private Boolean activo;
 
+    @OneToMany(mappedBy = "receptor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Notificaciones> notificacionesRecividas;
+
     @OneToOne
     private Imagen profilePicture;
 
@@ -205,6 +208,14 @@ public class Usuario {
 
     public void setOcupacion(Ocupaciones ocupacion) {
         this.ocupacion = ocupacion;
+    }
+
+    public List<Notificaciones> getNotificacionesRecividas() {
+        return notificacionesRecividas;
+    }
+
+    public void setNotificacionesRecividas(List<Notificaciones> notificacionesRecividas) {
+        this.notificacionesRecividas = notificacionesRecividas;
     }
 
     public void setOcupacion(String ocupacion) {

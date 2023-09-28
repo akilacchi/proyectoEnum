@@ -50,22 +50,23 @@ public class TrabajoController {
     }
 
     @PostMapping("/enviarSolicitud")
-    public String enviarSolicitud(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio, @RequestParam String direccion, @RequestParam String descripcion, ModelMap modelo) throws MiException {
+    public String enviarSolicitud(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio, @RequestParam String direccion,
+                                  @RequestParam String descripcion, ModelMap modelo) throws MiException {
 
-        try {
-
-            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, fechaInicio, Estados.ACEPTADO);
-
-            modelo.put("exito", "trabajo solicitado con éxito");
-
-            return "index.html";
-        } catch (MiException e) {
-
-            modelo.put("error", "Error al enviar la solicitud de trabajo");
-
+//        try {
+//
+//            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, fechaInicio, Estados.ACEPTADO);
+//
+//            modelo.put("exito", "trabajo solicitado con éxito");
+//
+//            return "index.html";
+//        } catch (MiException e) {
+//
+//            modelo.put("error", "Error al enviar la solicitud de trabajo");
+//
             return "solicitarTrabajo.html";
-
-        }
+//
+//        }
 
     }
 

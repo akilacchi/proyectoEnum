@@ -2,6 +2,7 @@ package com.equipoa.servicewebapp.Servicios;
 
 import com.equipoa.servicewebapp.Entidades.Calificacion;
 import com.equipoa.servicewebapp.Entidades.Imagen;
+import com.equipoa.servicewebapp.Entidades.Notificaciones;
 import com.equipoa.servicewebapp.Entidades.Ocupaciones;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,6 +74,7 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
+
     //Crud Cliente
     @Transactional
 
@@ -120,7 +123,7 @@ public class UsuarioServicio implements UserDetailsService {
         cliente.setPhone(phone);
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
 
-        Long idImagen = null;
+        Long idImagen;
         if (cliente.getProfilePicture() != null) {
             idImagen = cliente.getProfilePicture().getId();
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
@@ -193,25 +196,37 @@ public class UsuarioServicio implements UserDetailsService {
             proveedor.setProvincia(provincia);
             proveedor.setOcupacion(ocupacionesServicio.buscarOcupacion(ocupacion));
 
+            Imagen imagen = imagenServicio.guardar(archivo);
+            proveedor.setProfilePicture(imagen);
+
             usuarioRepositorio.save(proveedor);
 
         }
 
     }
 
+
+    @Transactional(readOnly = true)
+    public List<Notificaciones> mostrarTodasLasNotificacionesUsr(Long idUsuario) throws MiException {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+        if(respuesta.isPresent()){
+            return respuesta.get().getNotificacionesRecividas();
+        }else{
+            throw new MiException("Usuario no encontrado");
+        }
+    }
+
+
     @Transactional(readOnly = true)
     public List<Usuario> obtenerTodosLosProveedores() {
-
-        List<Usuario> proveedores = usuarioRepositorio.findAllByRol(Rol.PROVEEDOR);
-        return proveedores;
-
+        return usuarioRepositorio.findAllByRol(Rol.PROVEEDOR);
     }
 
     @Transactional
     public void eliminarProveedor(String email) throws MiException {
 
         Usuario proveedor = usuarioRepositorio.buscarPorEmail(email);
-        if (proveedor == null || !proveedor.equals(Rol.PROVEEDOR)) {
+        if (proveedor == null || !proveedor.getRol().equals(Rol.PROVEEDOR)) {
             throw new MiException("El proveedor que intenta eliminar no existe");
         } else {
 
@@ -221,8 +236,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional(readOnly = true)
     public List<Usuario> obtenerTodosLosClientes() {
-        List<Usuario> clientes = usuarioRepositorio.findAllByRol(Rol.CLIENTE);
-        return clientes;
+        return usuarioRepositorio.findAllByRol(Rol.CLIENTE);
     }
 
     private void validar(String email, String name, String password, String password2, String phone) throws MiException {
@@ -262,9 +276,13 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    public Usuario getOne(Long id) {
-        System.out.println("a");
-        return usuarioRepositorio.findById(id);
+    public Usuario getOne(Long id) throws MiException {
+        Optional<Usuario> usr = usuarioRepositorio.findById(id);
+        if (usr.isPresent()) {
+            return usr.get();
+        }else{
+            throw new MiException("Usuario no encontrado");
+        }
     }
 
     @Override
@@ -294,8 +312,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional(readOnly = true)
     public Usuario obtenerProveedorConCalificaciones(Long idProveedor) {
-        Usuario proveedor = usuarioRepositorio.findById(idProveedor);
-        if (proveedor != null && proveedor.getRol() == Rol.PROVEEDOR) {
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idProveedor);
+        if (!respuesta.isPresent() && respuesta.get().getRol() == Rol.PROVEEDOR) {
+            Usuario proveedor = respuesta.get();
             List<Calificacion> calificaciones = calificacionRepositorio.findAllByProveedorReceptor(proveedor);
             proveedor.setCalificacionesRecibidas(calificaciones);
             return proveedor;

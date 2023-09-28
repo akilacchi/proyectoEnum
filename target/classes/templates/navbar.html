@@ -1,0 +1,15 @@
+<div th:fragment="nav_bar" class="nav">
+    <div class="contenedor_navbar">
+        <div class="contenedor_logo">
+            <a th:href="@{/}" id="logo">
+                <img class="logo" src="Img/logoTresBlanco.png" alt="logoReparoYa" >
+            </a>
+        </div>
+        <nav class="navbar">
+            <a class="nav_a" th:href="@{/servicios}">Servicios</a>
+            <a class="nav_a" href="">Contacto</a>
+            <a class="nav_a" href="">Preguntas Frecuentes</a>
+            <a class="nav_a_sesion" th:href="@{/login}" >Iniciar Sesión</a>
+        </nav>
+    </div>
+</div>

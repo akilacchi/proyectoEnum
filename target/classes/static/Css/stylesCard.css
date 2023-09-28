@@ -1,0 +1,131 @@
+/* Estilo CSS para el contenedor principal */
+.container {
+    display: flex;
+    padding: 30px;
+}
+
+/* Estilo CSS para el filtro en el lado izquierdo */
+.filtro-box {
+    width: 220px;
+    background-color: #5C8374;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: left;
+    /* Cambio de alineación a izquierda */
+    margin-right: 40px;
+    font-family: 'Roboto';
+    color: white;
+
+    /* Añade sombra a la tarjeta */
+    box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo CSS para las casillas de verificación */
+.filtro-box label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: 'Roboto';
+}
+
+/* Estilo CSS para la tarjeta rectangular */
+.user-card {
+    background-color: #5C8374;
+    border: 0px solid #183D3D;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px; /* Ajusta el valor de acuerdo a la cantidad de espacio que deseas */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    height: 300px;
+    transition: background-color 0.3s;
+
+    /* Añade sombra a la tarjeta */
+    box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo CSS para la imagen de perfil */
+.user-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* Estilo CSS para el nombre del usuario */
+.user-info h1 {
+    font-size: 24px;
+    color: #040D12;
+    margin: 5px 0;
+    font-family: 'Roboto';
+    color: white;
+}
+.user-info h3 {
+    font-size: 20px;
+    color: #040D12;
+    margin: 5px 0;
+    font-family: 'Roboto';
+}
+
+/* Estilo CSS para el botón "VER MÁS" */
+.ver-mas-button {
+    background-color: #183D3D; /* Cambia el color de fondo del botón "VER MÁS" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 10px 20px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 5px; /* Añade espacio superior para separar los botones */
+}
+
+/* Estilo CSS para el botón "BUSCAR" */
+.buscar-button {
+    background-color: #183D3D; /* Cambia el color de fondo del botón "BUSCAR" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 10px 20px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 10px; /* Añade espacio superior para separar los botones */
+}
+
+.p-p-button{
+    background-color: #183D3D; /* Cambia el color de fondo del botón "BUSCAR" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 5px 10px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 10px;
+    text-decoration: none;
+}
+/* Estilo CSS para las estrellas de calificación */
+.rating .star {
+    font-size: 24px;
+    color: gold;
+    margin-right: 5px;
+    font-family: 'Roboto';
+}
+
+.rating .full-star {
+    color: gold;
+}
+
+.rating .half-star {
+    color: black;
+}
+
+/* Estilo CSS para el efecto hover en la tarjeta */
+.user-card:hover {
+    background-color: #93B1A6; /* Cambia el color de fondo al pasar el cursor */
+}
+
+/* Cambio de color de fondo del cuerpo de la página */
+body {
+    background-color: #93B1A6;
+}
