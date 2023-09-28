@@ -63,7 +63,7 @@ public class AdminController {
     @GetMapping("/crearAdmin")
     public String crearUser(ModelMap modelo) {
         modelo.addAttribute("provincia", getProvincias());
-        return "registroAdmin.html";
+        return "admin_db/registroAdmin.html";
     }
 
     @PostMapping("/registro")
