@@ -30,6 +30,10 @@ h1 {
     flex-direction: column;
     padding: 10px;
 }
+.contenedor_input img{
+
+    margin: 20px;
+}
 
 .contenedor_recordar {
     display: flex;
@@ -41,6 +45,7 @@ h1 {
 p {
     text-decoration: none;
     margin: 10px;
+    text-align: center;
 }
 
 a{
@@ -59,7 +64,6 @@ select {
     border: none;
     border-radius: 5px;
     padding: 5px;
-    /*box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);*/
 }
 
 input {
@@ -67,8 +71,6 @@ input {
     border: none;
     border-radius: 5px;
     padding: 5px;
-    /*    margin: 5px;*/
-    /*box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);*/
 }
 
 button {
