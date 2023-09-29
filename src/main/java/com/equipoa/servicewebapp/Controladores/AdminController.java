@@ -70,7 +70,7 @@ public class AdminController {
 
     public String adminDashboard(HttpSession session) {
         if (validarAdmin(session)) {
-            return "adminDashboard.html";
+            return "admin_db/adminDashboard.html";
         } else {
             return "redirect:/";
         }
@@ -80,7 +80,7 @@ public class AdminController {
     public String crearUser(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("provincia", getProvincias());
         if (validarAdmin(session)) {
-            return "registroAdmin.html";
+            return "admin_db/registroAdmin.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -105,7 +105,7 @@ public class AdminController {
     @GetMapping("/crearocupacion")
     public String crearOcupacion(HttpSession session) {
         if (validarAdmin(session)) {
-            return "crearOcupacion.html";
+            return "admin_db/crearOcupacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -126,7 +126,7 @@ public class AdminController {
     public String modificarOcupacion(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("listaOcupacion", getOcupaciones());
         if (validarAdmin(session)) {
-            return "modificarOcupacion.html";
+            return "admin_db/modificarOcupacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
