@@ -77,7 +77,6 @@ public class UsuarioServicio implements UserDetailsService {
 
     //Crud Cliente
     @Transactional
-
     public void crearCliente(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String direccion) throws MiException {
         validar(email, name, password, password2, phone);
 

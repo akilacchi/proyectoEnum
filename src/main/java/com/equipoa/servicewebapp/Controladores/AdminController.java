@@ -1,6 +1,5 @@
 package com.equipoa.servicewebapp.Controladores;
 
-import com.equipoa.servicewebapp.Entidades.Notificaciones;
 import com.equipoa.servicewebapp.Entidades.Ocupaciones;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
@@ -12,7 +11,6 @@ import com.equipoa.servicewebapp.Servicios.AdminServicio;
 import com.equipoa.servicewebapp.Servicios.NotificacionServicio;
 import com.equipoa.servicewebapp.Servicios.OcupacionesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -23,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -89,8 +86,8 @@ public class AdminController {
 
     @PostMapping("/registro")
     public String registro(@RequestParam MultipartFile archivo, @RequestParam String email, @RequestParam String name,
-                           @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
-                           @RequestParam Provincias provincia) {
+            @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
+            @RequestParam Provincias provincia) {
         try {
             System.out.println("Registro admin existoso");
             adminServicio.crearAdmin(archivo, email, name, password, password2, phone, provincia);
