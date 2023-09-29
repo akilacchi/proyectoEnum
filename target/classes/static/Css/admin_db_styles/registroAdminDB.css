@@ -1,0 +1,72 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #93B1A6;
+}
+
+.card {
+    background-color: #5C8374;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 60px auto;
+}
+
+
+
+.form-wrapper {
+    background-color: #5C8374; /* Cambia el color de fondo de los formularios */
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.card h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.form-wrapper form {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.card label,
+.card input,
+.card select,
+.card button {
+    margin: 10px 0;
+    width: 100%;
+}
+
+
+.button{
+    background-color: #183D3D; /* Cambia el color de fondo del botón "BUSCAR" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 14px 30px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 10px;
+    text-decoration: none;
+    display: flex; /* Hace que el contenedor sea un contenedor flex */
+    flex-direction: column; /* Los botones se apilan verticalmente */
+    justify-content: space-between; /* Distribuye los botones con espacio entre ellos */
+    align-items: flex-start; /* Alinea los botones a la izquierda */
+    font-size: 20px;
+    align-items: center; /* Centra horizontalmente el contenido */
+    text-align: center; /* Centra el texto dentro del botón */
+}

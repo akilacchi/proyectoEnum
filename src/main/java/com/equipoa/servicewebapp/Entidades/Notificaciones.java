@@ -1,5 +1,7 @@
 package com.equipoa.servicewebapp.Entidades;
 
+import com.equipoa.servicewebapp.Enum.TipoNotificacion;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +22,9 @@ public class Notificaciones {
     private Usuario receptor;            //Usuarios que reciben la notificacion
 
     private String mensaje;              //Mensaje de la notificacion
+
+    @Enumerated(EnumType.STRING)
+    private TipoNotificacion tipoNotificacion;
 
     private Date fechaEnvio;
 

@@ -36,7 +36,7 @@ public class RegistroController {
     UsuarioServicio usuarioServicio;
 
     @Autowired
-    private OcupacionesRepositorio ocupacionesRepositorio;
+    OcupacionesRepositorio ocupacionesRepositorio;
 
 
     @GetMapping("/")

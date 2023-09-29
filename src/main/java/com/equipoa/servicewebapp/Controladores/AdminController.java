@@ -6,6 +6,7 @@ import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
+import com.equipoa.servicewebapp.Repositorios.NotificacionesRepositorio;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import com.equipoa.servicewebapp.Servicios.AdminServicio;
@@ -31,6 +32,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admindashboard")
 public class AdminController {
+
+    @Autowired
+    NotificacionesRepositorio notificacionesRepositorio;
 
     @Autowired
     private NotificacionServicio notificacionServicio;
@@ -70,7 +74,7 @@ public class AdminController {
 
     public String adminDashboard(HttpSession session) {
         if (validarAdmin(session)) {
-            return "adminDashboard.html";
+            return "admin_db/adminDashboard.html";
         } else {
             return "redirect:/";
         }
@@ -80,7 +84,7 @@ public class AdminController {
     public String crearUser(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("provincia", getProvincias());
         if (validarAdmin(session)) {
-            return "registroAdmin.html";
+            return "admin_db/registroAdmin.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -105,7 +109,7 @@ public class AdminController {
     @GetMapping("/crearocupacion")
     public String crearOcupacion(HttpSession session) {
         if (validarAdmin(session)) {
-            return "crearOcupacion.html";
+            return "admin_db/crearOcupacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -126,7 +130,7 @@ public class AdminController {
     public String modificarOcupacion(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("listaOcupacion", getOcupaciones());
         if (validarAdmin(session)) {
-            return "modificarOcupacion.html";
+            return "admin_db/modificarOcupacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -151,7 +155,7 @@ public class AdminController {
     public String borrarocupacion(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("listaOcupacion", getOcupaciones());
         if (validarAdmin(session)) {
-            return "borrarOcupacion.html";
+            return "admin_db/borrarOcupacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -173,7 +177,7 @@ public class AdminController {
     public String cambioRol(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("listaUsuarios", getClientes());
         if (validarAdmin(session)) {
-            return "cambioRol.html";
+            return "admin_db/cambioRol.html";
         } else {
             return "redirect:/";
         }
@@ -194,7 +198,7 @@ public class AdminController {
         modelo.addAttribute("activos", getActivos());
         modelo.addAttribute("inactivos", getInactivos());
         if (validarAdmin(session)) {
-            return "activar.html";
+            return "admin_db/activar.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -224,7 +228,7 @@ public class AdminController {
     public String enviarNotificacion(HttpSession session, ModelMap modelo) {
         modelo.addAttribute("listaUsuarios", getActivos());
         if (validarAdmin(session)) {
-            return "enviarNotificacion.html";
+            return "admin_db/enviarNotificacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -246,6 +250,16 @@ public class AdminController {
             }
         }
         return "redirect:/admindashboard/";
+    }
+
+    @GetMapping("/revisarReportes")
+    public String revisarReportes(HttpSession session, ModelMap modelo){
+        if (validarAdmin(session)) {
+            modelo.addAttribute("listaReportes", notificacionesRepositorio.buscarNotificacionReporte());
+            return "admin_db/reportes.html";
+        }else{
+            return "redirect:/admindashboard/";
+        }
 
     }
 
