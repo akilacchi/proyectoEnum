@@ -3,54 +3,58 @@
     <head>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/Css/registrocliente.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Formulario.css">
         <link rel="stylesheet" type="text/css" href="/css/Header.css">
         <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="/css/Body.css">
         <title>Registro de cliente</title>
     </head>
     <body>
         <header class="header">
             <nav th:replace="/navbarSinInicioSesion :: nav_bar_sin_inicio"></nav>
         </header>
-        <div class="page-content">
-            <h1> Registro de Clientes </h1>
-            <form action="/r/registrocliente" method="post" enctype="multipart/form-data">
-                <!-- Primera fila -->
-                <div class="form-row">
-                    <label>Ingrese su nombre</label>
-                    <input name="name" type="text" placeholder="Nombre">
-                    <br>
-                    <label>Suba una foto de perfil</label>
-                    <input name="archivo" type="file">
-                    <br>
-                    <label>Ingrese su contraseña</label>
-                    <input name="password" type="password" placeholder="********">
-                    <br>
-                    <label>Ingrese su número de teléfono</label>
-                    <input name="phone" type="text" placeholder="56 9 1234 5678">
-                </div>
+        <div class="contenedor">
+            <h1>Registro Cliente</h1>
+            <div>
+                <form class="contenedor_formulario" action="/r/registrocliente" method="post" enctype="multipart/form-data">
 
-                <!-- Segunda fila -->
-                <div class="form-row">
-                    <label>Ingrese su Email</label>
-                    <input name="email" type="email" placeholder="fernando@chiquito.com">
-                    <br>
-                    <label>Repita su contraseña</label>
-                    <input name="password2" type="password" placeholder="********">
-                    <br>
-                    <label>Ingrese su calle/ dirección</label>
-                    <input name="direccion" type="text" placeholder="Ej: Calle Las Camelias">
-                    <br>
-                    <label>Seleccione su provincia</label>
-                    <select id="provincia" name="provincia">
-                        <option th:each="p: ${provincia}" th:value="${p}"
-                                th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
-                    </select>
-                </div>
+                    <div class="contenedor_input">
+                        <label>Ingrese su nombre</label>
+                        <input name="name" type="text" placeholder="Nombre">
 
-                <br>
-                <button type="regist">Registrarse!</button>
-            </form>
+                        <label>Ingrese su contraseña</label>
+                        <input name="password" type="password" placeholder="********">
+
+                        <label>Ingrese su número de teléfono</label>
+                        <input name="phone" type="text" placeholder="56 9 1234 5678">
+
+                        <label>Suba una foto de perfil</label>
+                        <input name="archivo" type="file">
+                    </div>
+
+                    <div class="contenedor_input">
+                        <label>Ingrese su Email</label>
+                        <input name="email" type="email" placeholder="fernando@chiquito.com">
+
+                        <label>Repita su contraseña</label>
+                        <input name="password2" type="password" placeholder="********">
+
+                        <label>Ingrese su calle/ dirección</label>
+                        <input name="direccion" type="text" placeholder="Ej: Calle Las Camelias">
+
+                        <label>Seleccione su provincia</label>
+                        <select id="provincia" name="provincia">
+                            <option th:each="p: ${provincia}" th:value="${p}"
+                                    th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
+                        </select>
+                    </div>
+
+                </form>
+
+            </div>
+            <div>
+                <button class="boton" type="regist">Registrarse!</button>
+            </div>
         </div>
     </body>
 </html>
