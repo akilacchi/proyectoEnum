@@ -151,7 +151,7 @@ public class AdminController {
     public String borrarocupacion(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("listaOcupacion", getOcupaciones());
         if (validarAdmin(session)) {
-            return "borrarOcupacion.html";
+            return "admin_db/borrarOcupacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
