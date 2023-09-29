@@ -31,6 +31,23 @@ h1 {
     padding: 10px;
 }
 
+.contenedor_recordar {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: start;
+}
+
+p {
+    text-decoration: none;
+    margin: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: #93B1A6;
+}
+
 label {
     margin: 10px;
     color: #93B1A6;
@@ -50,11 +67,12 @@ input {
     border: none;
     border-radius: 5px;
     padding: 5px;
-    margin: 5px;
+    /*    margin: 5px;*/
     /*box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);*/
 }
 
 button {
+    font-size: 1rem;
     color: #93B1A6;
     border: none;
     border-radius: 5px;
