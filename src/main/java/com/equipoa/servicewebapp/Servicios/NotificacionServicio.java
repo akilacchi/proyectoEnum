@@ -63,17 +63,10 @@ public class NotificacionServicio {
                     aux.add(lista.get(i));
                 }
             }
-
-
-//            System.out.println(lista == usr.getNotificacionesRecividas());
-//            System.out.println(lista.size());
             usr.setNotificacionesRecividas(aux);
             usuarioRepositorio.save(usr);
 
             notificacionesRepositorio.deleteById(notificacion.getId());
-
-//            notificacionesRepositorio.eliminarNotificacionPorId(notificacion.getId());
-//            notificacionesRepositorio.deleteById(usr.getID());
             System.out.println(notificacion.getMensaje());
         } else {
             throw new MiException("Notificación no encontrada");
