@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/Css/Login.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Formulario.css">
         <link rel="stylesheet" type="text/css" href="/css/Header.css">
         <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
         <link rel="stylesheet" type="text/css" href="/Css/Body.css">
@@ -15,26 +15,25 @@
         <header class="header">
             <nav th:replace="/navbarSinInicioSesion :: nav_bar_sin_inicio"></nav>
         </header>
-        <div class="contenedor-formulario">
-            <div class="cuerpo-formulario">
-                <div class="encabezado">
-                    <h2>Registro</h2>
-                    <p>¿Ya tienes una cuenta? <a href="">Inicia sesión</a></p>
-                </div>
+        <div class="contenedor">
+            <div class="encabezado">
+                <h1>Registro</h1>
+                <p>¿Ya tienes una cuenta? <a href="">Inicia sesión</a></p>
+            </div>
+            <div class="contenedor_formulario">
+
                 <!-- Sección de selección de tipo (Cliente o Proveedor) -->
-                <div class="grupo-formulari">
-                    <div class="grupo-input" id="clienteopcion">
-                        <a th:href="@{/r/cliente}">
-                            <img src="/Img/icono-usuario.png" alt="Cliente" >
-                            <p>Cliente</p>
-                        </a>
-                    </div>
-                    <div class="grupo-input" id="proveedorOption">
-                        <a th:href="@{/r/proveedor}">
-                            <img src="/Img/icono-profesional.png" alt="Proveedor">
-                            <p>Proveedor</p>
-                        </a>
-                    </div>
+                <div class="contenedor_input" id="clienteopcion">
+                    <a th:href="@{/r/cliente}">
+                        <img src="/Img/icono-usuario.png" alt="Cliente" >
+                        <p>Cliente</p>
+                    </a>
+                </div>
+                <div class="contenedor_input" id="proveedorOption">
+                    <a th:href="@{/r/proveedor}">
+                        <img src="/Img/icono-profesional.png" alt="Proveedor">
+                        <p>Proveedor</p>
+                    </a>
                 </div>
 
             </div>
