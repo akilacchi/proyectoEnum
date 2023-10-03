@@ -22,28 +22,33 @@
             </div>
 
             <div>
-                <form class="contenedor_formulario" action="/logincheck" method="post">
-                    <div class="contenedor_input">
-                        <input type="text" name="email" placeholder="fernando@chiquito.com">
-                    </div>
-                    
+                <form  action="/logincheck" method="post">
+                    <div class="contenedor_formulario">
+                        <div class="contenedor_input">
+                            <input type="text" name="email" placeholder="fernando@chiquito.com">
+                        </div>
+
                         <div class="contenedor_input">
                             <input type="password" name="password" placeholder="********">
                         </div>
-                </form>
-                
-                <div class="contenedor_recordar">
+                    </div>
+                    <div class="contenedor_recordar">
 
                     <div class="recordar"><input type="checkbox" id="checkbox"> <label for="checkbox">Recordarme</label></div>
                     <div class="olvidar"><a href="#">¿Olvidaste tu contraseña?</a></div>
 
                 </div>
 
+                    <div class="contenedor_button">
+                        <button type="submit">Iniciar sesión</button>
+                    </div>
+                </form>
+
+                
+
             </div>
-            <div >
-                <button type="submit">Iniciar sesión</button>
-            </div>
+
         </div>
-        
+
     </body>
 </html>

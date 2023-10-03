@@ -29,10 +29,12 @@ import com.equipoa.servicewebapp.Enum.Estados;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.CalificacionRepositorio;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
+import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,65 +46,53 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TrabajoServicio {
 
-    @Autowired
+   @Autowired
     TrabajoRepositorio trabajoRepositorio;
-
+   
+   @Autowired
+   UsuarioRepositorio usuarioRepositorio;
+    
+    @Autowired
+    UsuarioServicio usuarioServicio;
+    
     @Autowired
     CalificacionRepositorio calificacionRepositorio;
-
-    @Autowired
-    CalificacionServicio calificacionServicio;
-
-
+    
+    
+    
     @Transactional
-    public void registrarTrabajo(Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException {
-        validar(cliente, proveedor, descripcion, fechaInicio, fechaFin);
-        Trabajo trabajo = new Trabajo();
+    public void registrarTrabajo(String descripcion, Date fechaInicio, Date fechaFin, Estados estado, HttpSession session, Long idProveedor) throws MiException{
+        
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
-        trabajo.setCliente(cliente);
-        trabajo.setProveedor(proveedor);
+       
+        Long cliente = logueado.getID();
+       
+        System.out.println("Este es el email del cliente logueado: "+logueado.getEmail());
+        
+        validar(descripcion, fechaInicio, fechaFin);
+        
+        Trabajo trabajo = new Trabajo();
+        trabajo.setIdProveedor(idProveedor);
+        trabajo.setIdCliente(cliente);
         trabajo.setDescripcion(descripcion);
         trabajo.setFechaInicio(fechaInicio);
         trabajo.setFechaFin(fechaFin);
         trabajo.setEstado(estado);
-
+        
+        
         trabajoRepositorio.save(trabajo);
-
+        
     }
 
-    @Transactional
-    public void actualizarEstadoTrabajo(Long id, Estados estados) throws MiException {
-        if (id < 1) {
-            throw new MiException("Id incorrecto");
-        }
-        Optional<Trabajo> respuestaTrabajo = trabajoRepositorio.findById(id);
-
-        if (respuestaTrabajo.isPresent()) {
-            Trabajo trabajo = respuestaTrabajo.get();
-            if (!trabajo.getEstado().toString().equals(estados.toString())) {
-                trabajo.setEstado(estados);
-
-                trabajoRepositorio.save(trabajo);
-            } else {
-                throw new MiException("Estado no ha cambiado");
-            }
-        }
-    }
-
-    @Transactional
     public void actualizarTrabajo(Long id, Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) throws MiException {
-        validar(cliente, proveedor, descripcion, fechaInicio, fechaFin);
-
-        if (id < 1) {
-            throw new MiException("Id incorrecto");
-        }
 
         Optional<Trabajo> respuestaTrabajo = trabajoRepositorio.findById(id);
 
         if (respuestaTrabajo.isPresent()) {
             Trabajo trabajo = respuestaTrabajo.get();
-            trabajo.setCliente(cliente);
-            trabajo.setProveedor(proveedor);
+            //trabajo.setCliente(cliente);
+            //trabajo.setProveedor(proveedor);
             trabajo.setDescripcion(descripcion);
             trabajo.setFechaInicio(fechaInicio);
             trabajo.setFechaFin(fechaFin);
@@ -116,43 +106,39 @@ public class TrabajoServicio {
     }
 
     @Transactional(readOnly = true)
-    public List<Trabajo> listaTrabajosPorUsuario(String email) {
-        return trabajoRepositorio.buscarTrabajosPorUsuario(email);
+    public List<Trabajo> listaTrabajosPorUsuario(Long id) {
+
+        List<Trabajo> trabajos = trabajoRepositorio.buscarTrabajosPorUsuario(id);
+        return trabajos;
 
     }
 
     @Transactional(readOnly = true)
     public List<Trabajo> listaTrabajos() {
-        return trabajoRepositorio.findAll();
+
+        List<Trabajo> trabajos = trabajoRepositorio.findAll();
+
+        return trabajos;
     }
-
-    private void validar(String descripcion, Date fechaInicio, Date fechaFin) throws MiException {
-
-        if (descripcion == null || descripcion.trim().isEmpty()) {
-
+    public void validar(String descripcion, Date fechaInicio, Date fechaFin) throws MiException{
+        
+        
+        if(descripcion==null || descripcion.trim().isEmpty()){
+            
             throw new MiException("Debe agregar una descripción del trabajo");
         }
-    }
-
-    public void validar(Usuario cliente, Usuario proveedor, String descripcion, Date fechaInicio, Date fechaFin) throws MiException {
-
-        if (cliente == null) {
-            throw new MiException("Cliente no puede ser nulo");
-        }
-        if (proveedor == null) {
-            throw new MiException("Proveedor no puede ser nulo");
-        }
-        if (descripcion == null || descripcion.trim().isEmpty()) {
-            throw new MiException("Debe agregar una descripción del trabajo");
-        }
-        if (fechaInicio == null) {
+        
+        if(fechaInicio==null){
             throw new MiException("Debe agregar fecha de inicio");
         }
-        if (fechaFin == null) {
+        if(fechaFin==null){
             throw new MiException("Debe agregar fecha final");
         }
-
-    }
+        
+        
+        }
+    
+    
 
     @Transactional
     public void finalizarTrabajo(Long idTrabajo) throws MiException {
@@ -183,8 +169,11 @@ public class TrabajoServicio {
             calificacion.setTrabajo(trabajo);
 
             // Aquí se asocian los usuarios a la calificación
-            calificacion.setClienteEmisor(trabajo.getCliente());
-            calificacion.setProveedorReceptor(trabajo.getProveedor());
+            
+            Usuario cliente = usuarioRepositorio.getById(trabajo.getIdCliente());
+            Usuario proveedor = usuarioRepositorio.getById(trabajo.getIdProveedor());
+            calificacion.setClienteEmisor(cliente);
+            calificacion.setProveedorReceptor(proveedor);
 
             calificacionRepositorio.save(calificacion);
         } else {

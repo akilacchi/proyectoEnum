@@ -6,7 +6,9 @@ import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import com.equipoa.servicewebapp.Servicios.TrabajoServicio;
+import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -29,45 +31,54 @@ public class TrabajoController {
 
     @Autowired
     TrabajoRepositorio trabajoRepositorio;
-
-    @Autowired
     UsuarioRepositorio usuarioRepositorio;
-
     @Autowired
     TrabajoServicio trabajoServicio;
+    @Autowired
+    UsuarioServicio usuarioServicio;
 
-    @GetMapping("/solicitarTrabajo")
-    public String solicitarTrabajo() {
+    /**
+     *
+     * @param Long
+     * @return
+     */
+    @GetMapping("/solicitarservicio/{id}")
+    public String solicitarTrabajo(@PathVariable Long id, ModelMap modelo) throws MiException {
+        
+        modelo.put("proveedor", usuarioServicio.getOne(id));
+        
 
         return "solicitarTrabajo.html";
     }
 
     @GetMapping("/trabajoSolicitado/")
     public String trabajoSolicitado(/*@PathVariable String id, ModelMap modelo**/) {
+        
+       // modelo.put("direccion", trabajoServicio.getOne(id));
 
-        // modelo.put("direccion", trabajoServicio.getOne(id));
         return "trabajoSolicitado.html";
     }
+    
+    @PostMapping("/solicitarservicio/{id}")
+    public String enviarSolicitud(@PathVariable Long id, @RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd")Date fechaInicio, @RequestParam String direccion, @RequestParam String descripcion,HttpSession session, ModelMap modelo) throws MiException {
 
-    @PostMapping("/enviarSolicitud")
-    public String enviarSolicitud(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio, @RequestParam String direccion,
-                                  @RequestParam String descripcion, ModelMap modelo) throws MiException {
+        try {
+            
+            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, fechaInicio, Estados.ACEPTADO, session,id);
+            
+            modelo.put("exito", "trabajo solicitado con éxito");
 
-//        try {
-//
-//            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, fechaInicio, Estados.ACEPTADO);
-//
-//            modelo.put("exito", "trabajo solicitado con éxito");
-//
-//            return "index.html";
-//        } catch (MiException e) {
-//
-//            modelo.put("error", "Error al enviar la solicitud de trabajo");
-//
+            return "index.html";
+        } 
+        
+        catch (MiException e) {
+
+            modelo.put("error", "Error al enviar la solicitud de trabajo");
+            
             return "solicitarTrabajo.html";
-//
-//        }
 
+        }
+    
     }
 
     @GetMapping("/calificar/{idTrabajo}")
