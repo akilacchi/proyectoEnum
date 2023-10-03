@@ -61,13 +61,13 @@ public class PortalController {
 
     @GetMapping("/FAQ")
     public String faq(){
-        return "faq.html";
+        return "preguntasfrecuentes.html";
     }
 
     @GetMapping("/contacto")
     public String contacto(ModelMap modelo){
         modelo.addAttribute("listaAdmin",getAdmins());
-        return "contacto.html";
+        return "Contacto.html";
     }
 
     @PostMapping("/contactar")
