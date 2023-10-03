@@ -8,6 +8,7 @@ import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
+import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import com.equipoa.servicewebapp.Servicios.NotificacionServicio;
 import com.equipoa.servicewebapp.Servicios.OcupacionesServicio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
@@ -21,11 +22,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping("/")
 public class PortalController {
+
+    public List<Usuario> getAdmins() {
+        return usuarioRepositorio.findAllByRol(Rol.ADMIN);
+    }
 
     public List<Ocupaciones> getOcupaciones() {
         return ocupacionesRepositorio.findAll();
@@ -40,6 +46,9 @@ public class PortalController {
     }
 
     @Autowired
+    UsuarioRepositorio usuarioRepositorio;
+
+    @Autowired
     UsuarioServicio usuarioServicio;
 
     @Autowired
@@ -49,6 +58,12 @@ public class PortalController {
     private OcupacionesRepositorio ocupacionesRepositorio;
     @Autowired
     private OcupacionesServicio ocupacionesServicio;
+
+    @GetMapping("/contacto")
+    public String contacto(ModelMap modelo){
+        modelo.addAttribute("listaAdmin",getAdmins());
+        return "contacto.html";
+    }
 
     @GetMapping("/")
     public String index(HttpSession session) {
