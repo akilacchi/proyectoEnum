@@ -15,7 +15,7 @@
             <a sec:authorize="isAuthenticated()" class="nav_a_sesion" th:href="@{/logout}" >Cerrar Sesión</a>
 
             <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <a class="nav_a_sesion" th:href="@{admin_db/admindashboard/}">Administración</a>
+                <a class="nav_a_sesion" th:href="@{/admindashboard/}">Administración</a>
             </div>
             <!-- Usuario normal -->
             <a sec:authorize="!isAuthenticated()" class="nav_a_sesion" th:href="@{/login}" >Iniciar Sesión</a>

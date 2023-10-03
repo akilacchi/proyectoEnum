@@ -68,7 +68,7 @@ public class AdminController {
         if (validarAdmin(session)) {
             return "admin_db/adminDashboard.html";
         } else {
-            return "redirect:/";
+            return "admin_db/adminDashboard.html"; // Volver a "redirect:/"
         }
     }
 
@@ -76,9 +76,9 @@ public class AdminController {
     public String crearUser(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("provincia", getProvincias());
         if (validarAdmin(session)) {
-            return "registroAdmin.html";
+            return "admin_db/registroAdmin.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/registroAdmin.html"; // Volver a redirect:/admindashboard/
         }
 
     }
@@ -101,9 +101,9 @@ public class AdminController {
     @GetMapping("/crearocupacion")
     public String crearOcupacion(HttpSession session) {
         if (validarAdmin(session)) {
-            return "crearOcupacion.html";
+            return "admin_db/crearOcupacion.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/crearOcupacion.html"; // Volver a redirect:/admindashboard/
         }
     }
 
@@ -122,9 +122,9 @@ public class AdminController {
     public String modificarOcupacion(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("listaOcupacion", getOcupaciones());
         if (validarAdmin(session)) {
-            return "modificarOcupacion.html";
+            return "admin_db/modificarOcupacion.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/modificarOcupacion.html"; // Volver a redirect:/admindashboard/
         }
 
     }
@@ -147,9 +147,9 @@ public class AdminController {
     public String borrarocupacion(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("listaOcupacion", getOcupaciones());
         if (validarAdmin(session)) {
-            return "borrarOcupacion.html";
+            return "admin_db/borrarOcupacion.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/borrarOcupacion.html"; // Volver a "redirect:/admindashboard/"
         }
 
     }
@@ -169,9 +169,9 @@ public class AdminController {
     public String cambioRol(ModelMap modelo, HttpSession session) {
         modelo.addAttribute("listaUsuarios", getClientes());
         if (validarAdmin(session)) {
-            return "cambioRol.html";
+            return "admin_db/cambioRol.html";
         } else {
-            return "redirect:/";
+            return "admin_db/cambioRol.html"; // Volver a "redirect:/admindashboard/"
         }
     }
 
@@ -190,9 +190,9 @@ public class AdminController {
         modelo.addAttribute("activos", getActivos());
         modelo.addAttribute("inactivos", getInactivos());
         if (validarAdmin(session)) {
-            return "activar.html";
+            return "admin_db/activar.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/activar.html";
         }
     }
 

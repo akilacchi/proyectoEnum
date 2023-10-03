@@ -83,3 +83,9 @@ button {
     background-color: #183D3D;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
+
+.contenedor_button {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
