@@ -15,6 +15,6 @@ public enum Estados {
     EN_PROCESO,
     RECHAZADO,
     CANCELADO,
-    FINALIZADO
+    FINALIZADO;
 
 }

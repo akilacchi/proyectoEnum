@@ -5,6 +5,7 @@ import com.equipoa.servicewebapp.Enum.Estados;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
+import com.equipoa.servicewebapp.Servicios.NotificacionServicio;
 import com.equipoa.servicewebapp.Servicios.TrabajoServicio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import java.util.Date;
@@ -37,11 +38,11 @@ public class TrabajoController {
     @Autowired
     UsuarioServicio usuarioServicio;
 
-    /**
-     *
-     * @param Long
-     * @return
-     */
+    @Autowired
+    NotificacionServicio notificacionServicio;
+
+//      @param Long
+//      @return
     @GetMapping("/solicitarservicio/{id}")
     public String solicitarTrabajo(@PathVariable Long id, ModelMap modelo) throws MiException {
         
@@ -64,7 +65,7 @@ public class TrabajoController {
 
         try {
             
-            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, fechaInicio, Estados.ACEPTADO, session,id);
+            trabajoServicio.registrarTrabajo(descripcion, fechaInicio,  Estados.ACEPTADO, session,id);
             
             modelo.put("exito", "trabajo solicitado con éxito");
 

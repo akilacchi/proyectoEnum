@@ -23,5 +23,5 @@ public enum Provincias {
     SANTA_FE,
     SANTIAGO_DEL_ESTERO,
     TIERRA_DEL_FUEGO,
-    TUCUMAN
+    TUCUMAN;
 }

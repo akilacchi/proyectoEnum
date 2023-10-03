@@ -21,6 +21,9 @@ public class CalificacionServicio {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    NotificacionServicio notificacionServicio;
+
     @Transactional
     public void crearCalificacion(Long idCliente, Long idProveedor, String comentario, int puntuacion) throws MiException {
         validar(idCliente, idProveedor, comentario, puntuacion);
@@ -44,6 +47,10 @@ public class CalificacionServicio {
             calificacion.setPuntuacion(puntuacion);
 
             calificacionRepositorio.save(calificacion);
+//              Crear notificacion
+            String mensaje = ("Calificacion recibida");
+            notificacionServicio.crearNotificacion(mensaje, cliente, proveedor.getID());
+//              Notificacion enviada
         }
     }
 

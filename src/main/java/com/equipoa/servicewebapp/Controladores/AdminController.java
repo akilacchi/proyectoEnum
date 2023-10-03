@@ -6,6 +6,7 @@ import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Provincias;
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Excepciones.MiException;
+import com.equipoa.servicewebapp.Repositorios.NotificacionesRepositorio;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import com.equipoa.servicewebapp.Servicios.AdminServicio;
@@ -31,6 +32,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admindashboard")
 public class AdminController {
+
+    @Autowired
+    NotificacionesRepositorio notificacionesRepositorio;
 
     @Autowired
     private NotificacionServicio notificacionServicio;
@@ -224,7 +228,7 @@ public class AdminController {
     public String enviarNotificacion(HttpSession session, ModelMap modelo) {
         modelo.addAttribute("listaUsuarios", getActivos());
         if (validarAdmin(session)) {
-            return "enviarNotificacion.html";
+            return "admin_db/enviarNotificacion.html";
         } else {
             return "redirect:/admindashboard/";
         }
@@ -246,6 +250,16 @@ public class AdminController {
             }
         }
         return "redirect:/admindashboard/";
+    }
+
+    @GetMapping("/revisarReportes")
+    public String revisarReportes(HttpSession session, ModelMap modelo){
+        if (validarAdmin(session)) {
+            modelo.addAttribute("listaReportes", notificacionesRepositorio.buscarNotificacionReporte());
+            return "admin_db/reportes.html";
+        }else{
+            return "redirect:/admindashboard/";
+        }
 
     }
 
