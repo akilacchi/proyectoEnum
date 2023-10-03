@@ -7,9 +7,18 @@
         </div>
         <nav class="navbar">
             <a class="nav_a" th:href="@{/servicios}">Servicios</a>
-            <a class="nav_a" th:href="@{/contacto}">Contacto</a>
-            <a class="nav_a" th:href="@{/FAQ}">Preguntas Frecuentes</a>
-            <a class="nav_a_sesion" th:href="@{/login}" >Iniciar Sesión</a>
+            <a class="nav_a" href="">Contacto</a>
+            <a class="nav_a" href="">Preguntas Frecuentes</a>
+
+            <!-- Usuario que ha iniciado sesión: cliente o proveedor -->
+            <a sec:authorize="isAuthenticated()" class="nav_a_sesion" th:href="@{/perfil}" >Ver Perfil</a>
+            <a sec:authorize="isAuthenticated()" class="nav_a_sesion" th:href="@{/logout}" >Cerrar Sesión</a>
+
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav_a_sesion" th:href="@{/admindashboard/}">Administración</a>
+            </div>
+            <!-- Usuario normal -->
+            <a sec:authorize="!isAuthenticated()" class="nav_a_sesion" th:href="@{/login}" >Iniciar Sesión</a>
         </nav>
     </div>
 </div>
