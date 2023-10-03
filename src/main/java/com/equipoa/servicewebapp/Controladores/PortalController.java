@@ -59,10 +59,31 @@ public class PortalController {
     @Autowired
     private OcupacionesServicio ocupacionesServicio;
 
+    @GetMapping("/FAQ")
+    public String faq(){
+        return "faq.html";
+    }
+
     @GetMapping("/contacto")
     public String contacto(ModelMap modelo){
         modelo.addAttribute("listaAdmin",getAdmins());
         return "contacto.html";
+    }
+
+    @PostMapping("/contactar")
+    public String contactar(HttpSession session, String mensaje, Long id){
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        if (usuario == null) {
+            usuario = new Usuario();
+            usuario.setName("Anonimo");
+            usuario.setID(-1l);
+        }
+        try {
+            notificacionServicio.crearNotificacion(mensaje,usuario,id);
+        } catch (MiException e) {
+            System.err.println(e.getMessage());
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/")
