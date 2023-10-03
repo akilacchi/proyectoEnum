@@ -6,12 +6,15 @@
 package com.equipoa.servicewebapp.Controladores;
 
 import com.equipoa.servicewebapp.Entidades.Calificacion;
+import com.equipoa.servicewebapp.Entidades.Trabajo;
 import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
+import com.equipoa.servicewebapp.Servicios.TrabajoServicio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +39,8 @@ public class ProveedorController {
 
     @Autowired
     UsuarioServicio usuarioServicio;
+    @Autowired
+    TrabajoServicio trabajoServicio;
 
 //    @GetMapping("/")
 //    public String perfilProveedor() {
@@ -61,6 +66,19 @@ public class ProveedorController {
             }
         }
         return "perfilProveedor.html";
+    }
+    
+    @GetMapping("/loginproveedor")
+    public String loginProveedor(HttpSession session, ModelMap modelo){
+        
+         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+         System.out.println("El ID de la sesion es: "+logueado.getID());
+         List<Trabajo> trabajos = trabajoServicio.listaTrabajosPorUsuario(logueado.getID());
+         System.out.println("Trabajos: " +trabajos);
+         modelo.addAttribute("proveedor", logueado);
+         modelo.addAttribute("trabajos", trabajos);
+         return "login_proveedor.html";
+    
     }
 
     
