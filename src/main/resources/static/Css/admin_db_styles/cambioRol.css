@@ -33,8 +33,7 @@ body {
     width: 100%;
 }
 
-.card label,
-.card input,
+.card select,
 .card button {
     margin: 10px 0;
     width: calc(100% - 20px);

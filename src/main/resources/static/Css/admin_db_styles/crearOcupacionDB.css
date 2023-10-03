@@ -34,7 +34,8 @@ body {
 .card h1 {
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
+    color: white;
 }
 
 .form-wrapper form {
