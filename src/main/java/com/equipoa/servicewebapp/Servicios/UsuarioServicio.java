@@ -74,10 +74,8 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-
     //Crud Cliente
     @Transactional
-
     public void crearCliente(MultipartFile archivo, String email, String name, String password, String password2, String phone, Provincias provincia, String direccion) throws MiException {
         validar(email, name, password, password2, phone);
 
@@ -205,17 +203,15 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-
     @Transactional(readOnly = true)
     public List<Notificaciones> mostrarTodasLasNotificacionesUsr(Long idUsuario) throws MiException {
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
-        if(respuesta.isPresent()){
+        if (respuesta.isPresent()) {
             return respuesta.get().getNotificacionesRecividas();
-        }else{
+        } else {
             throw new MiException("Usuario no encontrado");
         }
     }
-
 
     @Transactional(readOnly = true)
     public List<Usuario> obtenerTodosLosProveedores() {
@@ -280,7 +276,7 @@ public class UsuarioServicio implements UserDetailsService {
         Optional<Usuario> usr = usuarioRepositorio.findById(id);
         if (usr.isPresent()) {
             return usr.get();
-        }else{
+        } else {
             throw new MiException("Usuario no encontrado");
         }
     }
@@ -311,15 +307,17 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public Usuario obtenerProveedorConCalificaciones(Long idProveedor) {
+    public Optional<Usuario> obtenerProveedorConCalificaciones(Long idProveedor) {
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idProveedor);
-        if (!respuesta.isPresent() && respuesta.get().getRol() == Rol.PROVEEDOR) {
+        if (respuesta.isPresent()) {
             Usuario proveedor = respuesta.get();
-            List<Calificacion> calificaciones = calificacionRepositorio.findAllByProveedorReceptor(proveedor);
-            proveedor.setCalificacionesRecibidas(calificaciones);
-            return proveedor;
+            if (proveedor.getRol() == Rol.PROVEEDOR) {
+                List<Calificacion> calificaciones = calificacionRepositorio.findAllByProveedorReceptor(proveedor);
+                proveedor.setCalificacionesRecibidas(calificaciones);
+                return Optional.of(proveedor);
+            }
         }
-        return null;
+        return Optional.empty();
     }
 
 }
