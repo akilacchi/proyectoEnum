@@ -11,6 +11,7 @@ import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,9 +43,10 @@ public class ProveedorController {
 //    }
     @GetMapping("/")
     public String perfilProveedor(@RequestParam Long idProveedor, Model model) {
-        Usuario proveedor = usuarioServicio.obtenerProveedorConCalificaciones(idProveedor);
-        if (proveedor != null) {
-            model.addAttribute("proveedor", proveedor); // añade el objeto proveedor completo al modelo
+        Optional<Usuario> proveedorOpt = usuarioServicio.obtenerProveedorConCalificaciones(idProveedor);
+        if (proveedorOpt.isPresent()) {
+            Usuario proveedor = proveedorOpt.get(); 
+            model.addAttribute("proveedor", proveedor);
             List<Calificacion> calificaciones = proveedor.getCalificacionesRecibidas();
             if (calificaciones != null) {
                 double promedio = calificaciones.stream()

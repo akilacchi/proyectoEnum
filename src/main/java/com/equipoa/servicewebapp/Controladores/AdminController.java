@@ -64,10 +64,9 @@ public class AdminController {
     }
 
     @GetMapping("/")
-
     public String adminDashboard(HttpSession session) {
         if (validarAdmin(session)) {
-            return "adminDashboard.html";
+            return "admin_db/adminDashboard.html";
         } else {
             return "redirect:/";
         }
