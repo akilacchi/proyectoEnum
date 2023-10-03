@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/css/admin_db_styles/cambioRol.css">
+        <title>Cambiar rol de Usuario</title>
+    </head>
+    <body>
+        <div class="form-container">
+            <div class="card">
+                <h1>Cambiar rol de Usuario</h1>
+                <form method="post" action="/admindashboard/rolcambio">
+                    <h2>Selecciona un usuario de la lista</h2>
+                    <select name="id" id="id">
+                        <option th:each="u : ${listaUsuarios}" th:value="${u.ID}" th:text="${u.name + ', '+ u.email + ', '+ u.rol}"> </option>
+                    </select>
+                    <button type="submit">Cambiar Rol!</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

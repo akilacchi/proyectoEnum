@@ -76,7 +76,7 @@ public class AdminController {
         if (validarAdmin(session)) {
             return "admin_db/adminDashboard.html";
         } else {
-            return "redirect:/";
+            return "admin_db/adminDashboard.html"; // Volver a "redirect:/"
         }
     }
 
@@ -86,7 +86,7 @@ public class AdminController {
         if (validarAdmin(session)) {
             return "admin_db/registroAdmin.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/registroAdmin.html"; // Volver a redirect:/admindashboard/
         }
 
     }
@@ -111,7 +111,7 @@ public class AdminController {
         if (validarAdmin(session)) {
             return "admin_db/crearOcupacion.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/crearOcupacion.html"; // Volver a redirect:/admindashboard/
         }
     }
 
@@ -132,7 +132,7 @@ public class AdminController {
         if (validarAdmin(session)) {
             return "admin_db/modificarOcupacion.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/modificarOcupacion.html"; // Volver a redirect:/admindashboard/
         }
 
     }
@@ -157,7 +157,7 @@ public class AdminController {
         if (validarAdmin(session)) {
             return "admin_db/borrarOcupacion.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/borrarOcupacion.html"; // Volver a "redirect:/admindashboard/"
         }
 
     }
@@ -179,7 +179,7 @@ public class AdminController {
         if (validarAdmin(session)) {
             return "admin_db/cambioRol.html";
         } else {
-            return "redirect:/";
+            return "admin_db/cambioRol.html"; // Volver a "redirect:/admindashboard/"
         }
     }
 
@@ -200,7 +200,7 @@ public class AdminController {
         if (validarAdmin(session)) {
             return "admin_db/activar.html";
         } else {
-            return "redirect:/admindashboard/";
+            return "admin_db/activar.html";
         }
     }
 
