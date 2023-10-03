@@ -40,10 +40,10 @@ public class Usuario {
     @JoinColumn(name = "ocupacion_id")
     private Ocupaciones ocupacion;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany()
     private List<Trabajo> trabajosCliente;
 
-    @OneToMany(mappedBy = "proveedor")
+    @OneToMany()
     private List<Trabajo> trabajosProveedor;
 
     @OneToMany(mappedBy = "clienteEmisor")

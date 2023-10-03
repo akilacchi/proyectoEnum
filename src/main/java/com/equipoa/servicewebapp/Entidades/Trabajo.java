@@ -24,13 +24,13 @@ public class Trabajo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    
     @JoinColumn(name = "cliente_id") // cliente que solicita el trabajo
-    private Usuario cliente;
+    private Long idCliente;
 
-    @ManyToOne
+    
     @JoinColumn(name = "proveedor_id") // proveedor que realiza el trabajo
-    private Usuario proveedor;
+    private Long idProveedor;
 
     @OneToOne(mappedBy = "trabajo")
     private Calificacion calificacion; // la calificación para el trabajo
@@ -43,34 +43,18 @@ public class Trabajo {
     @Enumerated(EnumType.STRING)
     Estados estado;
 
-    public Trabajo(Long id, Usuario cliente, Usuario proveedor, Calificacion calificacion, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) {
+    public Trabajo() {
+    }
+
+    public Trabajo(Long id, Long idCliente, Long idProveedor, Calificacion calificacion, String descripcion, Date fechaInicio, Date fechaFin, Estados estado) {
         this.id = id;
-        this.cliente = cliente;
-        this.proveedor = proveedor;
+        this.idCliente = idCliente;
+        this.idProveedor = idProveedor;
         this.calificacion = calificacion;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.estado = estado;
-    }
-
-    public Calificacion getCalificacion() {
-        return calificacion;
-    }
-
-    public void setCalificacion(Calificacion calificacion) {
-        this.calificacion = calificacion;
-    }
-
-    public Estados getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estados estado) {
-        this.estado = estado;
-    }
-
-    public Trabajo() {
     }
 
     public Long getId() {
@@ -81,20 +65,28 @@ public class Trabajo {
         this.id = id;
     }
 
-    public Usuario getCliente() {
-        return cliente;
+    public Long getIdCliente() {
+        return idCliente;
     }
 
-    public void setCliente(Usuario cliente) {
-        this.cliente = cliente;
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public Usuario getProveedor() {
-        return proveedor;
+    public Long getIdProveedor() {
+        return idProveedor;
     }
 
-    public void setProveedor(Usuario proveedor) {
-        this.proveedor = proveedor;
+    public void setIdProveedor(Long idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public Calificacion getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Calificacion calificacion) {
+        this.calificacion = calificacion;
     }
 
     public String getDescripcion() {
@@ -120,4 +112,14 @@ public class Trabajo {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
+
+    public Estados getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estados estado) {
+        this.estado = estado;
+    }
 }
+
+   

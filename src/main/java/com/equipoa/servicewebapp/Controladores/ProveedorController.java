@@ -7,6 +7,7 @@ package com.equipoa.servicewebapp.Controladores;
 
 import com.equipoa.servicewebapp.Entidades.Calificacion;
 import com.equipoa.servicewebapp.Entidades.Usuario;
+import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
@@ -14,7 +15,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,9 +43,11 @@ public class ProveedorController {
 //        return ("perfilProveedor.html");
 //
 //    }
-    @GetMapping("/")
-    public String perfilProveedor(@RequestParam Long idProveedor, Model model) {
-        Usuario proveedor = usuarioServicio.obtenerProveedorConCalificaciones(idProveedor);
+   @GetMapping("/{id}")
+    public String perfilProveedor(@PathVariable Long id, Model model, ModelMap modelo) throws MiException {
+        
+        modelo.put("proveedor", usuarioServicio.getOne(id));
+        Usuario proveedor = usuarioServicio.obtenerProveedorConCalificaciones(id);
         if (proveedor != null) {
             model.addAttribute("proveedor", proveedor); // añade el objeto proveedor completo al modelo
             List<Calificacion> calificaciones = proveedor.getCalificacionesRecibidas();
@@ -55,7 +60,9 @@ public class ProveedorController {
                 model.addAttribute("promedio", promedio);
             }
         }
-        return "perfilProveedor";
+        return "perfilProveedor.html";
     }
 
+    
+    
 }

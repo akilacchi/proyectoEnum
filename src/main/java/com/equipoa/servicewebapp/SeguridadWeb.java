@@ -2,6 +2,7 @@ package com.equipoa.servicewebapp;
 
 import com.equipoa.servicewebapp.Enum.Rol;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
+import static javafx.scene.input.KeyCode.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,7 +22,7 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userSrvc).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService( userSrvc).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
