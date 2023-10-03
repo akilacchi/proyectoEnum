@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/Css/Login.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Formulario.css">
         <link rel="stylesheet" type="text/css" href="/css/Header.css">
         <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
         <link rel="stylesheet" type="text/css" href="/Css/Body.css">
@@ -15,32 +15,40 @@
         <header class="header">
             <nav th:replace="/navbarSinInicioSesion :: nav_bar_sin_inicio"></nav>
         </header>
-        <div class="cuerpo-formulario">
-            <div class="encabezado">
-                <h2>Iniciar Sesión</h2>
+        <div class="contenedor">
+            <div>
+                <h1>Iniciar Sesión</h1>
                 <p>¿No tienes una cuenta? <a th:href="@{/seleccionar}">Crea tu cuenta</a></p>
             </div>
 
-            <div class="grupo-formulario">
-                <form action="/logincheck" method="post">
-                    <div class="grupo-input">
-                        <input type="text" name="email" placeholder="fernando@chiquito.com">
+            <div>
+                <form  action="/logincheck" method="post">
+                    <div class="contenedor_formulario">
+                        <div class="contenedor_input">
+                            <input type="text" name="email" placeholder="fernando@chiquito.com">
+                        </div>
+
+                        <div class="contenedor_input">
+                            <input type="password" name="password" placeholder="********">
+                        </div>
                     </div>
-                    <div class="grupo-input">
-                        <input type="password" name="password" placeholder="********">
-                    </div>
-                    <div class="grupo-input flex">
-                        <div class="recordar"><input type="checkbox" id="checkbox"> <label for="checkbox">Recordarme</label></div>
-                        <div class="olvidar"><a href="#">¿Olvidaste tu contraseña?</a></div>
-                    </div>
-                    <div class="grupo-input centro">
+                    <div class="contenedor_recordar">
+
+                    <div class="recordar"><input type="checkbox" id="checkbox"> <label for="checkbox">Recordarme</label></div>
+                    <div class="olvidar"><a href="#">¿Olvidaste tu contraseña?</a></div>
+
+                </div>
+
+                    <div class="contenedor_button">
                         <button type="submit">Iniciar sesión</button>
                     </div>
                 </form>
+
+                
+
             </div>
+
         </div>
-        <footer  class:"footer">
-            <div th:replace="/footer :: vista_footer"></div>
-        </footer>
+
     </body>
 </html>
