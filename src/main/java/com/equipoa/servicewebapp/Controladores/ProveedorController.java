@@ -38,14 +38,12 @@ public class ProveedorController {
     @Autowired
     UsuarioServicio usuarioServicio;
 
-
     @GetMapping("/")
     public String perfilProveedor(@RequestParam Long idProveedor, Model model) {
         Optional<Usuario> proveedorOpt = usuarioServicio.obtenerProveedorConCalificaciones(idProveedor);
         if (proveedorOpt.isPresent()) {
-            Usuario proveedor = proveedorOpt.get(); 
+            Usuario proveedor = proveedorOpt.get();
             model.addAttribute("proveedor", proveedor);
-
             List<Calificacion> calificaciones = proveedor.getCalificacionesRecibidas();
             if (calificaciones != null) {
                 double promedio = calificaciones.stream()
@@ -56,9 +54,7 @@ public class ProveedorController {
                 model.addAttribute("promedio", promedio);
             }
         }
-        return "perfilProveedor.html";
+        return "perfilProveedor";
     }
 
-    
-    
 }
