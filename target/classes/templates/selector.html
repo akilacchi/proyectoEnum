@@ -13,12 +13,12 @@
 
     <body>
         <header class="header">
-            <nav th:replace="/navbarSinInicioSesion :: nav_bar_sin_inicio"></nav>
+            <nav th:replace="/navbar :: navbar"></nav>
         </header>
         <div class="contenedor">
             <div class="encabezado">
                 <h1>Registro</h1>
-                <p>¿Ya tienes una cuenta? <a href="">Inicia sesión</a></p>
+                <p>¿Ya tienes una cuenta? <a th:href="@{/login}">Inicia sesión</a></p>
             </div>
             <div class="contenedor_formulario">
 
