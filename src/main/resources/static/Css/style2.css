@@ -93,8 +93,8 @@ main {
 }
 
 .contenedor-trabajos-solicitados{
-    
-   background-color: #fff;
+
+    background-color: #fff;
     color: #000;
     padding: 30px;
     text-align: center;
@@ -193,5 +193,5 @@ main {
     justify-content:space-around;
     display:flex;
     padding:1%;
-    
+
 }

@@ -45,41 +45,37 @@ public class TrabajoController {
 //      @return
     @GetMapping("/solicitarservicio/{id}")
     public String solicitarTrabajo(@PathVariable Long id, ModelMap modelo) throws MiException {
-        
+
         modelo.put("proveedor", usuarioServicio.getOne(id));
-        
 
         return "solicitarTrabajo.html";
     }
 
     @GetMapping("/trabajoSolicitado/")
     public String trabajoSolicitado(/*@PathVariable String id, ModelMap modelo**/) {
-        
-       // modelo.put("direccion", trabajoServicio.getOne(id));
 
+        // modelo.put("direccion", trabajoServicio.getOne(id));
         return "trabajoSolicitado.html";
     }
-    
+
     @PostMapping("/solicitarservicio/{id}")
-    public String enviarSolicitud(@PathVariable Long id, @RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd")Date fechaInicio, @RequestParam String direccion, @RequestParam String descripcion,HttpSession session, ModelMap modelo) throws MiException {
+    public String enviarSolicitud(@PathVariable Long id, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio, @RequestParam String direccion, @RequestParam String descripcion, HttpSession session, ModelMap modelo) throws MiException {
 
         try {
-            
-            trabajoServicio.registrarTrabajo(descripcion, fechaInicio,  Estados.ACEPTADO, session,id);
-            
+
+            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, Estados.ACEPTADO, session, id);
+
             modelo.put("exito", "trabajo solicitado con éxito");
 
             return "index.html";
-        } 
-        
-        catch (MiException e) {
+        } catch (MiException e) {
 
             modelo.put("error", "Error al enviar la solicitud de trabajo");
-            
+
             return "solicitarTrabajo.html";
 
         }
-    
+
     }
 
     @GetMapping("/calificar/{idTrabajo}")
@@ -93,7 +89,7 @@ public class TrabajoController {
     public String calificarTrabajo(@PathVariable Long idTrabajo, @ModelAttribute Calificacion calificacion) {
         try {
             trabajoServicio.calificarTrabajo(idTrabajo, calificacion.getComentario(), calificacion.getPuntuacion());
-            return "redirect:/trabajo"; 
+            return "redirect:/trabajo";
         } catch (MiException e) {
             return "error";
         }

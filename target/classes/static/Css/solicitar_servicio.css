@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #0a3846; 
+    background-color: #0a3846;
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
@@ -20,7 +20,7 @@ form {
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px; 
+    border-radius: 8px;
 }
 
 label {
@@ -52,7 +52,7 @@ button {
     margin-top: 20px;
     transition: background-color 0.3s;
     margin-left: 43%;
-    
+
 }
 
 button:hover {
