@@ -1,65 +1,26 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #0a3846; 
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0;
-    padding: 0;
-    margin-top: 100px;
+
+.card-title{
+    font-family: "Roboto";
+    font-size: 40px;
+    margin: 20px 0;
+    color: #040D12;
 }
 
-h1 {
-    text-align: center;
-    color: #f1eeee;
+h4{
+    font-size: 30px;
+    
 }
-
-form {
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px; 
-}
-
-label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-    color: #060707;
-}
-
-input[type="text"],
-input[type="date"],
-textarea {
-    width: 97%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #b6b6b6;
-    border-radius: 4px;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-button {
-    background: linear-gradient(to bottom, #214cd8, #255dd4);
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s;
-    margin-left: 43%;
+.prueba{
+    font-size: 20px;
+    font-family: "Roboto";
+    flex-wrap: wrap;
+    
+    display:flex;
+    padding:1%;
     
 }
 
-button:hover {
-    background: linear-gradient(to bottom, #1772c7, #3558ca);
-}
-
-textarea {
-    height: 100px;
-    resize: none;
+.card{
+    margin: 1%;
+    
 }

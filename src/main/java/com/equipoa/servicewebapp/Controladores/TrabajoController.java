@@ -1,6 +1,8 @@
 package com.equipoa.servicewebapp.Controladores;
 
 import com.equipoa.servicewebapp.Entidades.Calificacion;
+import com.equipoa.servicewebapp.Entidades.Trabajo;
+import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Estados;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
@@ -37,9 +39,11 @@ public class TrabajoController {
     TrabajoServicio trabajoServicio;
     @Autowired
     UsuarioServicio usuarioServicio;
-
+    
     @Autowired
     NotificacionServicio notificacionServicio;
+    
+    
 
 //      @param Long
 //      @return
@@ -52,10 +56,14 @@ public class TrabajoController {
         return "solicitarTrabajo.html";
     }
 
-    @GetMapping("/trabajoSolicitado/")
-    public String trabajoSolicitado(/*@PathVariable String id, ModelMap modelo**/) {
+    @GetMapping("/trabajosolicitado/{id}")
+    public String trabajoSolicitado(@PathVariable Long id, ModelMap modelo) throws MiException {
         
-       // modelo.put("direccion", trabajoServicio.getOne(id));
+        Trabajo trabajo = trabajoServicio.getOne(id);
+        Long idCliente = trabajo.getIdCliente();
+        Usuario cliente = usuarioServicio.getOne(idCliente);
+        modelo.put("trabajo", trabajo);
+        modelo.addAttribute("cliente", cliente);
 
         return "trabajoSolicitado.html";
     }
