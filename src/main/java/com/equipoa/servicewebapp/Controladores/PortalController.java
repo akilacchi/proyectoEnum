@@ -13,6 +13,7 @@ import com.equipoa.servicewebapp.Servicios.NotificacionServicio;
 import com.equipoa.servicewebapp.Servicios.OcupacionesServicio;
 import com.equipoa.servicewebapp.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,18 +61,18 @@ public class PortalController {
     private OcupacionesServicio ocupacionesServicio;
 
     @GetMapping("/FAQ")
-    public String faq(){
+    public String faq() {
         return "preguntasfrecuentes.html";
     }
 
     @GetMapping("/contacto")
-    public String contacto(ModelMap modelo){
-        modelo.addAttribute("listaAdmin",getAdmins());
+    public String contacto(ModelMap modelo) {
+        modelo.addAttribute("listaAdmin", getAdmins());
         return "Contacto.html";
     }
 
     @PostMapping("/contactar")
-    public String contactar(HttpSession session, String mensaje, Long id){
+    public String contactar(HttpSession session, String mensaje, Long id) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         if (usuario == null) {
             usuario = new Usuario();
@@ -79,7 +80,7 @@ public class PortalController {
             usuario.setID(-1l);
         }
         try {
-            notificacionServicio.crearNotificacion(mensaje,usuario,id);
+            notificacionServicio.crearNotificacion(mensaje, usuario, id);
         } catch (MiException e) {
             System.err.println(e.getMessage());
         }
@@ -116,7 +117,20 @@ public class PortalController {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         if (usuario != null) {
             modelo.put("usuario", usuario);
-            return "perfil.html";
+            return "datos_user.html";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @GetMapping("/perfil/modificar")
+    public String perfilModificar(ModelMap modelo, HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        if (usuario != null) {
+            modelo.put("usuario", usuario);
+            modelo.addAttribute("provincia", getProvincias());
+            modelo.addAttribute("ocupaciones", getOcupaciones());
+            return "editar_user.html";
         } else {
             return "redirect:/login";
         }
@@ -124,14 +138,19 @@ public class PortalController {
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @PostMapping("/perfil/{id}")
-    public String actualizar(MultipartFile archivo, @PathVariable Long id, String email, String nombre, String direccion, String phone, String password, String password2) {
+    public String actualizar(HttpSession session, MultipartFile archivo, @PathVariable Long id, String email, String name, String direccion, String phone,
+                             String password, String password2, Provincias provincia, Ocupaciones ocupacion) {
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         try {
-            usuarioServicio.actualizarCliente(archivo, email, nombre, direccion, phone, password, password2);
+        if(usuario.getRol().equals(Rol.CLIENTE)){
+            usuarioServicio.actualizarCliente(archivo, email, name, direccion, phone, password, password2);
+        } else if (usuario.getRol().equals(Rol.PROVEEDOR)) {
+            usuarioServicio.actualizarProveedor(archivo,email,name,password,password2,phone,provincia, ocupacion.getNombre());
+        }
         } catch (MiException e) {
             System.err.println(e.getMessage());
-            return "usuario_modificar.html";
         }
-        return "redirect:/pefil";
+        return "redirect:/perfil";
     }
 
     @GetMapping("/login")

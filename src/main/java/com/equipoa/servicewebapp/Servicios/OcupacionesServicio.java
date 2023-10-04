@@ -4,7 +4,9 @@ import com.equipoa.servicewebapp.Entidades.Imagen;
 import com.equipoa.servicewebapp.Entidades.Ocupaciones;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.OcupacionesRepositorio;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,11 +39,7 @@ public class OcupacionesServicio {
     }
 
     public Ocupaciones buscarOcupacion(String ocuppacion) throws MiException {
-        if (ocupacionesRepositorio.buscarOcupacion(ocuppacion) != null) {
-            return ocupacionesRepositorio.buscarOcupacion(ocuppacion);
-        } else {
-            throw new MiException("Ocupacion inexistente");
-        }
+        return ocupacionesRepositorio.buscarOcupacion(ocuppacion);
     }
 
     @Transactional
