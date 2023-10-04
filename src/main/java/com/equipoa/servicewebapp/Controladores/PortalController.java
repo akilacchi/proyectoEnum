@@ -24,8 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PathVariable;
-
 @Controller
 @RequestMapping("/")
 public class PortalController {
