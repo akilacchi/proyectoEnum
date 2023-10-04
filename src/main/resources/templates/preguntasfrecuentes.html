@@ -16,11 +16,11 @@
 
 <body>
     
-    
     <div class="container">
         <header class="header">
             <nav th:replace="/navbar :: nav_bar"></nav>  
         </header>
+        <div class="acordeon-container"></div>
         <div class="preguntas">
             <h1 class="titulo">Preguntas Frecuentes</h1>
             <div class="acordeon">
@@ -97,7 +97,7 @@
             <div th:replace="/footer :: vista_footer"></div>
         </footer>
     </div>
-   
+    
     <script>
         const acordeonItems = document.querySelectorAll('.acordeon-item');
 
