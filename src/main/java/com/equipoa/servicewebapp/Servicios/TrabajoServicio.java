@@ -221,4 +221,12 @@ public class TrabajoServicio {
             throw new MiException("Debe agregar fecha de inicio");
         }
     }
+    
+    public Trabajo getOne(Long id){
+    
+        Trabajo trabajo = trabajoRepositorio.getOne(id);
+        
+        return trabajo;
+    
+    }
 }

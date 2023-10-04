@@ -11,51 +11,56 @@
     </head>
     <body>
         <header class="header">
-            <nav th:replace="/navbar :: navbar"></nav>
+            <nav th:replace="/navbarSinInicioSesion :: nav_bar_sin_inicio"></nav>
         </header>
         <div class="contenedor">
             <h1>Registro Proveedor</h1>
             <div>
-                <form class="contenedor_formulario" action="/r/registroproveedor" method="post" enctype="multipart/form-data">
-                    <div class="contenedor_input">
-                        <label>Ingrese su nombre</label>
-                        <input name="name" type="text" placeholder="Nombre">
+                <form  action="/r/registroproveedor" method="post" enctype="multipart/form-data">
+                    <div class="contenedor_formulario">
 
-                        <label>Ingrese su Email</label>
-                        <input name="email" type="email" placeholder="fernando@chiquito.com">
+                        <div class="contenedor_input">
+                            <label>Ingrese su nombre</label>
+                            <input name="name" type="text" placeholder="Nombre">
 
-                        <label>Ingrese su teléfono</label>
-                        <input name="phone" type="text" placeholder="56 9 1234 5678">
+                            <label>Ingrese su Email</label>
+                            <input name="email" type="email" placeholder="fernando@chiquito.com">
 
-                        <label>Suba una foto de perfil</label>
-                        <input name="archivo" type="file">
+                            <label>Ingrese su teléfono</label>
+                            <input name="phone" type="text" placeholder="56 9 1234 5678">
 
+                            <label>Suba una foto de perfil</label>
+                            <input name="archivo" type="file">
+
+                        </div>
+                        <div class="contenedor_input">
+
+                            <label>Ingrese su contraseña</label>
+                            <input name="password" type="password" placeholder="********">
+
+                            <label>Repita su contraseña</label>
+                            <input name="password2" type="password" placeholder="********">
+
+                            <label>Seleccione su provincia</label>
+                            <select id="provincia" name="provincia">
+                                <option th:each="p: ${provincia}" th:value="${p}"
+                                        th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
+                            </select>
+
+                            <label>Seleccione su ocupacion</label>
+                            <select id="ocupacion" name="ocupacion">
+                                <option th:each="o : ${listaOcupacion}" th:value="${o.nombre}" th:text="${o.nombre}"></option>
+                            </select>
+
+                        </div>
                     </div>
-                    <div class="contenedor_input">
 
-                        <label>Ingrese su contraseña</label>
-                        <input name="password" type="password" placeholder="********">
-
-                        <label>Repita su contraseña</label>
-                        <input name="password2" type="password" placeholder="********">
-
-                        <label>Seleccione su provincia</label>
-                        <select id="provincia" name="provincia">
-                            <option th:each="p: ${provincia}" th:value="${p}"
-                                    th:text="${#strings.capitalize(#strings.replace(p.toString().toLowerCase(), '_', ' '))}"></option>
-                        </select>
-
-                        <label>Seleccione su ocupacion</label>
-                        <select id="ocupacion" name="ocupacion">
-                            <option th:each="o : ${listaOcupacion}" th:value="${o.nombre}" th:text="${o.nombre}"></option>
-                        </select>
-
+                    <div class="contenedor_button" >
+                        <button class="boton" type="submit">Registrarse!</button> 
                     </div>
                 </form>  
             </div>
-            <div >
-                <button class="boton" type="submit">Registrarse!</button> 
-            </div>
+
         </div>
 
     </body>

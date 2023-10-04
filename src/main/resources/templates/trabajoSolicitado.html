@@ -3,38 +3,42 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="solicitar servicio.css">
+        <link rel="stylesheet" type="text/css" href="/css/Header.css">
+        
+        <link rel="stylesheet" type="text/css" href="/css/Main.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/solicitar_servicio.css">
         <title>Solicitud de Trabajo</title>
     </head>
     <body>
-        <h1>Solicitud de Trabajo</h1>
-        <form>
-            <label for="nombreCliente">Nombre del Cliente:</label>
-            <input type="text" id="nombreCliente" name="nombreCliente" required>
+        <section class="prueba">
+        <div class="card" style="width: 18rem;"  enctype="multipart/form-data">
+            
+             <div class="card-body">
+                 <h5 class="card-title">SOLICITUD DE TRABAJO </h5>
+                 <h4>Descripción: </h4>
+                 <p class="card-text"th:text="${trabajo.descripcion}" >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h4>Fecha inicio trabajo </h4>
+                 <p th:text="${trabajo.fechaInicio}"></p>
+                 <h4>Nombre Cliente</h4>
+                 <p th:text="${cliente.name}"></p>
+                   <div>
+                       <button type="button" id="aceptarTrabajo">Aceptar y enviar</button>
+                       <button type="button" id="rechazarTrabajo">Rechazar</button>
+                   </div>
 
-            <label for="fechaInicio">Fecha de Inicio:</label>
-            <input type="date" id="fechaInicio" name="fechaInicio" required>
+                   <div id="motivoRechazo">
+                       <label for="motivo">Motivo del Rechazo:</label>
+                       <textarea id="motivo" name="motivo"></textarea>
+                       <button type="button" id="rechazarYenviar">Rechazar y Enviar</button>
+                   </div>
+                 
+             </div>
+        </div>
+       </section>
 
-            <label for="direccion">Dirección:</label>
-            <input type="text" id="direccion" name="direccion" required>
-
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" required>
-
-            <label for="descripcion">Descripción:</label>
-            <input type="text" id="descripcion" name="descripcion" required>
-
-            <div>
-                <button type="button" id="aceptarTrabajo">Aceptar y enviar</button>
-                <button type="button" id="rechazarTrabajo">Rechazar</button>
-            </div>
-
-            <div id="motivoRechazo">
-                <label for="motivo">Motivo del Rechazo:</label>
-                <textarea id="motivo" name="motivo"></textarea>
-                <button type="button" id="rechazarYenviar">Rechazar y Enviar</button>
-            </div>
-        </form>
+          
+        
 
 
     </body>
