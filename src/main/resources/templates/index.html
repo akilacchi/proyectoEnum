@@ -1,61 +1,63 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/Header.css">
-    <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
-    <link rel="stylesheet" type="text/css" href="/css/Main.css">
-    <link rel="stylesheet" type="text/css" href="/Css/Body.css">
-    <link rel="stylesheet" type="text/css" href="/Css/Footer.css">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/Header.css">
+        <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="/css/Main.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Footer.css">
 
 
 
-    <title>ReparoYa</title>
-</head>
 
-<body class="body">
-    <header class="header">
-        <nav th:replace="/navbar :: nav_bar"></nav>
-    </header>
-    <main class="main">
-        <section class="main_section">
-            <p class="main_section_p">
-            <h1 class="description">Encuentra el servicio<br> que necesites.</h1>
-            </p>
-        </section>
-        <section>
-            <form th:action="@{/buscarProveedores}" method="get">
-                <input class="input" type="text" name="ocupacion" placeholder="Buscar un servicio..." required>
-                <input class="input_submit" type="submit" value="Buscar">
-            </form>
-        </section>
-        <section class="populares">
-            <p>
-            <h4 class="titulo_populares">Populares</h4>
-            </p>
-            <ol class="list_populares">
-                <li class="list_populares_li">
-                    <a class="list_populares_a" th:href="@{/buscarProveedores?ocupacion=Albañil}">Albañil</a>
-                </li>
-                <li class="list_populares_li">
-                    <a class="list_populares_a" th:href="@{/buscarProveedores?ocupacion=Jardinero}">Jardinero</a>
-                </li>
-                <li class="list_populares_li">
-                    <a class="list_populares_a" th:href="@{/buscarProveedores?ocupacion=Pintor}">Pintor</a>
-                </li>
-                <li class="list_populares_li">
-                    <a class="list_populares_a" th:href="@{/buscarProveedores?ocupacion=Gasista}">Gasista</a>
-                </li>
-            </ol>
+        <title>ReparoYa</title>
+    </head>
 
-        </section>
-    </main>
-    <footer>
-        <div th:replace="/footer :: vista_footer"></div>
-    </footer>
-</body>
+    <body class="body">
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>
+        </header>
+        <main class="main">
+            <section class="main_section">
+                <p class="main_section_p">
+                <h1 class="description">Encuentra el servicio<br> que necesites.</h1>
+                </p>
+            </section>
+            <section>
+                <form th:action="@{/buscarProveedores}" method="get">
+                    <input class="input" type="text" name="ocupacion" placeholder="Buscar un servicio..." required>
+                    <input class="input_submit" type="submit" value="Buscar">
+                </form>
+            </section>
+            <section class="populares">
+                <p>
+                <h4 class="titulo_populares">Populares</h4>
+                </p>
+                <ol class="list_populares">
+                    <li class="list_populares_li">
+                        <a class="list_populares_a" th:href="@{/buscarProveedores?ocupacion=Albañil}">Albañil</a>
+                    </li>
+                    <li class="list_populares_li">
+                        <a class="list_populares_a" th:href="@{/buscarProveedores?ocupacion=Jardinero}">Jardinero</a>
+                    </li>
+                    <li class="list_populares_li">
+                        <a class="list_populares_a" th:href="@{/buscarProveedores?ocupacion=Pintor}">Pintor</a>
+                    </li>
+                    <li class="list_populares_li">
+                        <a class="list_populares_a" th:href="@{/buscarProveedores?ocupacion=Gasista}">Gasista</a>
+                    </li>
+                </ol>
+
+            </section>
+        </main>
+        <footer>
+            <div th:replace="/footer :: vista_footer"></div>
+        </footer>
+    </body>
 
 </html>
