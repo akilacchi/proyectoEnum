@@ -8,19 +8,20 @@
     <link rel="stylesheet" th:href="@{/css/styleregistro.css}">
 </head>
 <body>
-
-<div class="form-container">
-    <div class="card">
-        <h1>Borrar Ocupaciones</h1>
-        <form method="post" action="/admindashboard/ocupacionborrar">
-            <label>Seleccione ocupacion</label>
-            <br>
-            <input type="text" name="ocupacion" placeholder="Ocupacion aqui">
-            <button type="submit">Borrar Ocupacion</button>
-        </form>
+    <header class="header">
+        <div th:replace="adminDashboard :: adminDashboard"></div>
+    </header>
+    <div class="form-container">
+        <div class="card">
+            <h1>Borrar Ocupaciones</h1>
+            <form method="post" action="/admindashboard/ocupacionborrar">
+                <label>Seleccione ocupacion</label>
+                <br>
+                <input type="text" name="ocupacion" placeholder="Ocupacion aqui">
+                <button type="submit">Borrar Ocupacion</button>
+            </form>
+        </div>
     </div>
-</div>
-
 </body>
 </html>
 
