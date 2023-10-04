@@ -49,11 +49,10 @@ public class ProveedorController {
 //        return ("perfilProveedor.html");
 //
 //    }
-   @GetMapping("/{id}")
-    public String perfilProveedor(@PathVariable Long id, Model model, ModelMap modelo) throws MiException {
-        
-        modelo.put("proveedor", usuarioServicio.getOne(id));
-        Optional<Usuario> proveedor = usuarioServicio.obtenerProveedorConCalificaciones(id);
+    @GetMapping("/")
+    public String perfilProveedor(@RequestParam Long idProveedor, Model model) {
+
+        Optional<Usuario> proveedor = usuarioServicio.obtenerProveedorConCalificaciones(idProveedor);
 
         if (proveedor.isPresent()) {
             Usuario usuarioProveedor = proveedor.get();
@@ -70,20 +69,18 @@ public class ProveedorController {
         }
         return "perfilProveedor.html";
     }
-    
+
     @GetMapping("/loginproveedor")
-    public String loginProveedor(HttpSession session, ModelMap modelo){
-        
-         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-         System.out.println("El ID de la sesion es: "+logueado.getID());
-         List<Trabajo> trabajos = trabajoServicio.listaTrabajosPorUsuario(logueado.getID());
-         System.out.println("Trabajos: " +trabajos);
-         modelo.addAttribute("proveedor", logueado);
-         modelo.addAttribute("trabajos", trabajos);
-         return "login_proveedor.html";
-    
+    public String loginProveedor(HttpSession session, ModelMap modelo) {
+
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        System.out.println("El ID de la sesion es: " + logueado.getID());
+        List<Trabajo> trabajos = trabajoServicio.listaTrabajosPorUsuario(logueado.getID());
+        System.out.println("Trabajos: " + trabajos);
+        modelo.addAttribute("proveedor", logueado);
+        modelo.addAttribute("trabajos", trabajos);
+        return "login_proveedor.html";
+
     }
 
-    
-    
 }

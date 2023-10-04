@@ -63,7 +63,6 @@ public class TrabajoServicio {
     @Autowired
     NotificacionServicio notificacionServicio;
 
-
     @Transactional
     public void registrarTrabajo(String descripcion, Date fechaInicio, Estados estado, HttpSession session, Long idProveedor) throws MiException {
 
@@ -202,7 +201,6 @@ public class TrabajoServicio {
             calificacion.setTrabajo(trabajo);
 
             // Aquí se asocian los usuarios a la calificación
-
             Usuario cliente = usuarioRepositorio.getById(trabajo.getIdCliente());
             Usuario proveedor = usuarioRepositorio.getById(trabajo.getIdProveedor());
             calificacion.setClienteEmisor(cliente);
@@ -211,7 +209,6 @@ public class TrabajoServicio {
             calificacionRepositorio.save(calificacion);
         }
     }
-
 
     public void validar(String descripcion, Date fechaInicio) throws MiException {
         if (descripcion == null || descripcion.trim().isEmpty()) {

@@ -26,6 +26,7 @@ public interface NotificacionesRepositorio extends JpaRepository<Notificaciones,
 
     @Query("SELECT n FROM Notificaciones n WHERE n.tipoNotificacion = 'SOLICITUD'")
     List<Notificaciones> buscarNotificacionSolicitud();
+
     @Query("SELECT n FROM Notificaciones n WHERE n.tipoNotificacion = 'REPORTE'")
     List<Notificaciones> buscarNotificacionReporte();
 

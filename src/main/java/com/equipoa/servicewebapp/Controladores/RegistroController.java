@@ -38,7 +38,6 @@ public class RegistroController {
     @Autowired
     OcupacionesRepositorio ocupacionesRepositorio;
 
-
     @GetMapping("/")
     public String registro() {
         return "redirect:/";
