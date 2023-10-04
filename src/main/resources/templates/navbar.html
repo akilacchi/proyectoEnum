@@ -11,7 +11,7 @@
             <a class="nav_a" href="">Preguntas Frecuentes</a>
 
             <!-- Usuario que ha iniciado sesión: cliente o proveedor -->
-            <a sec:authorize="isAuthenticated()" class="nav_a_sesion" th:href="@{/perfil}" >Ver Perfil</a>
+            <a sec:authorize="isAuthenticated()" class="nav_a_sesion" th:href="@{/perfil}">Ver Perfil</a>
             <a sec:authorize="isAuthenticated()" class="nav_a_sesion" th:href="@{/logout}" >Cerrar Sesión</a>
 
             <div sec:authorize="hasRole('ROLE_ADMIN')">

@@ -93,10 +93,15 @@ public class PortalController {
     }
 
     @GetMapping("/buscarProveedores")
-    public String buscarProveedores(@RequestParam String ocupacion, Model model) {
+    public String buscarProveedores(@RequestParam String ocupacion,
+            @RequestParam(required = false) String filtro,
+            Model model) {
         List<Usuario> proveedores = usuarioServicio.obtenerProveedoresPorOcupacion(ocupacion);
         model.addAttribute("proveedores", proveedores);
         model.addAttribute("listaOcupaciones", getOcupaciones());
+        model.addAttribute("ocupacion", ocupacion);
+        model.addAttribute("filtro", filtro);
+
         return "card.html";
     }
 
