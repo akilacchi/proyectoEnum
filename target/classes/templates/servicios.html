@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>Servicios</title>
+        <link rel="stylesheet" type="text/css" href="/Css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Header.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" href="Css/servicio_estilo.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Footer.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>
+        </header>
+        <div class="container">
+
+            <div class="card" th:each="o: ${listaOcupaciones}">
+                <figure>
+                    <img th:src="@{/img/ocupacion/__${o.id}__}" alt="">
+                </figure>
+                <div class="contenido">
+                    <h3 th:text="${o.nombre}"></h3>
+                    <p th:text="${o.descripcion}"></p>
+                    <br>
+                    <a class="ver-mas-button" href="#">Ver Mas</a>
+                </div>
+            </div>
+
+        </div>
+        <footer>
+            <div th:replace="/footer :: vista_footer"></div>
+        </footer>
+
+    </body>
+
+
+</div>
+
+</body>
+
+</html>
