@@ -1,0 +1,35 @@
+.contenedor_navbar {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 3rem;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+}
+.nav_a {
+    font-family: "Roboto";
+    font-size: 22px;
+    color:#040D12;
+    margin: 0 20px 0 20px;
+    text-decoration: none;
+}
+.nav_a_sesion{
+    font-family: "Roboto";
+    font-size: 22px;
+    color: rgba(0, 0, 0, 0.80);
+    margin: 0 20px 0 20px;
+    text-decoration: none;
+    background-color: #5C8374;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+
+}

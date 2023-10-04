@@ -1,0 +1,197 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-sep-2023, 18:22:45
+    Author     : alejandrasuarez
+*/
+
+body {
+    font-family: 'Ubuntu';
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, #333, #fff);
+    color: #fff;
+    background-color: #5C8374;
+}
+
+img {
+    max-width: 100%;
+    margin-top: 30px;
+}
+
+main {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+
+.contenedor-imagen {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.contenedor-informacion-descripcion {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    align-items: flex-start;
+}
+
+.titulo-descripcion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titulo-descripcion h4 {
+    font-weight: 300;
+    color: #ffb811;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.texto-descripcion {
+    font-size: 13px;
+    color: #dadada;
+    line-height: 22px;
+
+}
+
+
+.contenedor-informacion-adicional {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 10px 0;
+}
+
+.titulo-informacion-adicional {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titulo-informacion-adicional h4 {
+    font-weight: 300;
+    color: #ffb811;
+    font-size: 14px;
+}
+
+.texto-informacion-adicional {
+    font-size: 13px;
+    color: #dadada;
+    line-height: 22px;
+    margin-top: -15px;
+}
+
+.contenedor-trabajos-solicitados{
+    
+   background-color: #fff;
+    color: #000;
+    padding: 30px;
+    text-align: center;
+}
+
+.contenedor-informacion-calificacion {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 10px 0;
+}
+
+.titulo-informacion-calificacion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titulo-informacion-calificacion h4 {
+    font-weight: 300;
+    color: #ffb811;
+    font-size: 14px;
+}
+
+.texto-informacion-calificacion {
+    font-size: 13px;
+    color: #dadada;
+    line-height: 22px;
+    margin-top: -15px;
+}
+
+.calificacion-estrellas {
+    font-size: 24px;
+}
+
+.calificacion-estrellas span {
+    color: #dadada;
+}
+
+.calificacion-estrellas span.pintada {
+    color: #ffb811;
+}
+
+.calificacion-estrellas span:hover,
+.calificacion-estrellas span.seleccionada {
+    color: #ffb811;
+}
+
+
+.contenedor-trabajos-realizados {
+    background-color: #fff;
+    color: #000;
+    padding: 30px;
+    text-align: center;
+}
+
+.lista-tarjetas-trabajos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.tarjeta-imagen {
+    background: transparent;
+    margin-bottom: 15px;
+}
+
+.tarjeta-imagen img {
+    height: 400px;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.botones {
+    display: flex;
+    gap: 10px;
+}
+
+.boton-contacto,
+.boton-solicitar-servicio {
+    border: none;
+    background-color: #252525;
+    padding: 10px;
+    color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.prueba{
+    flex-wrap: wrap;
+    justify-content:space-around;
+    display:flex;
+    padding:1%;
+    
+}

@@ -1,0 +1,43 @@
+body {
+    background-color: #93B1A6;
+}
+
+.filtro-box {
+    width: 400px;
+    background-color: #5C8374;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: left;
+    font-family: 'Roboto';
+    color: white;
+    box-shadow: 5px 8px 13px rgba(0, 0, 0, 0.3);
+    /* Establece la posición fija y la ubicación en la pantalla */
+    position: fixed;
+    top: 0; /* Anclar en la parte superior de la pantalla */
+    left: 0; /* Anclar en el lado izquierdo de la pantalla */
+    height: 100%; /* Ocupa toda la altura de la pantalla */
+    overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+}
+
+.filtro-box a{
+    margin: 35px;
+}
+
+.button{
+    background-color: #183D3D; /* Cambia el color de fondo del botón "BUSCAR" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 14px 30px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 10px;
+    text-decoration: none;
+    display: flex; /* Hace que el contenedor sea un contenedor flex */
+    flex-direction: column; /* Los botones se apilan verticalmente */
+    justify-content: space-between; /* Distribuye los botones con espacio entre ellos */
+    align-items: flex-start; /* Alinea los botones a la izquierda */
+    font-size: 20px;
+    align-items: center; /* Centra horizontalmente el contenido */
+    text-align: center; /* Centra el texto dentro del botón */
+}

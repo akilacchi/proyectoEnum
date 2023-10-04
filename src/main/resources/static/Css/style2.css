@@ -92,6 +92,13 @@ main {
     margin-top: -15px;
 }
 
+.contenedor-trabajos-solicitados{
+    
+   background-color: #fff;
+    color: #000;
+    padding: 30px;
+    text-align: center;
+}
 
 .contenedor-informacion-calificacion {
     display: flex;
@@ -179,4 +186,12 @@ main {
     gap: 5px;
     font-weight: 700;
     cursor: pointer;
+}
+
+.prueba{
+    flex-wrap: wrap;
+    justify-content:space-around;
+    display:flex;
+    padding:1%;
+    
 }
