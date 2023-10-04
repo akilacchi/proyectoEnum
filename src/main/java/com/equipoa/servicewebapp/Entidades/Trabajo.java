@@ -25,11 +25,11 @@ public class Trabajo {
     private Long id;
 
     
-    @JoinColumn(name = "cliente_id") // cliente que solicita el trabajo
+    // cliente que solicita el trabajo
     private Long idCliente;
 
     
-    @JoinColumn(name = "proveedor_id") // proveedor que realiza el trabajo
+     // proveedor que realiza el trabajo
     private Long idProveedor;
 
     @OneToOne(mappedBy = "trabajo")
@@ -120,6 +120,13 @@ public class Trabajo {
     public void setEstado(Estados estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }
 
    
