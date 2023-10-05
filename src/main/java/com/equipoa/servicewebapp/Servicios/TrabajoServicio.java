@@ -63,7 +63,6 @@ public class TrabajoServicio {
     @Autowired
     NotificacionServicio notificacionServicio;
 
-
     @Transactional
     public void registrarTrabajo(String descripcion, Date fechaInicio, Estados estado, HttpSession session, Long idProveedor) throws MiException {
 
@@ -84,7 +83,7 @@ public class TrabajoServicio {
             trabajo.setEstado(estado);
 
 //              Creacion de notificacion automatica
-            String mensaje = ("Solicitud de trabajo recivida por cliente " + logueado.getName() + " con el mensaje:\n" + descripcion);
+            String mensaje = ("Solicitud de trabajo recivida. Enviada por cliente: " + logueado.getName() + " con el mensaje: \n" + descripcion +" con fecha para: "+ trabajo.getFechaInicio());
             notificacionServicio.crearNotificacion(mensaje, logueado, idProveedor);
 //              Notificacion enviada
 
@@ -114,6 +113,15 @@ public class TrabajoServicio {
             throw new MiException("El trabajo que desea actualizar no existe en la base de datos");
         }
     }
+    
+    @Transactional
+    public void aceptarTrabajo(Long id){
+        
+        Trabajo trabajo = trabajoRepositorio.getOne(id);
+        
+        trabajo.setEstado(Estados.ACEPTADO);
+    
+    }
 
     @Transactional(readOnly = true)
     public List<Trabajo> listaTrabajosPorUsuario(Long id) {
@@ -125,6 +133,33 @@ public class TrabajoServicio {
         return trabajoRepositorio.findAll();
     }
 
+    @Transactional(readOnly=true)
+    public List<Trabajo> trabajosSolicitados(Long id){
+        
+        List <Trabajo> trabajos = trabajoRepositorio.buscarTrabajosEstadoPorUsuario(id, Estados.SOLICITADO);
+        
+        return trabajos;
+        
+    }
+    
+     @Transactional(readOnly=true)
+    public List<Trabajo> trabajosAceptados(Long id){
+        
+        List <Trabajo> trabajos = trabajoRepositorio.buscarTrabajosEstadoPorUsuario(id, Estados.ACEPTADO);
+        
+        return trabajos;
+        
+    }
+    
+         @Transactional(readOnly=true)
+    public List<Trabajo> trabajosRechazados(Long id){
+        
+        List <Trabajo> trabajos = trabajoRepositorio.buscarTrabajosEstadoPorUsuario(id, Estados.RECHAZADO);
+        
+        return trabajos;
+        
+    }
+    
     @Transactional
     public void rechazarTrabajo(HttpSession session, Long id) throws MiException {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
@@ -202,7 +237,6 @@ public class TrabajoServicio {
             calificacion.setTrabajo(trabajo);
 
             // Aquí se asocian los usuarios a la calificación
-
             Usuario cliente = usuarioRepositorio.getById(trabajo.getIdCliente());
             Usuario proveedor = usuarioRepositorio.getById(trabajo.getIdProveedor());
             calificacion.setClienteEmisor(cliente);
@@ -212,7 +246,6 @@ public class TrabajoServicio {
         }
     }
 
-
     public void validar(String descripcion, Date fechaInicio) throws MiException {
         if (descripcion == null || descripcion.trim().isEmpty()) {
             throw new MiException("Debe agregar una descripción del trabajo");
@@ -220,5 +253,13 @@ public class TrabajoServicio {
         if (fechaInicio == null) {
             throw new MiException("Debe agregar fecha de inicio");
         }
+    }
+    
+    public Trabajo getOne(Long id){
+    
+        Trabajo trabajo = trabajoRepositorio.getOne(id);
+        
+        return trabajo;
+    
     }
 }

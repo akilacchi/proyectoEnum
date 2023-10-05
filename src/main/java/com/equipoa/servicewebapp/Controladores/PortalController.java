@@ -93,10 +93,15 @@ public class PortalController {
     }
 
     @GetMapping("/buscarProveedores")
-    public String buscarProveedores(@RequestParam String ocupacion, Model model) {
+    public String buscarProveedores(@RequestParam String ocupacion,
+            @RequestParam(required = false) String filtro,
+            Model model) {
         List<Usuario> proveedores = usuarioServicio.obtenerProveedoresPorOcupacion(ocupacion);
         model.addAttribute("proveedores", proveedores);
         model.addAttribute("listaOcupaciones", getOcupaciones());
+        model.addAttribute("ocupacion", ocupacion);
+        model.addAttribute("filtro", filtro);
+
         return "card.html";
     }
 
@@ -139,14 +144,14 @@ public class PortalController {
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_PROVEEDOR', 'ROLE_ADMIN' )")
     @PostMapping("/perfil/{id}")
     public String actualizar(HttpSession session, MultipartFile archivo, @PathVariable Long id, String email, String name, String direccion, String phone,
-                             String password, String password2, Provincias provincia, Ocupaciones ocupacion) {
+            String password, String password2, Provincias provincia, Ocupaciones ocupacion) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         try {
-        if(usuario.getRol().equals(Rol.CLIENTE)){
-            usuarioServicio.actualizarCliente(archivo, email, name, direccion, phone, password, password2);
-        } else if (usuario.getRol().equals(Rol.PROVEEDOR)) {
-            usuarioServicio.actualizarProveedor(archivo,email,name,password,password2,phone,provincia, ocupacion.getNombre());
-        }
+            if (usuario.getRol().equals(Rol.CLIENTE)) {
+                usuarioServicio.actualizarCliente(archivo, email, name, direccion, phone, password, password2);
+            } else if (usuario.getRol().equals(Rol.PROVEEDOR)) {
+                usuarioServicio.actualizarProveedor(archivo, email, name, password, password2, phone, provincia, ocupacion.getNombre());
+            }
         } catch (MiException e) {
             System.err.println(e.getMessage());
         }
@@ -212,8 +217,8 @@ public class PortalController {
 
     @PostMapping("/registro")
     public String registro(@RequestParam MultipartFile archivo, @RequestParam String email, @RequestParam String name,
-                           @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
-                           @RequestParam Rol rol, @RequestParam Provincias provincia) {
+            @RequestParam String password, @RequestParam String password2, @RequestParam String phone,
+            @RequestParam Rol rol, @RequestParam Provincias provincia) {
         try {
             System.out.println("holas");
             usuarioServicio.crearUsuario(archivo, email, name, password, password2, phone, rol, provincia);

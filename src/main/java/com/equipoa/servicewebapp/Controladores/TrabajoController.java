@@ -1,6 +1,8 @@
 package com.equipoa.servicewebapp.Controladores;
 
 import com.equipoa.servicewebapp.Entidades.Calificacion;
+import com.equipoa.servicewebapp.Entidades.Trabajo;
+import com.equipoa.servicewebapp.Entidades.Usuario;
 import com.equipoa.servicewebapp.Enum.Estados;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.TrabajoRepositorio;
@@ -45,43 +47,63 @@ public class TrabajoController {
 //      @return
     @GetMapping("/solicitarservicio/{id}")
     public String solicitarTrabajo(@PathVariable Long id, ModelMap modelo) throws MiException {
-        
+
         modelo.put("proveedor", usuarioServicio.getOne(id));
-        
 
         return "solicitarTrabajo.html";
     }
 
-    @GetMapping("/trabajoSolicitado/")
-    public String trabajoSolicitado(/*@PathVariable String id, ModelMap modelo**/) {
-        
-       // modelo.put("direccion", trabajoServicio.getOne(id));
+    @GetMapping("/trabajosolicitado/{id}")
+    public String trabajoSolicitado(@PathVariable Long id, ModelMap modelo) throws MiException {
 
+        Trabajo trabajo = trabajoServicio.getOne(id);
+        Long idCliente = trabajo.getIdCliente();
+        Usuario cliente = usuarioServicio.getOne(idCliente);
+        modelo.put("trabajo", trabajo);
+        modelo.addAttribute("cliente", cliente);
+
+        // modelo.put("direccion", trabajoServicio.getOne(id));
         return "trabajoSolicitado.html";
     }
-    
+
     @PostMapping("/solicitarservicio/{id}")
-    public String enviarSolicitud(@PathVariable Long id, @RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd")Date fechaInicio, @RequestParam String direccion, @RequestParam String descripcion,HttpSession session, ModelMap modelo) throws MiException {
+    public String enviarSolicitud(@PathVariable Long id, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio, @RequestParam String direccion, @RequestParam String descripcion, HttpSession session, ModelMap modelo) throws MiException {
 
         try {
-            
-            trabajoServicio.registrarTrabajo(descripcion, fechaInicio,  Estados.ACEPTADO, session,id);
-            
+
+            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, Estados.SOLICITADO, session, id);
+
             modelo.put("exito", "trabajo solicitado con éxito");
 
             return "index.html";
-        } 
-        
-        catch (MiException e) {
+        } catch (MiException e) {
 
             modelo.put("error", "Error al enviar la solicitud de trabajo");
-            
+
             return "solicitarTrabajo.html";
 
         }
-    
-    }
 
+    }
+    
+    @GetMapping("/trabajoaceptado/{id}")
+    public String aceptarTrabajo(@PathVariable Long id, ModelMap model){
+        
+        trabajoServicio.aceptarTrabajo(id);
+    
+    return "trabajoAceptado.html";
+    }
+    
+    @GetMapping("/trabajorechazado/{id}")
+    public String rechazarTrabajo(@PathVariable Long id, HttpSession session) throws MiException{
+        
+        trabajoServicio.rechazarTrabajo(session, id);
+        
+        
+    
+    return "trabajoRechazado.html";
+    }
+    
     @GetMapping("/calificar/{idTrabajo}")
     public String mostrarFormularioCalificacion(@PathVariable Long idTrabajo, Model model) {
         model.addAttribute("idTrabajo", idTrabajo);
@@ -93,9 +115,11 @@ public class TrabajoController {
     public String calificarTrabajo(@PathVariable Long idTrabajo, @ModelAttribute Calificacion calificacion) {
         try {
             trabajoServicio.calificarTrabajo(idTrabajo, calificacion.getComentario(), calificacion.getPuntuacion());
-            return "redirect:/trabajo"; 
+            return "redirect:/trabajo";
         } catch (MiException e) {
             return "error";
         }
+        
+     
     }
 }

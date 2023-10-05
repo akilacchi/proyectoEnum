@@ -64,7 +64,8 @@
                                 <i class="fa-solid fa-plus"></i>
                                 Contactar
                             </button>
-                            <a class="boton-solicitar-servicio" th:href="@{/trabajo/solicitarservicio/__${proveedor.ID}__}">
+                            <a class="boton-solicitar-servicio" th:href="@{/trabajo/solicitarservicio/__${proveedor.ID}__}"
+                               sec:authorize="hasRole('ROLE_CLIENTE')">
                                 <i class="fa-solid fa-plus"></i>
                                 Solicitar servicio
                             </a>

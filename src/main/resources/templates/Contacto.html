@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    
+   
+    <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+    <link rel="stylesheet" type="text/css" href="/Css/Contacto.css">
+    <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+    <link rel="stylesheet" type="text/css" href="/css/Header.css">
+    <link rel="stylesheet" type="text/css" href="/Css/Footer.css">
+    
+    <title>Contacto</title>
+</head>
+<body>
+   
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>  
+        </header>
+  
+    
+    <div class="contenedor-formulario">
+        <section class="informacion-formulario">
+            <h1>Contacto</h1>
+            <p>Estamos aquí para ayudarte. Contáctanos y te responderemos lo antes posible.</p>
+            <ul class="informacion-contacto">
+                <li><i class="fa fa-phone"></i> Llámanos: 123-456-789</li>
+                <li><i class="fa fa-envelope"></i> Correo Electrónico: info@reparoya.com</li>
+            </ul>
+        </section>
+        
+        <section class="formulario-de-contacto">
+            <h2>Envíanos un Mensaje</h2>
+            <form action="#" autocomplete="off">
+                <div class="grupo-de-formulario">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="campo" required>
+                </div>
+                <div class="grupo-de-formulario">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="campo" required>
+                </div>
+                <div class="grupo-de-formulario">
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" class="campo" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="boton-enviar">Enviar Mensaje</button>
+            </form>
+        </section>
+       
+    </div>
+    <footer>
+        <div th:replace="/footer :: vista_footer"></div>
+    </footer>
+</body>
+</html>

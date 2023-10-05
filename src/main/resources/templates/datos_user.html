@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Datos del Usuario</title>
+        <link rel="stylesheet" type="text/css" href="/css/datos_user.css">
+        <link rel="stylesheet" type="text/css" href="/css/Header.css">
+        <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="/css/Main.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Footer.css">
+
+    </head>
+    <body class="body">
+
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>
+        </header>
+        <main class="main">
+            <div class="card">
+                <h1>Datos del Usuario</h1>
+
+                <img th:if="${usuario.profilePicture != null}" th:src="@{/img/perfil/__${usuario.ID}__}" alt="Foto de Perfil"
+                     class="profile-picture">
+                <img th:if="${usuario.profilePicture == null}" th:src="@{/img/profile-icon-design-free-vector.jpg}"
+                     alt="Foto de Perfil" class="profile-picture">
+
+                <div class="data-columns">
+                    <div class="column">
+                        <p><strong>Nombre de Usuario:</strong> <span th:text="${usuario.name}"></span></p>
+                        <p><strong>Email:</strong> <span th:text="${usuario.email}"></span></p>
+                        <p><strong>Número de Teléfono:</strong> <span th:text="${usuario.phone}"></span></p>
+                    </div>
+
+                    <div class="column">
+                        <p><strong>Contraseña:</strong> *************</p>
+                        <div th:if="${usuario.rol == T(com.equipoa.servicewebapp.Enum.Rol).CLIENTE}">
+                            <p><strong>Calle/Dirección:</strong> <span th:text="${usuario.direccion}"></span></p>
+                        </div>
+                        <div th:if="${usuario.rol == T(com.equipoa.servicewebapp.Enum.Rol).PROVEEDOR}">
+                            <p><strong>Ocupacion:</strong> <span th:text="${usuario.ocupacion.nombre}"></span></p>
+                        </div>
+                        <p><strong>Provincia: </strong><span th:text="${#strings.toString(usuario.provincia)}"></span></p>
+                    </div>
+                </div>
+                <a th:href="@{/perfil/modificar}">
+                    <button class="edit-button">Editar datos</button>
+                </a>
+                <a th:href="@{/perfil/notificaciones}">
+                    <button class="edit-button">Ver notificaciones</button>
+                </a>
+            </div>
+        </main>
+        <footer>
+            <div th:replace="/footer :: vista_footer"></div>
+        </footer>
+    </body>
+</html>

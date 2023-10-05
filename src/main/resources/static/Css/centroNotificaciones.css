@@ -1,0 +1,32 @@
+.notif {
+    background: white;
+    padding: 1rem;
+    margin: auto;
+    border: none;
+    border-radius: 0.5rem;
+    text-decoration: none;
+}
+
+.container {
+    position: relative;
+    background-color: #5C8374;
+    padding: 1rem;
+    margin: auto;
+    border: none;
+    border-radius: 1rem;
+    text-decoration: none;
+}
+
+.button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1rem;
+    color: #93B1A6;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #183D3D;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
