@@ -15,7 +15,7 @@
 .card h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: white;
+    color: #93B1A6;
 }
 
 .data-columns {
@@ -44,7 +44,7 @@
 
 .edit-button {
     background-color: #183D3D;
-    color: white;
+    color: #93B1A6;
     cursor: pointer;
     padding: 10px 20px;
     border: none;
