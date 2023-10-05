@@ -1,17 +1,8 @@
-/* crearOcupacion.css */
-
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
 .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #93B1A6;
 }
 
 .card {
@@ -46,27 +37,23 @@ body {
 
 .card label,
 .card input,
-.card select,
-.card button {
-    margin: 10px 0;
-    width: 100%;
+.card select
+{
+    font-family: 'Roboto';
+    margin: 10px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .button {
-    background-color: #183D3D;
-    color: white;
-    padding: 10px 5px;
+    font-size: 1rem;
+    color: #93B1A6;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Roboto';
-    margin-top: 10px;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    font-size: 20px;
-    align-items: center;
-    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: #183D3D;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
