@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/Main.css">
+    <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+    <link rel="stylesheet" type="text/css" href="/css/centroNotificaciones.css">
+    <title>Centro de notificaciones</title>
+</head>
+<body>
+<div class="container">
+    <h1>Notificaciones</h1>
+    <a th:href="@{/perfil}" class="button"> Volver a perfil</a>
+    <div th:each="l : ${listaNotificaciones}" class="notif">
+        <form th:action="@{/perfil/notificaciones/__${l.id}__}">
+            <p th:text="${l.mensaje}"></p>
+            <p th:text="${'Emisor: '+ l.emisor.name}"></p>
+            <button type="submit"> Borrar notificacion</button>
+        </form>
+            <a th:if="${l.tipoNotificacion==T(com.equipoa.servicewebapp.Enum.TipoNotificacion).SOLICITUD}" th:href="@{/proveedor/loginproveedor}"><button>Ver trabajo</button></a>
+    </div>
+
+</div>
+
+</body>
+</html>

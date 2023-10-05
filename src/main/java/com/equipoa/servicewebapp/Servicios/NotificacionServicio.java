@@ -2,6 +2,7 @@ package com.equipoa.servicewebapp.Servicios;
 
 import com.equipoa.servicewebapp.Entidades.Notificaciones;
 import com.equipoa.servicewebapp.Entidades.Usuario;
+import com.equipoa.servicewebapp.Enum.TipoNotificacion;
 import com.equipoa.servicewebapp.Excepciones.MiException;
 import com.equipoa.servicewebapp.Repositorios.NotificacionesRepositorio;
 import com.equipoa.servicewebapp.Repositorios.UsuarioRepositorio;
@@ -43,6 +44,26 @@ public class NotificacionServicio {
         notificacionesRepositorio.save(notificacion);
     }
 
+    @Transactional
+    public void crearNotificacionTrabajo(String mensaje, Usuario emisor, Long idReceptor) throws MiException {
+        validar(mensaje);
+        if (emisor == null) {
+            throw new MiException("Remitente inexistente");
+        }
+        Usuario receptor = usuarioRepositorio.findById(idReceptor)
+                .orElseThrow(() -> new MiException("Usuario receptor inexistente"));
+
+        Notificaciones notificacion = new Notificaciones();
+
+        notificacion.setMensaje(mensaje);
+        notificacion.setEmisor(emisor);
+        notificacion.setReceptor(receptor);
+        notificacion.setTipoNotificacion(TipoNotificacion.SOLICITUD);
+
+        notificacion.setFechaEnvio(new Date());
+
+        notificacionesRepositorio.save(notificacion);
+    }
     @Transactional
     public void eliminarNotificacion(Usuario usr, Long idNotificacion) throws MiException {
         if (usr == null) {

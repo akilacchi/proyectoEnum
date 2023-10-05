@@ -1,47 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/Header.css">
-        
+        <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
         <link rel="stylesheet" type="text/css" href="/css/Main.css">
         <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Footer.css">
         <link rel="stylesheet" type="text/css" href="/Css/solicitar_servicio.css">
         <title>Solicitud de Trabajo</title>
     </head>
     <body>
-        <section class="prueba">
-        <div class="card" style="width: 18rem;"  enctype="multipart/form-data">
-            
-             <div class="card-body">
-                 <h5 class="card-title">SOLICITUD DE TRABAJO </h5>
-                 <h4>Descripción: </h4>
-                 <p class="card-text"th:text="${trabajo.descripcion}" >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                 <h4>Fecha inicio trabajo </h4>
-                 <p th:text="${trabajo.fechaInicio}"></p>
-                 <h4>Nombre Cliente</h4>
-                 <p th:text="${cliente.name}"></p>
-                   <div>
-                        <a class="aceptar-trabajo-button"  th:href="@{/trabajo/trabajoaceptado/__${trabajo.id}__}">Aceptar</a>
-                          <a class="rechazar-trabajo-button" th:href="@{/trabajo/trabajorechazado/__${trabajo.id}__}">Rechazar</a>
-                       
-                   </div>
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>
+        </header>
+        <div  class="contenedor">
+            <div  class="contenedor-formulario">
+                <h1>SOLICITUD DE TRABAJO</h1>
+                <section class="contenedor-section">
+                    <div class="card" style="width: 18rem;"  enctype="multipart/form-data">
 
-                   <div id="motivoRechazo">
-                       <label for="motivo">Motivo del Rechazo:</label>
-                       <textarea id="motivo" name="motivo"></textarea>
-                       <button type="button" id="rechazarYenviar">Rechazar y Enviar</button>
-                   </div>
-                 
-             </div>
+                        <div class="card-body">
+
+                            <h4>Descripción: </h4>
+                            <p class="card-text"th:text="${trabajo.descripcion}" >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h4>Fecha inicio trabajo </h4>
+                            <p th:text="${trabajo.fechaInicio}"></p>
+                            <h4>Nombre Cliente</h4>
+                            <p th:text="${cliente.name}"></p>
+                            <div>
+                                <a class="aceptar-trabajo-button"  th:href="@{/trabajo/trabajoaceptado/__${trabajo.id}__}">Aceptar</a>
+                                <a class="rechazar-trabajo-button" th:href="@{/trabajo/trabajorechazado/__${trabajo.id}__}">Rechazar</a>
+
+                            </div>
+
+                            <div id="motivoRechazo">
+                                <label for="motivo">Motivo del Rechazo:</label>
+                                <textarea id="motivo" name="motivo"></textarea>
+                                <button type="button" id="rechazarYenviar">Rechazar y Enviar</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
         </div>
-       </section>
 
-          
-        
-
-
+        <footer>
+            <div th:replace="/footer :: vista_footer"></div>
+        </footer>
     </body>
 </html>
 

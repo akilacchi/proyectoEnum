@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 
+<<<<<<< HEAD
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,9 +15,18 @@ and open the template in the editor.
         <link rel="stylesheet" href="/css/style2.css">
 
         <title>Actividad proveedor</title>
+=======
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+    <link rel="stylesheet" type="text/css" href="/css/style2.css">
+    <title>Página perfil proveedor</title>
+>>>>>>> 7edcab87301da32ac12a3687812ada8901b73846
 
-    </head>
 
+<<<<<<< HEAD
     <body>
         <header class="header">
             <nav th:replace="/navbar :: nav_bar"></nav>
@@ -146,5 +150,130 @@ and open the template in the editor.
             <div th:replace="/footer :: vista_footer"></div>
         </footer>
     </body>
+=======
+</head>
+
+<body>
+<main>
+    <h4 class="titulo_principal">Mi Perfil Proveedor</h4>
+    <p class="etiquetas"><span th:text="${proveedor.name}"></span></p>
+    <div class="contenedor-imagen">
+        <img class="imagen-perfil" th:src="@{/img/perfil/__${proveedor.ID}__}"
+             onerror="this.src='/Img/card/blank-profile-picture-973460_960_720.webp'" alt="Foto de Perfil"/>
+    </div>
+    <div class="contenedor-informacion-descripcion">
+        <div class="contenedor-descripcion">
+            <div class="titulo-descripcion">
+                <h4 class="etiquetas">Descripción</h4>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="texto-descripcion">
+                <p>
+                    Profesional con más de 10 años de experiencia
+                </p>
+            </div>
+        </div>
+        <div class="contenedor-informacion-adicional">
+            <div class="titulo-informacion-adicional">
+                <h4 class="etiquetas">Ocupacion</h4>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="texto-descripcion">
+                <div class="">
+                    <span th:if="${proveedor.ocupacion != null}" th:text="${proveedor.ocupacion.nombre}"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor-informacion-calificacion">
+            <div class="titulo-informacion-calificacion">
+                <h4 class="etiquetas">Calificación</h4>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <p class="etiquetas" th:if="${promedio != null}">Promedio de Puntuaciones: <span
+                    th:text="${promedio}"></span></p>
+            <div class="texto-descripcion">
+                <div class="calificacion-estrellas">
+                    <span class="calificacionestrella" data-valor="1">&#9733;</span>
+                    <span class="calificacionestrella" data-valor="2">&#9733;</span>
+                    <span class="calificacionestrella" data-valor="3">&#9733;</span>
+                    <span class="calificacion-strella" data-valor="4">&#9733;</span>
+                    <span class="calificacionestrella" data-valor="5">&#9733;</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<section class="trabajos-card">
+    <section class="prueba">
+        <h1 class="etiquetas">Trabajos solicitados</h1>
+        <div class="card" style="width: 18rem;" enctype="multipart/form-data" th:each="trabajo:${trabajosSolicitados}">
+
+            <img class="card-img-top" src="/img/nuevotrabajo.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${trabajo.descripcion}">Card title</h5>
+                <p class="card-text" th:text="${trabajo.fechaInicio}">Some quick example text to build on the card title
+                    and make up the bulk of the card's content.</p>
+                <a class="btn btn-primary" th:href="@{/trabajo/trabajosolicitado/__${trabajo.id}__}">Ver detalle</a>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="prueba">
+        <h1 class="etiquetas">Trabajos Aceptados</h1>
+        <div class="card" style="width: 18rem;" enctype="multipart/form-data" th:each="trabajo:${trabajosAceptados}">
+
+            <img class="card-img-top" src="/img/accepted.jpeg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${trabajo.descripcion}">Card title</h5>
+                <p class="card-text" th:text="${trabajo.fechaInicio}">Some quick example text to build on the card title
+                    and make up the bulk of the card's content.</p>
+                <a class="btn btn-primary" th:href="@{/trabajo/trabajosolicitado/__${trabajo.id}__}">Ver detalle</a>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="prueba">
+        <h1 class="etiquetas">Trabajos Rechazados</h1>
+        <div class="card" style="width: 18rem;" enctype="multipart/form-data" th:each="trabajo:${trabajosRechazados}">
+
+            <img class="card-img-top" src="/img/denied.jpeg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${trabajo.descripcion}">Card title</h5>
+                <p class="card-text" th:text="${trabajo.fechaInicio}">Some quick example text to build on the card title
+                    and make up the bulk of the card's content.</p>
+                <a class="btn btn-primary" th:href="@{/trabajo/trabajosolicitado/__${trabajo.id}__}">Ver detalle</a>
+
+            </div>
+        </div>
+    </section>
+
+
+    </div>
+
+</section>
+<section class="contenedor-trabajos-realizados">
+    <h2 class="etiquetas">Trabajos realizados</h2>
+    <div th:if="${calificaciones != null}">
+        <div th:each="calificacion : ${calificaciones}" class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title" th:text="${calificacion.clienteEmisor.name}"></h4>
+                <strong class="etiquetas">Trabajo realizado: </strong><span class="card-title"
+                                                                            th:text="${calificacion.trabajo.descripcion}"></span>
+                <p class="etiquetas">
+                    <strong>Puntuación:</strong> <span th:text="${calificacion.puntuacion}"></span><br/>
+                    <strong>Comentario:</strong> <span th:text="${calificacion.comentario}"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div th:if="${calificaciones == null}">
+        <p>No hay comentarios ni puntuaciones para mostrar.</p>
+    </div>
+</section>
+</body>
+>>>>>>> 7edcab87301da32ac12a3687812ada8901b73846
 
 </html>

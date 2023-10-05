@@ -31,6 +31,14 @@ public class Notificaciones {
     public Notificaciones() {
     }
 
+    public TipoNotificacion getTipoNotificacion() {
+        return tipoNotificacion;
+    }
+
+    public void setTipoNotificacion(TipoNotificacion tipoNotificacion) {
+        this.tipoNotificacion = tipoNotificacion;
+    }
+
     public Long getId() {
         return id;
     }
