@@ -8,7 +8,8 @@
     border: none;
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-    margin: 10px 30px;
+    margin-left: 30px;
+    margin-top: 70px;
     font-family: 'Roboto';
 }
 

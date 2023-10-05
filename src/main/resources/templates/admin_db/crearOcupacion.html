@@ -5,10 +5,10 @@
         <title>Crear Ocupacion</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
- <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
         <link rel="stylesheet" type="text/css" href="/css/Header.css">
         <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
-        <link rel="stylesheet" type="text/css" href="/css/admin_db_styles/crearOcupacionDB.css">
+        <link rel="stylesheet" type="text/css" href="/css/Formulario.css">
 
     </head>
     <body>
@@ -16,31 +16,29 @@
             <nav th:replace="/navbar :: nav_bar"></nav>
         </header>
 
-        <div class="form-container">
-            <div class="card">
-                <h1>Crear Ocupaciones</h1>
-                <div class="form-wrapper">
-                   
-                    <!-- Formulario para crear la ocupación y subir la imagen -->
-                    <form id="formularioCrear" method="post" action="/admindashboard/ocupacion" enctype="multipart/form-data">
-                        <label>Ingrese ocupacion</label>
-                        <br>
-                        <input type="text" name="nombre" placeholder="Ocupacion aquí">
-                        <br>
-                        <label>Suba una foto de perfil</label>
-                        <br>
-                        <input name="archivo" type="file">
-                        <br>
-                        <label>Descripción</label>
-                        <br>
-                        <textarea name="descripcion"></textarea>
-                        <br>
+        <div class="contenedor">
 
+            <h1>Crear Ocupaciones</h1>
+            <div>
+
+                <form id="formularioCrear" method="post" action="/admindashboard/ocupacion" enctype="multipart/form-data">
+                    <div class="contenedor_formulario" >
+                        <div class="contenedor_input">
+                            <label>Ingrese ocupacion</label>
+                            <input type="text" name="nombre" placeholder="Ocupacion aquí">
+                            <label>Suba una foto de perfil</label>
+                            <input name="archivo" type="file">
+                            <label>Descripción</label>
+                            <textarea name="descripcion"></textarea>
+                        </div>
+                    </div>
+                    <div class="contenedor_button">
                         <button type="submit" class="button">Crear Ocupacion</button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
-    </body>
+</body>
 </html>
