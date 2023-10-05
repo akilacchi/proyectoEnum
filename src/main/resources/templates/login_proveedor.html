@@ -12,19 +12,28 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/css/Header.css">
+        <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="/css/Main.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Footer.css">
         <link rel="stylesheet" href="/css/style2.css">
-        <title>Página perfil proveedor</title>
+
+        <title>Actividad proveedor</title>
 
     </head>
 
     <body>
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>
+        </header>
         <main>
             <h4 class="titulo_principal">Mi Perfil Proveedor</h4>
-            <p class="etiquetas"><span th:text="${proveedor.name}"></span></p>
             <div class="contenedor-imagen">
                 <img class="imagen-perfil" th:src="@{/img/perfil/__${proveedor.ID}__}"
                      onerror="this.src='/Img/card/blank-profile-picture-973460_960_720.webp'" alt="Foto de Perfil" />
             </div>
+            <p class="etiquetas"><span th:text="${proveedor.name}"></span></p>
             <div class="contenedor-informacion-descripcion">
                 <div class="contenedor-descripcion">
                     <div class="titulo-descripcion">
@@ -35,6 +44,7 @@ and open the template in the editor.
                         <p >
                             Profesional con más de 10 años de experiencia
                         </p>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
                 </div>
                 <div class="contenedor-informacion-adicional">
@@ -114,7 +124,7 @@ and open the template in the editor.
         
         </section>
         <section class="contenedor-trabajos-realizados">
-            <h2 class="etiquetas">Trabajos realizados</h2>
+            <h2 class="etiquetas"></h2>
             <div th:if="${calificaciones != null}">
                 <div th:each="calificacion : ${calificaciones}" class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -129,9 +139,12 @@ and open the template in the editor.
                 </div>
             </div>
             <div th:if="${calificaciones == null}">
-                <p>No hay comentarios ni puntuaciones para mostrar.</p>
+                <p></p>
             </div>
         </section>
+        <footer>
+            <div th:replace="/footer :: vista_footer"></div>
+        </footer>
     </body>
 
 </html>
