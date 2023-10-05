@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/" lang="es">
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <title>Crear Ocupacion</title>
@@ -53,9 +54,56 @@
                     document.getElementById("formularioModificar").submit();
                 }
             </script>
+=======
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Ocupacion</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/Css/Formulario.css">
+        <link rel="stylesheet" type="text/css" href="/css/Header.css">
+        <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="/css/Body.css">
+
+
+    </head>
+    <body>
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>
+        </header>
+
+        <div class="contenedor">
+            <h1>Modificar Ocupaciones</h1>
+            <div>
+                <form id="formularioCrear" method="post" action="/admindashboard/ocupacion" enctype="multipart/form-data">
+                    <div class="contenedor_formulario" >
+                        <div class="contenedor_input">
+
+                            <label>Ingrese ocupacion</label>
+                            <input type="text" name="nombre" placeholder="Ocupacion aquí">
+                            <label>Suba una foto de perfil</label>
+                            <input name="archivo" type="file">
+                            <label>Ingrese descripción de la ocupación</label>
+                            <textarea name="descripcion"></textarea>
+                        </div>
+                    </div>
+                    <div class="contenedor_button">
+
+                        <button type="submit" class="button">Crear Ocupacion</button>
+
+                    </div>
+                </form>
+            </div>
+>>>>>>> defa06582138f1640a7e4573fe2e90aad70b1ce2
         </div>
     </div>
 </div>
 
+<<<<<<< HEAD
 </body>
+=======
+
+    </body>
+>>>>>>> defa06582138f1640a7e4573fe2e90aad70b1ce2
 </html>

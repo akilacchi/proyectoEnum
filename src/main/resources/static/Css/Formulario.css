@@ -8,12 +8,19 @@
     border: none;
     border-radius: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-    margin: 10px 30px;
+    margin-left: 30px;
+    margin-top: 70px;
     font-family: 'Roboto';
 }
 
 h1 {
     font-size: 2rem;
+    margin: 5px;
+    color: #93B1A6;
+    text-align: center;
+}
+h2 {
+    font-size: 1.5rem;
     margin: 5px;
     color: #93B1A6;
     text-align: center;
