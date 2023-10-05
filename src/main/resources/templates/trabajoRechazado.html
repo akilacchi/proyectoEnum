@@ -1,20 +1,33 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
     <head>
-        <title>TODO supply a title</title>
+        <title>Trabajo rechazado</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/css/trabajoRechazado.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/Header.css">
+        <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/trabajoRechazado.css">
+
+
     </head>
     <body>
-        <div>
-            <h1 class="mensaje-aceptar">¡Auch, has rechazado este nueva solicitud de trabajo!</h1>
-            <a class="perfil-proveedor-button" href="/proveedor/loginproveedor">Regresar a mi perfil</a>
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>
+        </header>
+        <div class="contenedor">
+
+
+            <div>
+                <h1 class="mensaje-aceptar">¡Has rechazado esta solicitud de trabajo!</h1>
+            </div>
+            <div class="contenedor_button">
+                <a class="perfil-proveedor-button" href="/proveedor/loginproveedor">Regresar a mi perfil</a>
+            </div>
         </div>
+
     </body>
 </html>
