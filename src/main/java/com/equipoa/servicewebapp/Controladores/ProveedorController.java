@@ -76,9 +76,16 @@ public class ProveedorController {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
         System.out.println("El ID de la sesion es: " + logueado.getID());
         List<Trabajo> trabajos = trabajoServicio.listaTrabajosPorUsuario(logueado.getID());
+        List<Trabajo> trabajosAceptados = trabajoServicio.trabajosAceptados(logueado.getID());
+        List<Trabajo> trabajosSolicitados = trabajoServicio.trabajosSolicitados(logueado.getID());
+        List<Trabajo> trabajosRechazados = trabajoServicio.trabajosRechazados(logueado.getID());
         System.out.println("Trabajos: " + trabajos);
         modelo.addAttribute("proveedor", logueado);
         modelo.addAttribute("trabajos", trabajos);
+        modelo.addAttribute("trabajosAceptados", trabajosAceptados);
+        modelo.addAttribute("trabajosSolicitados", trabajosSolicitados);
+        modelo.addAttribute("trabajosRechazados", trabajosRechazados);
+        
         return "login_proveedor.html";
 
     }

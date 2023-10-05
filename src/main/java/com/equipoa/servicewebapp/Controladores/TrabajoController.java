@@ -71,7 +71,7 @@ public class TrabajoController {
 
         try {
 
-            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, Estados.ACEPTADO, session, id);
+            trabajoServicio.registrarTrabajo(descripcion, fechaInicio, Estados.SOLICITADO, session, id);
 
             modelo.put("exito", "trabajo solicitado con éxito");
 
@@ -85,7 +85,25 @@ public class TrabajoController {
         }
 
     }
-
+    
+    @GetMapping("/trabajoaceptado/{id}")
+    public String aceptarTrabajo(@PathVariable Long id, ModelMap model){
+        
+        trabajoServicio.aceptarTrabajo(id);
+    
+    return "trabajoAceptado.html";
+    }
+    
+    @GetMapping("/trabajorechazado/{id}")
+    public String rechazarTrabajo(@PathVariable Long id, HttpSession session) throws MiException{
+        
+        trabajoServicio.rechazarTrabajo(session, id);
+        
+        
+    
+    return "trabajoRechazado.html";
+    }
+    
     @GetMapping("/calificar/{idTrabajo}")
     public String mostrarFormularioCalificacion(@PathVariable Long idTrabajo, Model model) {
         model.addAttribute("idTrabajo", idTrabajo);
@@ -101,5 +119,7 @@ public class TrabajoController {
         } catch (MiException e) {
             return "error";
         }
+        
+     
     }
 }
