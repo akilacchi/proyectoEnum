@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/solicitar_servicio.css">
-    <title>Solicitud de Trabajo</title>
-</head>
-<body>
-    <h1>Solicitud de servicio</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" type="text/css" href="/css/Main.css">
+        <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+        <link rel="stylesheet" type="text/css" href="/Css/solicitar_servicio.css">
+        <title>Solicitud de Trabajo</title>
+    </head>
+    <body>
+        <h1>Solicitud de servicio</h1>
 
-    <form th:href="@{/trabajo/solicitarservicio/__${proveedor.ID}__}" method="POST">
-        <input hidden th:value="${id}" name="id">
-        <label for="fechaInicio">Fecha de Inicio:</label>
-        <input type="date" id="fechaInicio" name="fechaInicio" required>
+        <form th:href="@{/trabajo/solicitarservicio/__${proveedor.ID}__}" method="POST">
+            <input hidden th:value="${id}" name="id">
+            <label for="fechaInicio">Fecha de Inicio:</label>
+            <input type="date" id="fechaInicio" name="fechaInicio" required>
 
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" >
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" >
 
-        <label for="descripcion">Descripción:</label>
-        <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
-        <div>
-            <button type="submit" id="aceptarTrabajo">Enviar</button>
-        </div>
-
-        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
-            <div class="card-body">
-                <h5 class="card-title">Error 👎</h5>
-                <p class="card-text" th:text="${error}"></p>
+            <label for="descripcion">Descripción:</label>
+            <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+            <div>
+                <button type="submit" id="aceptarTrabajo">Enviar</button>
             </div>
-        </div>
-        <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
-            <div class="card-body">
-                <h5 class="card-title">Exito!</h5>
-                <p class="card-text" th:text="${exito}"></p>
+
+            <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+                <div class="card-body">
+                    <h5 class="card-title">Error 👎</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
             </div>
-    </form>
-    
-</body>
+            <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                <div class="card-body">
+                    <h5 class="card-title">Exito!</h5>
+                    <p class="card-text" th:text="${exito}"></p>
+                </div>
+        </form>
+
+    </body>
 </html>

@@ -249,11 +249,11 @@ public class AdminController {
     }
 
     @GetMapping("/revisarReportes")
-    public String revisarReportes(HttpSession session, ModelMap modelo){
+    public String revisarReportes(HttpSession session, ModelMap modelo) {
         if (validarAdmin(session)) {
             modelo.addAttribute("listaReportes", notificacionesRepositorio.buscarNotificacionReporte());
             return "admin_db/reportes.html";
-        }else{
+        } else {
             return "redirect:/admindashboard/";
         }
 

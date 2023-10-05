@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/Css/preguntasFrecuentes.css">
+   
+    <link rel="stylesheet" type="text/css" href="/Css/Body.css">
+    <link rel="stylesheet" type="text/css" href="/css/Header.css">
+    <link rel="stylesheet" type="text/css" href="/css/NavBar.css">
+    <link rel="stylesheet" type="text/css" href="/Css/Footer.css">
+    <title>Preguntas Frecuentes</title>
+</head>
+
+<body>
+    
+    <div class="container">
+        <header class="header">
+            <nav th:replace="/navbar :: nav_bar"></nav>  
+        </header>
+        <div class="acordeon-container"></div>
+        <div class="preguntas">
+            <h1 class="titulo">Preguntas Frecuentes</h1>
+            <div class="acordeon">
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Qué tipos de servicios ofrecen?</button>
+                    <div class="acordeon-contenido">
+                        Brindamos una amplia gama de servicios que incluyen electricidad, gas, construcción y más. Si
+                        necesitas algún servicio en particular, no dudes en consultarnos.
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Cómo puedo solicitar sus servicios?</button>
+                    <div class="acordeon-contenido">
+                        Puedes ponerte en contacto con nosotros a través de nuestro sitio web, por teléfono o correo
+                        electrónico. Estamos disponibles para discutir tus necesidades y proporcionarte un presupuesto.
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Cuál es el tiempo de respuesta para las solicitudes de
+                        servicio?</button>
+                    <div class="acordeon-contenido">
+                        Nuestro tiempo de respuesta varía según la demanda, pero nos esforzamos por atender las
+                        solicitudes de manera eficiente y oportuna.
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Pueden ayudarme con proyectos de remodelación o renovación?</button>
+                    <div class="acordeon-contenido">
+                        Sí, estamos equipados para proyectos de remodelación y renovación en hogares y locales
+                        comerciales. Habla con nosotros sobre tus ideas.
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Tienen referencias de proyectos anteriores?</button>
+                    <div class="acordeon-contenido">
+                        Sí, podemos proporcionarte referencias de proyectos anteriores y ejemplos de trabajos realizados
+                        para clientes satisfechos.
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Cuál es su política de garantía para el trabajo realizado?</button>
+                    <div class="acordeon-contenido">
+                        Ofrecemos garantías para nuestros servicios, y la duración de la garantía puede variar según el
+                        tipo de trabajo. Te proporcionaremos detalles específicos sobre la garantía antes de comenzar
+                        cualquier proyecto.
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Trabajan con materiales sostenibles o respetuosos con el medio
+                        ambiente?</button>
+                    <div class="acordeon-contenido">
+                        Sí, estamos comprometidos con la sostenibilidad ambiental. Podemos utilizar materiales
+                        respetuosos con el medio ambiente en tus proyectos si así lo deseas.
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Qué formas de pago aceptan?</button>
+                    <div class="acordeon-contenido">
+                        Aceptamos una variedad de formas de pago, incluyendo efectivo, tarjetas de crédito,
+                        transferencias bancarias y otros métodos convenientes. Te proporcionaremos información detallada
+                        sobre las opciones de pago.
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <button class="acordeon-boton">¿Cuál es su plazo típico para completar proyectos?</button>
+                    <div class="acordeon-contenido">
+                        El plazo para completar proyectos varía según su tamaño y complejidad. Te proporcionaremos un
+                        cronograma estimado al discutir los detalles de tu proyecto.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div th:replace="/footer :: vista_footer"></div>
+        </footer>
+    </div>
+    
+    <script>
+        const acordeonItems = document.querySelectorAll('.acordeon-item');
+
+        acordeonItems.forEach(item => {
+            const boton = item.querySelector('.acordeon-boton');
+            const contenido = item.querySelector('.acordeon-contenido');
+
+            boton.addEventListener('click', () => {
+                item.classList.toggle('activo');
+                if (item.classList.contains('activo')) {
+                    contenido.style.maxHeight = contenido.scrollHeight + 'px';
+                    const container = document.querySelector('.container');
+                    container.style.width = '100%'; 
+                } else {
+                    contenido.style.maxHeight = '0';
+                    const container = document.querySelector('.container');
+                    container.style.width = 'auto'; 
+                }
+            });
+        });
+    </script>
+</body>
+</html>

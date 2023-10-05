@@ -7,6 +7,8 @@ package com.equipoa.servicewebapp.Repositorios;
 
 import com.equipoa.servicewebapp.Entidades.Trabajo;
 import com.equipoa.servicewebapp.Entidades.Usuario;
+import com.equipoa.servicewebapp.Enum.Estados;
+import static com.equipoa.servicewebapp.Enum.Estados.ACEPTADO;
 
 import java.util.List;
 
@@ -19,8 +21,8 @@ import org.springframework.data.repository.query.Param;
  */
 public interface TrabajoRepositorio extends JpaRepository<Trabajo, Long> {
 
-
     @Query("SELECT t FROM Trabajo t WHERE t.idProveedor=:id")
     List<Trabajo> buscarTrabajosPorUsuario(@Param("id") Long id);
-
+    @Query("SELECT t FROM Trabajo t WHERE t.idProveedor=:id AND t.estado LIKE :estado")
+    List<Trabajo> buscarTrabajosEstadoPorUsuario(@Param("id") Long id, @Param("estado") Estados estado);
 }

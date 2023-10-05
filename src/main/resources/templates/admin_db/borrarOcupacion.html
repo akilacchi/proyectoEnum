@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/" lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Borrar Ocupacion</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/admin_db_styles/borrarOcupacion.css">
-    <link rel="stylesheet" th:href="@{/css/styleregistro.css}">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Borrar Ocupacion</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/admin_db_styles/borrarOcupacion.css">
+        <link rel="stylesheet" th:href="@{/css/styleregistro.css}">
+    </head>
+    <body>
 
-<div class="form-container">
-    <div class="card">
-        <h1>Borrar Ocupaciones</h1>
-        <form method="post" action="/admindashboard/ocupacionborrar">
-            <label>Seleccione ocupacion</label>
-            <br>
-            <input type="text" name="ocupacion" placeholder="Ocupacion aqui">
-            <button type="submit">Borrar Ocupacion</button>
-        </form>
-    </div>
-</div>
+        <div class="form-container">
+            <div class="card">
+                <h1>Borrar Ocupaciones</h1>
+                <form method="post" action="/admindashboard/ocupacionborrar">
+                    <label>Seleccione ocupacion</label>
+                    <br>
+                    <input type="text" name="ocupacion" placeholder="Ocupacion aqui">
+                    <button type="submit">Borrar Ocupacion</button>
+                </form>
+            </div>
+        </div>
 
-</body>
+    </body>
 </html>
 

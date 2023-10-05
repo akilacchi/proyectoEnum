@@ -11,6 +11,7 @@ package com.equipoa.servicewebapp.Enum;
  */
 public enum Estados {
 
+    SOLICITADO,
     ACEPTADO,
     EN_PROCESO,
     RECHAZADO,
