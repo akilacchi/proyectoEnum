@@ -17,6 +17,7 @@
             <p th:text="${'Emisor: '+ l.emisor.name}"></p>
             <button type="submit"> Borrar notificacion</button>
         </form>
+            <a th:if="${l.tipoNotificacion==T(com.equipoa.servicewebapp.Enum.TipoNotificacion).SOLICITUD}" th:href="@{/proveedor/loginproveedor}"><button>Ver trabajo</button></a>
     </div>
 
 </div>
