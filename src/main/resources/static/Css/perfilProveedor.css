@@ -1,0 +1,67 @@
+/* Estilos para la tarjeta (card) */
+.card {
+    background-color: #5C8374;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 45%;
+    padding: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor-imagen {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para la imagen de perfil */
+.contenedor-imagen img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+
+/* Estilos para las secciones de información */
+.contenedor-informacion-descripcion,
+.contenedor-informacion-adicional,
+.contenedor-informacion-calificacion {
+    margin-bottom: 20px;
+}
+
+/* Estilos para las etiquetas <p> */
+.card p {
+    font-size: 18px;
+    color: white;
+}
+
+.card span {
+    font-size: 18px;
+    color: white;
+}
+
+.card h2{
+    font-size: 30px;
+    color: black;
+}
+
+/* Estilos para los botones */
+.boton-contacto,
+.boton-solicitar-servicio {
+    background-color: #183D3D;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-contacto:hover,
+.boton-solicitar-servicio:hover {
+    background-color: #145151;
+}
