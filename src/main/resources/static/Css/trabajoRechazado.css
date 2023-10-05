@@ -1,0 +1,30 @@
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+body{
+    
+    background: #007BFF;
+}
+
+.mensaje-aceptar{
+     font-family: "Roboto";
+    font-size: 34px;
+    margin-bottom: 20px;
+    
+}
+
+.perfil-proveedor-button { background-color: #183D3D; /* Cambia el color de fondo del botón "VER MÁS" */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+    padding: 10px 20px; /* Ajusta el espaciado del botón según tus preferencias */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    margin-top: 20px;
+    text-decoration: none;}
