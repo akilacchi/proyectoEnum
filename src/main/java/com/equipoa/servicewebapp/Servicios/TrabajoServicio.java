@@ -113,6 +113,15 @@ public class TrabajoServicio {
             throw new MiException("El trabajo que desea actualizar no existe en la base de datos");
         }
     }
+    
+    @Transactional
+    public void aceptarTrabajo(Long id){
+        
+        Trabajo trabajo = trabajoRepositorio.getOne(id);
+        
+        trabajo.setEstado(Estados.ACEPTADO);
+    
+    }
 
     @Transactional(readOnly = true)
     public List<Trabajo> listaTrabajosPorUsuario(Long id) {
@@ -124,6 +133,33 @@ public class TrabajoServicio {
         return trabajoRepositorio.findAll();
     }
 
+    @Transactional(readOnly=true)
+    public List<Trabajo> trabajosSolicitados(Long id){
+        
+        List <Trabajo> trabajos = trabajoRepositorio.buscarTrabajosEstadoPorUsuario(id, Estados.SOLICITADO);
+        
+        return trabajos;
+        
+    }
+    
+     @Transactional(readOnly=true)
+    public List<Trabajo> trabajosAceptados(Long id){
+        
+        List <Trabajo> trabajos = trabajoRepositorio.buscarTrabajosEstadoPorUsuario(id, Estados.ACEPTADO);
+        
+        return trabajos;
+        
+    }
+    
+         @Transactional(readOnly=true)
+    public List<Trabajo> trabajosRechazados(Long id){
+        
+        List <Trabajo> trabajos = trabajoRepositorio.buscarTrabajosEstadoPorUsuario(id, Estados.RECHAZADO);
+        
+        return trabajos;
+        
+    }
+    
     @Transactional
     public void rechazarTrabajo(HttpSession session, Long id) throws MiException {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
