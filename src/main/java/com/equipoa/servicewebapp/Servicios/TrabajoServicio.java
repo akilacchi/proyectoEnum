@@ -83,7 +83,7 @@ public class TrabajoServicio {
             trabajo.setEstado(estado);
 
 //              Creacion de notificacion automatica
-            String mensaje = ("Solicitud de trabajo recivida por cliente " + logueado.getName() + " con el mensaje:\n" + descripcion);
+            String mensaje = ("Solicitud de trabajo recivida. Enviada por cliente: " + logueado.getName() + " con el mensaje: \n" + descripcion +" con fecha para: "+ trabajo.getFechaInicio());
             notificacionServicio.crearNotificacion(mensaje, logueado, idProveedor);
 //              Notificacion enviada
 
